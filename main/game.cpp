@@ -89,7 +89,7 @@ void UpdateGame(void)
 //---------------
 void DrawGame(void)
 {
-	SetCamera();
 	DrawMeshfield();
+	SetCamera();
 
 }

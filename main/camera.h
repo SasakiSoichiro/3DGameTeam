@@ -3,6 +3,7 @@
 #define _CAMERA_H_
 
 #include "main.h"
+#define MAX_CAMERA (3)
 
 //\‘¢‘Ì
 typedef struct
@@ -16,6 +17,7 @@ typedef struct
 	float fDistance;			//	‹“_‚©‚ç’‹“_‚Ì‹——£
 	D3DXVECTOR3 posRDest;
 	D3DXVECTOR3 posVDest;
+	D3DVIEWPORT9 viewport;
 }Camera;
 
 //	‚Õ‚ë‚Æ‚½‚¢‚Õ

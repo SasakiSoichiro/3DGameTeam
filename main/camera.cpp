@@ -7,9 +7,10 @@
 #include "main.h"
 #include "camera.h"
 #include "input.h"
+#include "player.h"
 
 //	グローバル
-Camera g_camera = {};	//カメラ情報
+Camera g_camera[MAX_CAMERA] = {};	//カメラ情報
 
 //====================
 //	初期化処理
@@ -17,13 +18,44 @@ Camera g_camera = {};	//カメラ情報
 void InitCamera(void)
 {
 	//	視点・注視点・上方向を設定する
-	g_camera.posV = D3DXVECTOR3(0.0f, 150.0f, -400.0f);
-	g_camera.posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	g_camera.posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	g_camera.posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	g_camera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	g_camera.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	g_camera.fDistance = sqrtf((g_camera.posV.x - g_camera.posR.x) * (g_camera.posV.x - g_camera.posR.x) + (g_camera.posV.y - g_camera.posR.y) * (g_camera.posV.y - g_camera.posR.y) + (g_camera.posV.z - g_camera.posR.z) * (g_camera.posV.z - g_camera.posR.z));
+	for (int count = 0; count < MAX_CAMERA; count++)
+	{
+		g_camera[count].posV = D3DXVECTOR3(0.0f, 120.0f, -300.0f);
+		g_camera[count].posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_camera[count].posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_camera[count].posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_camera[count].vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+		g_camera[count].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_camera[count].fDistance = sqrtf((g_camera[count].posV.x - g_camera[count].posR.x) 
+			* (g_camera[count].posV.x - g_camera[count].posR.x) + (g_camera[count].posV.y - g_camera[count].posR.y) 
+			* (g_camera[count].posV.y - g_camera[count].posR.y) + (g_camera[count].posV.z - g_camera[count].posR.z) 
+			* (g_camera[count].posV.z - g_camera[count].posR.z));
+	}
+
+	//	ビューポート構成の保存	左
+	g_camera[0].viewport.X = 0.0f;
+	g_camera[0].viewport.Y = 0.0f;
+	g_camera[0].viewport.Width = 640.0f;
+	g_camera[0].viewport.Height = 720.0f;
+	g_camera[0].viewport.MinZ = 0.0f;
+	g_camera[0].viewport.MaxZ = 1.0f;
+
+	//	ビューポート構成の保存	右
+	g_camera[1].viewport.X = 640.0f;
+	g_camera[1].viewport.Y = 0.0f;
+	g_camera[1].viewport.Width = 640.0f;
+	g_camera[1].viewport.Height = 720.0f;
+	g_camera[1].viewport.MinZ = 0.0f;
+	g_camera[1].viewport.MaxZ = 1.0f;
+
+	//	ビューポート構成の保存	真ん中
+	g_camera[2].viewport.X = 450.0f;
+	g_camera[2].viewport.Y = 420.0f;
+	g_camera[2].viewport.Width = 300.0f;
+	g_camera[2].viewport.Height = 200.0f;
+	g_camera[2].viewport.MinZ = 0.0f;
+	g_camera[2].viewport.MaxZ = 1.0f;
+
 }
 
 void UninitCamera(void)
@@ -33,70 +65,16 @@ void UninitCamera(void)
 
 void UpdateCamera(void)
 {
+	Player* pPlayer = GetPlayer();
 
-	//================================
-	//		注視点の旋回
-	//================================
-	if (GetKeyboardPress(DIK_Q) == true)
+	for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
 	{
-		//	回転量
-		g_camera.rot.y -= 0.05f;
-
-		//	角度の正規化
-		if (g_camera.rot.y < -D3DX_PI)
-		{
-			g_camera.rot.y = g_camera.rot.y - D3DX_PI * 2.0f;
-		}
-
-		g_camera.posR.x = g_camera.posV.x + sinf(g_camera.rot.y) * g_camera.fDistance;
-		g_camera.posR.z = g_camera.posV.z + cosf(g_camera.rot.y) * g_camera.fDistance;
-	}
-	else if (GetKeyboardPress(DIK_E) == true)
-	{
-		//	回転量
-		g_camera.rot.y += 0.05f;
-
-		//	角度の正規化
-		if (g_camera.rot.y > D3DX_PI)
-		{
-			g_camera.rot.y = g_camera.rot.y + D3DX_PI * 2.0f;
-		}
-
-		g_camera.posR.x = g_camera.posV.x + sinf(g_camera.rot.y) * g_camera.fDistance;
-		g_camera.posR.z = g_camera.posV.z + cosf(g_camera.rot.y) * g_camera.fDistance;
-	}
-
-	////================================
-	////		視点の旋回
-	////================================
-	if (GetKeyboardPress(DIK_Z) == true)
-	{
-		//	回転量
-		g_camera.rot.y += 0.05f;
-
-		//	角度の正規化
-		if (g_camera.rot.y > D3DX_PI)
-		{
-			g_camera.rot.y = g_camera.rot.y + D3DX_PI * 2.0f;
-		}
-
-		g_camera.posV.x = g_camera.posR.x + sinf(g_camera.rot.y) * g_camera.fDistance;
-		g_camera.posV.z = g_camera.posR.z + cosf(g_camera.rot.y) * g_camera.fDistance;
-	}
-
-	if (GetKeyboardPress(DIK_C) == true)
-	{
-		//	回転量
-		g_camera.rot.y -= 0.05f;
-
-		//	角度の正規化
-		if (g_camera.rot.y < -D3DX_PI)
-		{
-			g_camera.rot.y = g_camera.rot.y - D3DX_PI * 2.0f;
-		}
-
-		g_camera.posV.x = g_camera.posR.x + sinf(g_camera.rot.y) * g_camera.fDistance;
-		g_camera.posV.z = g_camera.posR.z + cosf(g_camera.rot.y) * g_camera.fDistance;
+		g_camera[nCntCamera].posR.x = pPlayer->pos.x - sinf(pPlayer->rot.y) * 50.0f;
+		g_camera[nCntCamera].posR.y = pPlayer->pos.y + 30.0f;
+		g_camera[nCntCamera].posR.z = pPlayer->pos.z - cosf(pPlayer->rot.y) * 50.0f;
+		g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(pPlayer->rot.y) * 15.0f;
+		g_camera[nCntCamera].posV.y = pPlayer->pos.y + 30.0f;
+		g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(pPlayer->rot.y) * 15.0f;
 	}
 }
 
@@ -105,33 +83,36 @@ void SetCamera(void)
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
-	//	ビューマトリックスの初期化
-	D3DXMatrixIdentity(&g_camera.mtxView);
+	for (int count = 0; count < MAX_CAMERA; count++)
+	{
+		//	ビューマトリックスの初期化
+		D3DXMatrixIdentity(&g_camera[count].mtxView);
 
-	//	ビューマトリックスの作成
-	D3DXMatrixLookAtLH(&g_camera.mtxView,
-		&g_camera.posV,
-		&g_camera.posR,
-		&g_camera.vecU);
+		//	ビューマトリックスの作成
+		D3DXMatrixLookAtLH(&g_camera[count].mtxView,
+			&g_camera[count].posV,
+			&g_camera[count].posR,
+			&g_camera[count].vecU);
 
-	//	ビューマトリックスの設定
-	pDevice->SetTransform(D3DTS_VIEW, &g_camera.mtxView);
+		//	ビューマトリックスの設定
+		pDevice->SetTransform(D3DTS_VIEW, &g_camera[count].mtxView);
 
-	//	プロジェクションマトリックスの初期化
-	D3DXMatrixIdentity(&g_camera.mtxProjection);
+		//	プロジェクションマトリックスの初期化
+		D3DXMatrixIdentity(&g_camera[count].mtxProjection);
 
-	//	プロジェクションマトリックスの初期化
-	D3DXMatrixPerspectiveFovLH(&g_camera.mtxProjection,
-		D3DXToRadian(45.0f),								//	視野角
-		(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,			//	アスペクト比
-		10.0f,												//	どこからどこまで
-		1000.0f);											//	カメラで表示するか
+		//	プロジェクションマトリックスの初期化
+		D3DXMatrixPerspectiveFovLH(&g_camera[count].mtxProjection,
+			D3DXToRadian(70.0f),								//	視野角
+			640.0f / 720.0f,									//	アスペクト比
+			10.0f,												//	どこからどこまで
+			1000.0f);											//	カメラで表示するか
 
-	//	プロジェクトマトリックスの設定
-	pDevice->SetTransform(D3DTS_PROJECTION, &g_camera.mtxProjection);
+		//	プロジェクトマトリックスの設定
+		pDevice->SetTransform(D3DTS_PROJECTION, &g_camera[count].mtxProjection);
+	}
 }
 
 Camera* GetCamera(void)
 {
-	return &g_camera;
+	return &g_camera[0];
 }

@@ -4,7 +4,7 @@
 
 #include "main.h"
 
-#define MAX_LIGHT (5)
+#define MAX_LIGHT (3)
 
 void InitLighr(void);
 void UninitLight(void);
