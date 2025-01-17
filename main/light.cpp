@@ -32,8 +32,6 @@ void InitLighr(void)
 		vecDir[0] = D3DXVECTOR3(0.2f, -0.8f, -1.0f);
 		vecDir[1] = D3DXVECTOR3(0.4f, -0.8f, -0.5f);
 		vecDir[2] = D3DXVECTOR3(0.6f, -0.8f, 0.0f);
-		vecDir[3] = D3DXVECTOR3(0.8f, -0.8f, 0.5f);
-		vecDir[4] = D3DXVECTOR3(-1.0f, -0.8f, 1.0f);
 
 		//	ê≥ãKâªÇ∑ÇÈ
 		D3DXVec3Normalize(&vecDir[nCntLight], &vecDir[nCntLight]);

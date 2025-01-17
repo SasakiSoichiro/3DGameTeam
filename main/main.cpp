@@ -13,6 +13,7 @@
 #include "result.h"
 #include "ranking.h"
 #include "tutrial.h"
+#include "camera.h"
 
 //=====================
 //	グローバル宣言
@@ -423,7 +424,6 @@ void Uninit(void)
 //=======================
 void Update(void)
 {
-
 	UpdateKeyboard();	//	キーボード
 	UpdateJoypad();		//	ジョイパッド
 
@@ -459,52 +459,68 @@ void Update(void)
 //================
 void Draw(void)
 {
-	//	画面クリア
-	g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(255, 255, 255, 255), 1.0f, 0);
+	Camera* pCamera = GetCamera();
 
-	//	描画開始
-	if (SUCCEEDED(g_pD3DDeviec->BeginScene()))
+	//	デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	for (int n = 0; n < 3; n++, pCamera++)
 	{
-		switch (g_mode)
+		if (g_mode == MODE_GAME)
 		{
-		case MODE_TITLE:
-			DrawTitle();		//	タイトル
-			break;
-
-		case MODE_TUTRIAL:
-			DrawTutrial();		//	チュートリアル
-			break;
-
-		case MODE_GAME:
-			DrawGame();			//	ゲーム
-			break;
-
-		case MODE_RESULT:
-			DrawResult();		//	リザルト
-			break;
-
-		case MODE_RANKING:
-			DrawRanking();		//	ランキング
-			break;
+			//	ビューポートの設定
+			pDevice->SetViewport(&pCamera->viewport);
 		}
 
-		//フェード描画
-		DrawFade();
+		//	画面クリア
+		g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(0, 0, 0, 255), 1.0f, 0);
+
+		//	描画開始
+		if (SUCCEEDED(g_pD3DDeviec->BeginScene()))
+		{
+			switch (g_mode)
+			{
+			case MODE_TITLE:
+				DrawTitle();		//	タイトル
+				break;
+
+			case MODE_TUTRIAL:
+				DrawTutrial();		//	チュートリアル
+				break;
+
+			case MODE_GAME:
+				DrawGame();			//	ゲーム
+				break;
+
+			case MODE_RESULT:
+				DrawResult();		//	リザルト
+				break;
+
+			case MODE_RANKING:
+				DrawRanking();		//	ランキング
+				break;
+			}
+
+			//	フェード描画
+			DrawFade();
 
 #ifdef _DEBUG
-		// FPSの表示
-		DrawFPS();
+			//	FPSの表示
+			DrawFPS();
 
 #endif // DEBUG
 
-		//終了
-		g_pD3DDeviec->EndScene();
+			//	終了
+			g_pD3DDeviec->EndScene();
+		}
 	}
+
 	//入れ替え
 	g_pD3DDeviec->Present(NULL, NULL, NULL, NULL);
+	
 }
 
-//モードの設定
+//	モードの設定
 void SetMode(MODE mode)
 {
 	//現在のモードの終了処理
@@ -580,5 +596,5 @@ void DrawFPS(void)
 	//===================
 	//	テキスト表示
 	//===================
-	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 0, 0, 255));
 }
