@@ -26,11 +26,11 @@ void InitModel(void)
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 	D3DXMATERIAL* pMat;
 
-	g_posModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_posModel = D3DXVECTOR3(0.0f, 0.0f, -100.0f);
 	g_rotModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	//	XÉtÉ@ÉCÉãÇÃì«Ç›çûÇ›
-	D3DXLoadMeshFromX("data\\model\\testes02.x",
+	D3DXLoadMeshFromX("data\\model\\ireihi.x",
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,

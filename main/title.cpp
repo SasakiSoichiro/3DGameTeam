@@ -6,7 +6,6 @@
 //================================================
 #include "title.h"
 #include "fade.h"
-#include "sound.h"
 #include "camera.h"
 
 //	マクロ
@@ -15,7 +14,7 @@
 //グローバル
 LPDIRECT3DTEXTURE9 g_apTextureTitle[MAX_TITLE] = { NULL };			// テクスチャへのポインタ
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffTitle = NULL;						// 頂点バッファへのポインタ
-Title g_aTitle[MAX_TITLE] = {};										// タイトル構造体の情報
+Title g_aTitle[MAX_TITLE] = {};											// タイトル構造体の情報
 TITLE g_Title;														// タイトル列挙型の情報
 int g_nCntTitleAnim;												// タイトル状態
 int g_nPatternAnim;													// 状態パターン
@@ -27,15 +26,12 @@ int nSelect2 = 0;
 //---------------
 void InitTitle(void)
 {
-	//BGMを鳴らす
-	PlaySound(SOUND_LABEL_BGM);
-
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
 
 	//テクスチャの読み込み 
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\GameTitle.png",
+		"data\\texture\\title000.png",
 		&g_apTextureTitle[0]);
 
 	//テクスチャの読み込み  2
@@ -44,7 +40,7 @@ void InitTitle(void)
 		&g_apTextureTitle[1]);
 
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\Start.png",
+		"data\\texture\\gamestart000.png",
 		&g_apTextureTitle[2]);
 
 	//頂点バッファの生成
@@ -108,11 +104,10 @@ void InitTitle(void)
 	SetTitle(TITLE_TWO, D3DXVECTOR3(650.0f, 440.0f, 0.0f));//タイトル2
 	SetTitle(TITLE_THREE, D3DXVECTOR3(650.0f, 540.0f, 0.0f));//タイトル3
 
+	InitCamera();
+
 	//アンロック
 	g_pVtxBuffTitle->Unlock();
-
-	// カメラの初期化処理
-	InitCamera();
 }
 
 //---------------
@@ -120,8 +115,7 @@ void InitTitle(void)
 //---------------
 void UninitTitle(void)
 {
-	// 音楽を止める
-	StopSound();
+	UninitCamera();
 
 	for (int nCnt = 0; nCnt < MAX_TITLE; nCnt++)
 	{
@@ -137,9 +131,6 @@ void UninitTitle(void)
 		g_pVtxBuffTitle->Release();
 		g_pVtxBuffTitle = NULL;
 	}
-
-	// カメラの終了処理
-	UninitCamera();
 }
 
 //---------------
@@ -147,6 +138,8 @@ void UninitTitle(void)
 //---------------
 void UpdateTitle(void)
 {
+	UpdateCamera();
+
 	//スティック状態の取得
 	VERTEX_2D* pVtx;
 	//頂点バッファをロックし、ちょうてん情報へのポインタを取得
@@ -166,11 +159,11 @@ void UpdateTitle(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffTitle->Unlock();
 
-	if (KeybordTrigger(DIK_W) == true)//W
+	if (KeybordTrigger(DIK_W) == true || OnMouseDown(MOUSE_L) == true)//W
 	{//Wキーが押された
 		nSelect2--;
 	}
-	else if (KeybordTrigger(DIK_S) == true)//S
+	else if (KeybordTrigger(DIK_S) == true || OnMouseDown(MOUSE_R) == true)//S
 	{//Sキーが押された
 		nSelect2++;
 	}
@@ -192,56 +185,27 @@ void UpdateTitle(void)
 	pVtx += 4 * nSelect2;
 
 	//頂点カラーの設定
-	pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.5f);
-	pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.5f);
-	pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.5f);
-	pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.5f);
-
-
-	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
-	{//決定キーが押された
-
-		// 音楽を鳴らす
-		PlaySound(SOUND_LABEL_SHOT01);
-
-		//g_nSelectを基準にポリゴンを不透明にする
-		pVtx += 4 * nSelect2;
-
-		//頂点カラーの設定
-		pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-		pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-		pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-		pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-
-		//メニューに合わせてモードの切り替え
-		switch (nSelect2)
-		{
-		case MODE_TUTRIAL:
-			SetFade(MODE_TUTRIAL);
-			break;
-
-		case MODE_GAME:
-			SetFade(MODE_GAME);
-			break;
-		}
-	}
-	else
-	{
-		////g_nSelectを基準にポリゴンを不透明にする
-		//pVtx += 4 * nSelect2;
-
-		//頂点カラーの設定
-		pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.7f);
-		pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.7f);
-		pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.7f);
-		pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.7f);
-	}
+	pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.3f);
+	pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.3f);
+	pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.3f);
+	pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.3f);
 
 	//頂点バッファをアンロックする
 	g_pVtxBuffTitle->Unlock();
 
-	//カメラの更新処理
-	UpdateCamera();
+	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true || OnMouseDown(MOUSE_H) == true)
+	{//決定キーが押された
+		//メニューに合わせてモードの切り替え
+		switch (nSelect2)
+		{
+		case MODE_TUTRIAL:
+			SetFade(MODE_GAME);
+			break;
+		case MODE_GAME:
+			SetFade(MODE_TUTRIAL);
+			break;
+		}
+	}
 }
 
 //---------------
@@ -249,6 +213,7 @@ void UpdateTitle(void)
 //---------------
 void DrawTitle(void)
 {
+	SetCamera();
 
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
@@ -267,8 +232,6 @@ void DrawTitle(void)
 		//ポリゴンの描画
 		pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, nCnt * 4, 2);
 	}
-
-	SetCamera();
 }
 
 //---------------
@@ -323,5 +286,4 @@ void SetTitle(int nType, D3DXVECTOR3 pos)
 
 	//アンロック
 	g_pVtxBuffTitle->Unlock();
-
 }

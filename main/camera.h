@@ -18,6 +18,9 @@ typedef struct
 	D3DXVECTOR3 posRDest;
 	D3DXVECTOR3 posVDest;
 	D3DVIEWPORT9 viewport;
+	float deltaX;
+	float deltaY;
+	POINT cursorPos;
 }Camera;
 
 //	‚Õ‚ë‚Æ‚½‚¢‚Õ

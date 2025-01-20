@@ -11,6 +11,8 @@
 #include "Xinput.h"							//	ジョイパットの入力処理
 #include "xaudio2.h"
 #include <stdio.h>
+#include <d3d9.h>
+#include <d3dx9.h>
 
 //========================
 //	ライブラリのリンク

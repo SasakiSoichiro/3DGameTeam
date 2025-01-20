@@ -30,6 +30,8 @@ void InitCamera(void)
 			* (g_camera[count].posV.x - g_camera[count].posR.x) + (g_camera[count].posV.y - g_camera[count].posR.y) 
 			* (g_camera[count].posV.y - g_camera[count].posR.y) + (g_camera[count].posV.z - g_camera[count].posR.z) 
 			* (g_camera[count].posV.z - g_camera[count].posR.z));
+		g_camera[count].deltaX = 0.0f;
+		g_camera[count].deltaY = 0.0f;
 	}
 
 	//	ビューポート構成の保存	左
@@ -69,12 +71,41 @@ void UpdateCamera(void)
 
 	for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
 	{
-		g_camera[nCntCamera].posR.x = pPlayer->pos.x - sinf(pPlayer->rot.y) * 50.0f;
-		g_camera[nCntCamera].posR.y = pPlayer->pos.y + 30.0f;
-		g_camera[nCntCamera].posR.z = pPlayer->pos.z - cosf(pPlayer->rot.y) * 50.0f;
-		g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(pPlayer->rot.y) * 15.0f;
-		g_camera[nCntCamera].posV.y = pPlayer->pos.y + 30.0f;
-		g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(pPlayer->rot.y) * 15.0f;
+		static POINT prevCursorPos = { SCREEN_WIDTH / 1.0f ,SCREEN_HEIGHT / 1.0f };
+
+		GetCursorPos(&g_camera[nCntCamera].cursorPos);
+
+		g_camera[nCntCamera].deltaX = g_camera[nCntCamera].cursorPos.x - prevCursorPos.x;
+		g_camera[nCntCamera].deltaY = g_camera[nCntCamera].cursorPos.y - prevCursorPos.y;
+
+		const float mouseSensitivity = 0.009f;
+		g_camera[nCntCamera].deltaX *= mouseSensitivity;
+		g_camera[nCntCamera].deltaY *= mouseSensitivity;
+
+		g_camera[nCntCamera].rot.x += g_camera[nCntCamera].deltaY;
+		g_camera[nCntCamera].rot.y += g_camera[nCntCamera].deltaX;
+
+		if (g_camera[nCntCamera].rot.y <= -D3DX_PI)
+		{
+			g_camera[nCntCamera].rot.y += D3DX_PI * 2.0f;
+		}
+		else if (g_camera[nCntCamera].rot.y >= D3DX_PI)
+		{
+			g_camera[nCntCamera].rot.y += -D3DX_PI * 2.0f;
+		}
+
+		prevCursorPos.x = SCREEN_WIDTH / 1.5;
+		prevCursorPos.y = SCREEN_HEIGHT / 1.5;
+
+		SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
+
+		g_camera[nCntCamera].posR.x = pPlayer->pos.x - cosf(g_camera[nCntCamera].rot.y) * sinf(g_camera[nCntCamera].rot.x);
+		g_camera[nCntCamera].posR.y = pPlayer->pos.y - sinf(g_camera[nCntCamera].rot.y);
+		g_camera[nCntCamera].posR.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.y) * sinf(g_camera[nCntCamera].rot.x);
+
+		g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
+		g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
+		g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.x) * 15.0f + sinf(g_camera[nCntCamera].rot.y);
 	}
 }
 

@@ -28,6 +28,14 @@ typedef enum
 	JOYKEY_MAX
 }JOYKEY;
 
+typedef enum
+{
+	MOUSE_L = 0,
+	MOUSE_R,
+	MOUSE_H,
+	MOUSE_MAX
+}MouseButton;
+
 //==================
 //プロトタイプ
 //==================
@@ -48,5 +56,14 @@ bool GetJoypadPress(JOYKEY key);
 bool JoyPadTrigger(JOYKEY key);
 bool GetJoyStick(void);
 XINPUT_STATE* GetJoyStickAngle(void);
+
+//	マウス
+HRESULT InitMausu(HINSTANCE hInstance, HWND hWnd);
+void UninitMausu(void);
+void UpdateMausu(void);
+bool OnMouseDown(MouseButton button_type);
+bool OnMouseUp(MouseButton button_type);
+D3DXVECTOR2 GetMouseVelocity();
+D3DXVECTOR2 GetMouseVelocityOld();
 
 #endif
