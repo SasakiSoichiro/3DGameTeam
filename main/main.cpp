@@ -3,7 +3,7 @@
 //	DirectXŠî”Õ		[main.cpp]
 //
 //			Athor : ryuusei hirata 
-//
+// 
 //===========================================================
 #include "main.h"
 #include "input.h"
