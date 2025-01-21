@@ -31,6 +31,7 @@
 *.out
 *.app
 /main/.vs
+/main/Debug
 /main/x64/Debug/*.log
 /main/x64/Debug/3Dteam.tlog/*.lastbuildstate
 /main/x64/Debug/3Dteam.tlog/*.tlog
@@ -40,4 +41,4 @@
 /main/Debug/vc142.pdb.BASE.pdb
 /main/Debug/vc142.pdb.LOCAL.pdb
 /main/Debug/vc142.pdb.REMOTE.pdb
-/main/Debug
+
