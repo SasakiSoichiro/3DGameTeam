@@ -474,10 +474,10 @@ void Draw(void)
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
-	for (int n = 0; n < 1; n++, pCamera++)
+	for (int n = 0; n < MAX_CAMERA; n++, pCamera++)
 	{
 		//	ビューポートの設定
-		//pDevice->SetViewport(&pCamera->viewport);
+		pDevice->SetViewport(&pCamera->viewport);
 
 		//	画面クリア
 		g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(255, 255, 0, 255), 1.0f, 0);
