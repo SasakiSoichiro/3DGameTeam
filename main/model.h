@@ -1,27 +1,33 @@
-#pragma once
-#ifndef _MODEL_H_
-#define _MODEL_H_
-
+//=============================================================================
+//
+//	モデル処理 [model.h]
+// Author : 佐々木奏一郎
+//
+//=============================================================================
+#ifndef _MODEL_H_//このマクロ定義がされていなかったら
+#define _MODEL_H_//2銃インクルード防止のマクロ定義
 #include "main.h"
 
+//モデルの構造体
 typedef struct
 {
-	LPD3DXMESH pMesh;
-	LPD3DXBUFFER pBuffMat;
-	DWORD dwNumMat;
-	int nIdxModelParent;
-	D3DXVECTOR3 pos;
-	D3DXVECTOR3 rot;
-	D3DXMATRIX mtxWorld;
-	D3DXVECTOR3 vtxMax;
-	D3DXVECTOR3 vtxMin;
-	LPDIRECT3DTEXTURE9 apTexture[128];	//	テクスチャのポインター
-}Model;
+	LPD3DXMESH pMesh;//メッシュ(頂点情報)へのポインタ
+	LPD3DXBUFFER pBuffMat;//マテリアルへのポインタ
+	DWORD dwNumMat;//マテリアルの数
+	int nIdxModelParent;//親モデルのインデックス
+	D3DXVECTOR3 pos;//位置(オフセット)
+	D3DXVECTOR3 rot;//向き
+	D3DXVECTOR3 posFirst;//位置(オフセット)
+	D3DXVECTOR3 rotFirst;//向き
+	D3DXMATRIX mtxWorld;//ワールドマトリックス
+	LPDIRECT3DTEXTURE9 apTexture[128];
+	D3DCOLORVALUE Diffuse, firstDiffuse;
 
-//	プロトタイプ
+}Model;
+//プロトタイプ宣言
 void InitModel(void);
 void UninitModel(void);
 void UpdateModel(void);
 void DrawModel(void);
 
-#endif // !_MODEL_H_
+#endif
