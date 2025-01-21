@@ -14,6 +14,7 @@
 #include "ranking.h"
 #include "tutrial.h"
 #include "camera.h"
+#include "title3D.h"
 
 //=====================
 //	グローバル宣言
@@ -388,7 +389,7 @@ void Uninit(void)
 	UninitMausu();
 	
 	//	タイトル終了
-	UninitTitle();
+	UninitTitle3D();
 
 	//	チュートリアル
 	UinitTutrial();
@@ -439,7 +440,7 @@ void Update(void)
 	switch (g_mode)
 	{
 	case MODE_TITLE:
-		UpdateTitle();			//	タイトル画面
+		UpdateTitle3D();			//	タイトル画面
 		break;
 
 	case MODE_TUTRIAL:
@@ -487,7 +488,7 @@ void Draw(void)
 			switch (g_mode)
 			{
 			case MODE_TITLE:
-				DrawTitle();		//	タイトル
+				DrawTitle3D();		//	タイトル
 				break;
 
 			case MODE_TUTRIAL:
@@ -533,7 +534,7 @@ void SetMode(MODE mode)
 	switch (g_mode)
 	{
 	case MODE_TITLE:
-		UninitTitle();		//	タイトル
+		UninitTitle3D();		//	タイトル
 		break;
 
 	case MODE_TUTRIAL:
@@ -556,7 +557,7 @@ void SetMode(MODE mode)
 	switch (mode)
 	{
 	case MODE_TITLE:
-		InitTitle();		//	タイトル
+		InitTitle3D();		//	タイトル
 		break;
 
 	case MODE_TUTRIAL:		
