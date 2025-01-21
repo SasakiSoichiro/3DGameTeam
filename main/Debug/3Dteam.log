@@ -13,24 +13,10 @@ C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(101,50): warning C4244: '引
 C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(101,29): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(103,55): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
 C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(104,56): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
-  fade.cpp
   game.cpp
-  input.cpp
-  light.cpp
-  main.cpp
-  meshfield.cpp
-  meshwall.cpp
-  model.cpp
   motion.cpp
   player.cpp
 C:\Users\student\Desktop\3DGameTeam\main\player.cpp(438,15): warning C4101: 'matDef': ローカル変数は 1 度も使われていません。
 C:\Users\student\Desktop\3DGameTeam\main\player.cpp(439,16): warning C4101: 'pMat': ローカル変数は 1 度も使われていません。
-  ranking.cpp
-  result.cpp
-  score.cpp
-  title.cpp
-  title3D.cpp
-  tutrial.cpp
   コードを生成中...
-  LINK : 前回のインクリメンタル リンクで C:\Users\student\Desktop\3DGameTeam\main\Debug\3Dteam.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   3Dteam.vcxproj -> C:\Users\student\Desktop\3DGameTeam\main\Debug\3Dteam.exe

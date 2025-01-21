@@ -1,5 +1,5 @@
-#pragma once
 #ifndef _MESHWALL_H_
+#define _MESHWALL_H_
 
 #include "main.h"
 
