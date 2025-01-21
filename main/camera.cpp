@@ -2,7 +2,7 @@
 //
 //			ƒJƒƒ‰	camera.cpp
 //				ryuusei hirata
-//
+// 
 //========================================================
 #include "main.h"
 #include "camera.h"
