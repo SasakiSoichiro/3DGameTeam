@@ -290,14 +290,14 @@ void UpdateMotion(void)
 
 		//パーツの位置.向きを設定
 		//位置
-		//pPlayer->motion.aModel[nCntModel].pos.x = pPlayer->motion.aModel[nCntModel].posFirst.x + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fPosX + k_Answer.fPosX * (pPlayer->motion.nCntMotion / ((float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti));//オフセット考慮
-		//pPlayer->motion.aModel[nCntModel].pos.y = pPlayer->motion.aModel[nCntModel].posFirst.y + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fPosY + k_Answer.fPosY * (pPlayer->motion.nCntMotion / ((float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti));
-		//pPlayer->motion.aModel[nCntModel].pos.z = pPlayer->motion.aModel[nCntModel].posFirst.z + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fPosZ + k_Answer.fPosZ * (pPlayer->motion.nCntMotion / ((float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti));
+		pPlayer->motion.aModel[nCntModel].pos.x = pPlayer->motion.aModel[nCntModel].posFirst.x + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fPosX + k_Answer.fPosX * (pPlayer->motion.nCntMotion / (float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame);
+		pPlayer->motion.aModel[nCntModel].pos.y = pPlayer->motion.aModel[nCntModel].posFirst.y + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fPosY + k_Answer.fPosY * (pPlayer->motion.nCntMotion / (float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame);
+		pPlayer->motion.aModel[nCntModel].pos.z = pPlayer->motion.aModel[nCntModel].posFirst.z + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fPosZ + k_Answer.fPosZ * (pPlayer->motion.nCntMotion / (float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame);
 
-		////向き
-		//pPlayer->motion.aModel[nCntModel].rot.x = pPlayer->motion.aModel[nCntModel].rotFirst.x + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fRotX + k_Answer.fRotX * (pPlayer->motion.nCntMotion / ((float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti));//オフセット考慮
-		//pPlayer->motion.aModel[nCntModel].rot.y = pPlayer->motion.aModel[nCntModel].rotFirst.y + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fRotY + k_Answer.fRotY * (pPlayer->motion.nCntMotion / ((float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti));//オフセット考慮
-		//pPlayer->motion.aModel[nCntModel].rot.z = pPlayer->motion.aModel[nCntModel].rotFirst.z + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fRotZ + k_Answer.fRotZ * (pPlayer->motion.nCntMotion / ((float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti));//オフセット考慮
+		//向き
+		pPlayer->motion.aModel[nCntModel].rot.x = pPlayer->motion.aModel[nCntModel].rotFirst.x + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fRotX + k_Answer.fRotX * (pPlayer->motion.nCntMotion / (float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame);//オフセット考慮
+		pPlayer->motion.aModel[nCntModel].rot.y = pPlayer->motion.aModel[nCntModel].rotFirst.y + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fRotY + k_Answer.fRotY * (pPlayer->motion.nCntMotion / (float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame);//オフセット考慮
+		pPlayer->motion.aModel[nCntModel].rot.z = pPlayer->motion.aModel[nCntModel].rotFirst.z + pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].aKey[nCntModel].fRotZ + k_Answer.fRotZ * (pPlayer->motion.nCntMotion / (float)pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame);//オフセット考慮
 
 
 	}
@@ -319,15 +319,15 @@ void UpdateMotion(void)
 
 
 
-	//if (pPlayer->motion.nCntMotion >= (pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame*pSlow->nMulti))
-	//{
-	//	pPlayer->motion.nCntMotion = 0;
+	if (pPlayer->motion.nCntMotion >= pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].aKeyInfo[pPlayer->motion.nKey].nFlame)
+	{
+		pPlayer->motion.nCntMotion = 0;
 
-	//	pPlayer->motion.nKey += 1;
-	//	if (pPlayer->motion.nKey >= pPlayer->motion.nNumKey)
-	//	{
-	//		pPlayer->motion.nKey = 0;
-	//	}
-	//}
+		pPlayer->motion.nKey += 1;
+		if (pPlayer->motion.nKey >= pPlayer->motion.nNumKey)
+		{
+			pPlayer->motion.nKey = 0;
+		}
+	}
 
 }
