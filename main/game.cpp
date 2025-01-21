@@ -1,6 +1,6 @@
 //==================================
 //		‚°[‚Ş‚Ìˆ—	game.cpp
-//			ryuusei.hirata
+//			ryuusei.hirata 
 //==================================
 #include "input.h"
 #include "game.h"
