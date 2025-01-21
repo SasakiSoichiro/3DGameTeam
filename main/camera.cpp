@@ -69,18 +69,22 @@ void UpdateCamera(void)
 {
 	Player* pPlayer = GetPlayer();
 
+	D3DXVECTOR2 a = GetMouseVelocity();
+	D3DXVECTOR2 b = GetMouseVelocityOld();
+
 	for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
 	{
-		static POINT prevCursorPos = { SCREEN_WIDTH / 1.0f ,SCREEN_HEIGHT / 1.0f };
-
 		GetCursorPos(&g_camera[nCntCamera].cursorPos);
 
-		g_camera[nCntCamera].deltaX = g_camera[nCntCamera].cursorPos.x - prevCursorPos.x;
-		g_camera[nCntCamera].deltaY = g_camera[nCntCamera].cursorPos.y - prevCursorPos.y;
+		g_camera[nCntCamera].prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
 
-		const float mouseSensitivity = 0.009f;
-		g_camera[nCntCamera].deltaX *= mouseSensitivity;
-		g_camera[nCntCamera].deltaY *= mouseSensitivity;
+		g_camera[nCntCamera].deltaX = g_camera[nCntCamera].cursorPos.x - g_camera[nCntCamera].prevCursorPos.x;
+		g_camera[nCntCamera].deltaY = g_camera[nCntCamera].cursorPos.y - g_camera[nCntCamera].prevCursorPos.y;
+
+		const float mouseSensitivity = 0.01f;
+
+		g_camera[nCntCamera].deltaX *= a.x - b.x;
+		g_camera[nCntCamera].deltaY *= a.y - b.y;
 
 		g_camera[nCntCamera].rot.x += g_camera[nCntCamera].deltaY;
 		g_camera[nCntCamera].rot.y += g_camera[nCntCamera].deltaX;
@@ -94,18 +98,18 @@ void UpdateCamera(void)
 			g_camera[nCntCamera].rot.y += -D3DX_PI * 2.0f;
 		}
 
-		prevCursorPos.x = SCREEN_WIDTH / 1.5;
-		prevCursorPos.y = SCREEN_HEIGHT / 1.5;
-
 		SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
 
-		g_camera[nCntCamera].posR.x = pPlayer->pos.x - cosf(g_camera[nCntCamera].rot.y) * sinf(g_camera[nCntCamera].rot.x);
-		g_camera[nCntCamera].posR.y = pPlayer->pos.y - sinf(g_camera[nCntCamera].rot.y);
+		g_camera[nCntCamera].prevCursorPos.x = SCREEN_WIDTH / 1.5;
+		g_camera[nCntCamera].prevCursorPos.y = SCREEN_HEIGHT / 1.5;
+
+		g_camera[nCntCamera].posR.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.y) * cosf(g_camera[nCntCamera].rot.x);
+		g_camera[nCntCamera].posR.y = pPlayer->pos.y - sinf(g_camera[nCntCamera].rot.x);
 		g_camera[nCntCamera].posR.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.y) * sinf(g_camera[nCntCamera].rot.x);
 
-		g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
-		g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
-		g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.x) * 15.0f + sinf(g_camera[nCntCamera].rot.y);
+		//g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
+		//g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
+		//g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.x) * 15.0f + sinf(g_camera[nCntCamera].rot.y);
 	}
 }
 
