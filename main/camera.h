@@ -21,6 +21,7 @@ typedef struct
 	float deltaX;
 	float deltaY;
 	POINT cursorPos;
+	POINT prevCursorPos;
 }Camera;
 
 //	‚Õ‚ë‚Æ‚½‚¢‚Õ
