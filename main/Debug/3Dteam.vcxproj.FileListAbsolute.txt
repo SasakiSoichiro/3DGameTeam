@@ -1,2 +1,3 @@
 C:\Users\student\source\repos\3Dteam\Debug\3Dteam.exe
 C:\Users\student\Desktop\チーム制作\3DGameTeam\main\Debug\3Dteam.exe
+C:\Users\student\Desktop\3Dチーム制作\3DGameTeam\main\Debug\3Dteam.exe
