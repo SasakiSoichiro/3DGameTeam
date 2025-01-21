@@ -1,1 +1,27 @@
+<<<<<<< HEAD
 ﻿  3Dteam.vcxproj -> C:\Users\student\Desktop\3Dチーム制作\3DGameTeam\main\Debug\3Dteam.exe
+=======
+﻿  motion.cpp
+C:\Users\student\source\repos\3Dteam\motion.cpp(268,2): error C2065: 'Slow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(268,8): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(268,16): error C3861: 'GetSlow': 識別子が見つかりませんでした
+C:\Users\student\source\repos\3Dteam\motion.cpp(293,79): error C2039: 'posFirst': 'Model' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\model.h(8): message : 'Model' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\motion.cpp(293,352): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(294,79): error C2039: 'posFirst': 'Model' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\model.h(8): message : 'Model' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\motion.cpp(294,352): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(295,79): error C2039: 'posFirst': 'Model' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\model.h(8): message : 'Model' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\motion.cpp(295,352): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(298,79): error C2039: 'rotFirst': 'Model' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\model.h(8): message : 'Model' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\motion.cpp(298,352): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(299,79): error C2039: 'rotFirst': 'Model' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\model.h(8): message : 'Model' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\motion.cpp(299,352): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(300,79): error C2039: 'rotFirst': 'Model' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\model.h(8): message : 'Model' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\motion.cpp(300,352): error C2065: 'pSlow': 定義されていない識別子です。
+C:\Users\student\source\repos\3Dteam\motion.cpp(322,131): error C2065: 'pSlow': 定義されていない識別子です。
+>>>>>>> 0068425a6f9c8477e471603971bd2d1c4581af36

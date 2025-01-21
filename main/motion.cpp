@@ -1,12 +1,7 @@
 #include "motion.h"
 #include "input.h"
 #include "camera.h"
-#include "shadow.h"
-#include "bullet.h"
-#include "effect.h"
-#include "block.h"
-#include "wall.h"
-#include "slow.h"
+#include "player.h"
 
 //‰Šú‰»ˆ—
 void ReadScript(int nType)
@@ -270,7 +265,7 @@ void UpdateMotion(void)
 {
 
 	Player* pPlayer = GetPlayer();
-	Slow* pSlow = GetSlow();
+	//Slow* pSlow = GetSlow();
 
 	pPlayer->motion.nNumKey = pPlayer->motion.aMotionInfo[pPlayer->motion.motionType].nNumKey;
 	if (pPlayer->motion.motionType != pPlayer->motion.motionTypeOld)

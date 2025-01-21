@@ -1,81 +1,67 @@
-#pragma once
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+//=============================================================================
+//
+//	プレイヤー処理 [player.h]
+// Author : 佐々木奏一郎
+//
+//=============================================================================
+
+#ifndef _PLAYER_H_//このマクロ定義がされていなかったら
+#define _PLAYER_H_//2銃インクルード防止のマクロ定義
 
 #include "main.h"
 #include "model.h"
+#include "motion.h"
 
-#define PLAYER_SSIZE_X (float)(30.0f)
-#define PLAYER_SSIZE_Z (float)(30.0f)
+#define GRAVI (0.05f)			//重力
+#define JUMP (2.0f)
+#define OBJ_P (20.0f)
+#define PARTS_MAX (20)
+#define USEPARTS_MAX (20)
 
-//	モーションタイプ
 typedef enum
 {
-	MOTIONTYPE_NEUTRAL = 0,	//	ニュートラル
-	MOTIONTYPE_MOVE,		//	移動
-	MOTIONTYPE_ACTION,		//	攻撃
-	MOTIONTYPE_JUNP,		//	ジャンプ
-	MOTIONTYPE_LANDING,		//	着地
-	MOTIONTYPE_MAX
-}MOTIONTYPE;
+	RED = 0,
+	BLUE,
+	GREEN,
+	PTYPE_MAX
+}PTYPE;
 
-//	キーの構造体
-typedef struct
+typedef enum
 {
-	float fposx;	//	位置
-	float fposy;
-	float fposz;
-	float frotx;	//	向き
-	float froty;
-	float frotz;
-}KEY;
+	PLAYERSTATE_NORMAL = 0,
+	PLAYERSTATE_DAMAGE,
+	PLAYERSTATE_MOVE,
+	PLAYERSTATE_JUMP,
+	PLAYERSTATE_ACTION,
+	PLAYERSTATE_MAX
+}PLAYERSTATE;
 
-//	キー情報の構造体
-typedef struct
-{
-	int nFrame;		//	フレーム数
-	KEY aKey[10];	//	各パーツの要素
-}KEY_INFO;
-
-//	モーション情報の構造体
-typedef struct
-{
-	bool bLoop;					//	ループするかどうか
-	int nNumKey;				//	キーの総数
-	KEY_INFO aKeyinfo[10];		//	キー情報
-}MOTION_INFO;
-
-//	構造体
+//プレイヤー構造体
 typedef struct
 {
 	D3DXVECTOR3 pos;
-	D3DXVECTOR3 Oldpos;
+	D3DXVECTOR3 posOld;
+	D3DXVECTOR3 size;
 	D3DXVECTOR3 move;
 	D3DXVECTOR3 rot;
 	D3DXVECTOR3 rotDest;
-	D3DXVECTOR3 moverot;
-	int nIndxShadow;
-	D3DXVECTOR3 vtxMax;
-	D3DXVECTOR3 vtxMin;
-	Model aModel[10];
-	int nNumModel;
-	D3DXMATRIX mtxWold;				//	ワールドマトリックス
-	MOTION_INFO aMotionInfo[10];	//	モーション情報
-	int nNumMotion;					//	モーションの総数
-	MOTIONTYPE MotionType;
-	int nNumKey;					//	キー総数
-	bool bLoopMotion;				//	ループするか
-	int nKey;						//	現在キーナンバー
-	int nextKey;
-	int nCntMotion;					//	モーションカウンター
+	D3DXVECTOR3 Offpos;
+	D3DXMATRIX mtxWorld;//ワールドマトリックス
+	D3DXMATRIX SwordmtxWorld;
+	int nLife;
+	int nType;
+	PLAYERSTATE pState;
+	Motion motion;
 }Player;
 
-//	プロトタイプ
+//プロトタイプ宣言
 void InitPlayer(void);
 void UninitPlayer(void);
 void UpdatePlayer(void);
-void UpdateMotion(int count);
 void DrawPlayer(void);
+void SetMatrix(void);
+void SetMotion(int nType);
 Player* GetPlayer(void);
+void ReadScriptPlayer(int nType);
 
-#endif // !_PLAYER_H_
+#endif
