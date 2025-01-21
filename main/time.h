@@ -13,8 +13,8 @@
 //マクロ定義
 //=============================================================================
 #define MAX_TIME (2)
-#define MAX_TEX  (2)
-#define MAX_MIN (2)
+#define MAX_TEX  (4)
+#define MAX_MIN (1)
 
 //=============================================================================
 //プロトタイプ宣言
@@ -24,9 +24,9 @@ void UninitTime(void);
 void UpdateTime(void);
 void DrawTime(void);
 void SetTime(int ntime);
-void SubTime(int nValue);
-void Subtime(int nValue);
-int GetTime(void);
-int Gettime(void);
+void SubNs(int nValue);
+void SubMin(int nValue);
+int GetNs(void);
+int GetMin(void);
 
 #endif
