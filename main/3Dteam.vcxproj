@@ -157,6 +157,7 @@
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="title.cpp" />
+    <ClCompile Include="title3D.cpp" />
     <ClCompile Include="tutrial.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,7 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="title.h" />
+    <ClInclude Include="title3D.h" />
     <ClInclude Include="tutrial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
