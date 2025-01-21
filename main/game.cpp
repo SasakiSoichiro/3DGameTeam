@@ -11,6 +11,8 @@
 #include "meshfield.h"
 #include "meshwall.h"
 #include "model.h"
+#include "player.h"
+#include "motion.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -31,6 +33,7 @@ void InitGame(void)
 	InitMeshWall();
 	InitMeshfield();
 	InitModel();
+	InitPlayer();
 	
 }
 
@@ -44,6 +47,7 @@ void UinitGame(void)
 	UninitMeshWall();
 	UninitCamera();
 	UninitModel();
+	UninitPlayer();
 
 }
 
@@ -57,6 +61,7 @@ void UpdateGame(void)
 	UpdateCamera();
 	UpdateLight();
 	UpdateModel();
+	UpdatePlayer();
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
 	{
@@ -96,5 +101,6 @@ void DrawGame(void)
 	DrawMeshfield();
 	SetCamera();
 	DrawModel();
+	DrawPlayer();
 
 }

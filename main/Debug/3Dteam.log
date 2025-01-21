@@ -1,20 +1,207 @@
-﻿  camera.cpp
-C:\Users\student\source\repos\3Dteam\camera.cpp(38,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(39,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(40,31): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(41,32): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(46,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(47,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(48,31): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(49,32): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(54,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(55,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(56,31): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(57,32): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(81,66): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(82,66): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(101,50): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(101,29): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(103,55): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
-C:\Users\student\source\repos\3Dteam\camera.cpp(104,56): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
-  3Dteam.vcxproj -> C:\Users\student\source\repos\3Dteam\Debug\3Dteam.exe
+﻿  motion.cpp
+C:\Users\student\source\repos\3Dteam\motion.cpp(4,10): fatal error C1083: include ファイルを開けません。'shadow.h':No such file or directory
+  player.cpp
+C:\Users\student\source\repos\3Dteam\player.cpp(226,11): error C2039: 'moverot': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(227,11): error C2039: 'MotionType': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(228,11): error C2039: 'nextKey': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(229,11): error C2039: 'nKey': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(230,11): error C2039: 'bLoopMotion': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(231,11): error C2039: 'nCntMotion': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(233,11): error C2039: 'aMotionInfo': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(234,11): error C2039: 'aMotionInfo': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(236,11): error C2039: 'aMotionInfo': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(237,11): error C2039: 'aMotionInfo': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(238,11): error C2039: 'aMotionInfo': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(239,11): error C2039: 'aMotionInfo': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(246,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(248,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(249,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(242,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(255,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(257,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(258,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(251,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(264,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(266,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(267,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(260,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(273,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(275,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(276,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(269,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(282,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(284,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(285,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(278,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(291,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(293,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(294,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(287,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(300,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(302,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(303,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(296,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(309,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(311,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(312,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(305,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(318,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(320,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(321,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(314,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(327,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(329,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(330,13): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(323,2): error C2660: 'D3DXLoadMeshFromXA': 関数に 5 個の引数を指定できません。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9mesh.h(745,5): message : 'D3DXLoadMeshFromXA' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(332,11): error C2039: 'nNumModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(333,11): error C2039: 'nNumKey': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(334,11): error C2039: 'nNumMotion': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(338,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(339,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(340,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(343,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(344,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(345,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(348,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(349,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(350,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(353,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(354,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(355,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(358,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(359,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(360,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(363,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(364,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(365,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(368,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(369,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(370,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(373,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(374,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(375,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(378,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(379,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(380,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(383,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(384,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(385,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(392,21): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(395,42): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(398,11): error C2039: 'aModel': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(405,24): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(407,13): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(409,29): error C2039: 'vtxMin': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(411,13): error C2039: 'vtxMin': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(415,24): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(417,13): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(419,29): error C2039: 'vtxMin': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(421,13): error C2039: 'vtxMin': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(425,24): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(427,13): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(429,29): error C2039: 'vtxMin': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(431,13): error C2039: 'vtxMin': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(438,11): error C2039: 'vtxMax': 'Player' のメンバーではありません
+C:\Users\student\source\repos\3Dteam\player.h(40): message : 'Player' の宣言を確認してください
+C:\Users\student\source\repos\3Dteam\player.cpp(438,17): fatal error C1003: プログラム内のエラーが 100 個を超えました。コンパイルは中断されます。
+  コードを生成中...
