@@ -7,6 +7,7 @@
 
 #ifndef _PLAYER_H_//このマクロ定義がされていなかったら
 #define _PLAYER_H_//2銃インクルード防止のマクロ定義
+
 #include "main.h"
 #include "model.h"
 #include "motion.h"
