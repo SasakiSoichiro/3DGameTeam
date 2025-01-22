@@ -3,7 +3,7 @@
 #define _CAMERA_H_
 
 #include "main.h"
-#define MAX_CAMERA (1)
+#define MAX_CAMERA (2)
 
 //ç\ë¢ëÃ
 typedef struct
@@ -28,7 +28,7 @@ typedef struct
 void InitCamera(void);
 void UninitCamera(void);
 void UpdateCamera(void);
-void SetCamera(void);
+void SetCamera(int nIdx);
 Camera* GetCamera(void);
 
 #endif // !_CAMERA_H_

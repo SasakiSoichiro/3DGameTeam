@@ -485,6 +485,9 @@ void Draw(void)
 		//	•`‰æŠJn
 		if (SUCCEEDED(g_pD3DDeviec->BeginScene()))
 		{
+			//ƒJƒƒ‰‚ğİ’è‚·‚é
+			SetCamera(n);
+
 			switch (g_mode)
 			{
 			case MODE_TITLE:

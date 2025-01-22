@@ -99,7 +99,6 @@ void UpdateGame(void)
 void DrawGame(void)
 {
 	DrawMeshfield();
-	SetCamera();
 	DrawModel();
 	DrawPlayer();
 

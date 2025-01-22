@@ -72,79 +72,102 @@ void UpdateCamera(void)
 	D3DXVECTOR2 a = GetMouseVelocity();
 	D3DXVECTOR2 b = GetMouseVelocityOld();
 
-	for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
+	for (int nCnt = 0; nCnt < MAX_CAMERA; nCnt++)
 	{
-		g_camera[nCntCamera].prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
+		static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
 
-		GetCursorPos(&g_camera[nCntCamera].cursorPos);
+		POINT cursorPos;
 
-		g_camera[nCntCamera].deltaX = g_camera[nCntCamera].cursorPos.x - g_camera[nCntCamera].prevCursorPos.x;
-		g_camera[nCntCamera].deltaY = g_camera[nCntCamera].cursorPos.y - g_camera[nCntCamera].prevCursorPos.y;
+		GetCursorPos(&cursorPos);
 
-		const float mouseSensitivity = 50.0f;
+		float DeltaX = (float)cursorPos.x - prevCursorPos.x;
+		float DeltaY = (float)cursorPos.y - prevCursorPos.y;
 
-		g_camera[nCntCamera].deltaX *= (a.x - b.x) / mouseSensitivity;
-		g_camera[nCntCamera].deltaY *= (a.y - b.y) / mouseSensitivity;
+		const float mouseSensitivity = 0.0009f;
 
-		g_camera[nCntCamera].rot.x += g_camera[nCntCamera].deltaY;
-		g_camera[nCntCamera].rot.y += g_camera[nCntCamera].deltaX;
+		DeltaX *= mouseSensitivity;
+		DeltaY *= mouseSensitivity;
 
-		if (g_camera[nCntCamera].rot.y <= -D3DX_PI)
+		g_camera[nCnt].rot.x += DeltaY;
+		g_camera[nCnt].rot.y += DeltaX;
+
+
+		//角度の正規化
+		if (g_camera[nCnt].rot.y <= -D3DX_PI)
 		{
-			g_camera[nCntCamera].rot.y += D3DX_PI * 2.0f;
+			g_camera[nCnt].rot.y += D3DX_PI * 2.0f;
 		}
-		else if (g_camera[nCntCamera].rot.y >= D3DX_PI)
+		else if (g_camera[nCnt].rot.y >= D3DX_PI)
 		{
-			g_camera[nCntCamera].rot.y += -D3DX_PI * 2.0f;
+			g_camera[nCnt].rot.y += -D3DX_PI * 2.0f;
+		}
+		if (g_camera[nCnt].rot.x <= -D3DX_PI)
+		{
+			g_camera[nCnt].rot.x += D3DX_PI * 2.0f;
+		}
+		else if (g_camera[nCnt].rot.x >= D3DX_PI)
+		{
+			g_camera[nCnt].rot.x += -D3DX_PI * 2.0f;
+		}
+
+		//角度制限
+		if (g_camera[nCnt].rot.x < 0.01f)
+		{
+			g_camera[nCnt].rot.x -= DeltaY;
+		}
+		else if (g_camera[nCnt].rot.x > 3.10f)
+		{
+			g_camera[nCnt].rot.x -= DeltaY;
 		}
 
 		SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
 
-		g_camera[nCntCamera].prevCursorPos.x = SCREEN_WIDTH / 1.5;
-		g_camera[nCntCamera].prevCursorPos.y = SCREEN_HEIGHT / 1.5;
+		prevCursorPos.x = SCREEN_WIDTH / 1.5;
+		prevCursorPos.y = SCREEN_HEIGHT / 1.5;
 
-		g_camera[nCntCamera].posR.x = g_camera[nCntCamera].posV.x - sinf(g_camera[nCntCamera].rot.y) * cosf(g_camera[nCntCamera].rot.x);
-		g_camera[nCntCamera].posR.y = g_camera[nCntCamera].posV.y - sinf(g_camera[nCntCamera].rot.x);
-		g_camera[nCntCamera].posR.z = g_camera[nCntCamera].posV.z - cosf(g_camera[nCntCamera].rot.y) * cosf(g_camera[nCntCamera].rot.x);
+
+		g_camera[nCnt].posR.x = g_camera[nCnt].posV.x + sinf(g_camera[nCnt].rot.x) * sinf(g_camera[nCnt].rot.y);
+		g_camera[nCnt].posR.y = g_camera[nCnt].posV.y + cosf(g_camera[nCnt].rot.x);
+		g_camera[nCnt].posR.z = g_camera[nCnt].posV.z + sinf(g_camera[nCnt].rot.x) * cosf(g_camera[nCnt].rot.y);
 
 		//g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
 		//g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
 		//g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.x) * 15.0f + sinf(g_camera[nCntCamera].rot.y);
+
 	}
+	
 }
 
-void SetCamera(void)
+void SetCamera(int nIdx)
 {
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
-	for (int count = 0; count < MAX_CAMERA; count++)
-	{
+
 		//	ビューマトリックスの初期化
-		D3DXMatrixIdentity(&g_camera[count].mtxView);
+		D3DXMatrixIdentity(&g_camera[nIdx].mtxView);
 
 		//	ビューマトリックスの作成
-		D3DXMatrixLookAtLH(&g_camera[count].mtxView,
-			&g_camera[count].posV,
-			&g_camera[count].posR,
-			&g_camera[count].vecU);
+		D3DXMatrixLookAtLH(&g_camera[nIdx].mtxView,
+			&g_camera[nIdx].posV,
+			&g_camera[nIdx].posR,
+			&g_camera[nIdx].vecU);
 
 		//	ビューマトリックスの設定
-		pDevice->SetTransform(D3DTS_VIEW, &g_camera[count].mtxView);
+		pDevice->SetTransform(D3DTS_VIEW, &g_camera[nIdx].mtxView);
 
 		//	プロジェクションマトリックスの初期化
-		D3DXMatrixIdentity(&g_camera[count].mtxProjection);
+		D3DXMatrixIdentity(&g_camera[nIdx].mtxProjection);
 
 		//	プロジェクションマトリックスの初期化
-		D3DXMatrixPerspectiveFovLH(&g_camera[count].mtxProjection,
+		D3DXMatrixPerspectiveFovLH(&g_camera[nIdx].mtxProjection,
 			D3DXToRadian(70.0f),								//	視野角
-			640.0f / 720.0f,									//	アスペクト比
+			SCREEN_WIDTH / SCREEN_HEIGHT,									//	アスペクト比
 			10.0f,												//	どこからどこまで
 			1000.0f);											//	カメラで表示するか
 
 		//	プロジェクトマトリックスの設定
-		pDevice->SetTransform(D3DTS_PROJECTION, &g_camera[count].mtxProjection);
-	}
+		pDevice->SetTransform(D3DTS_PROJECTION, &g_camera[nIdx].mtxProjection);
 }
 
 Camera* GetCamera(void)

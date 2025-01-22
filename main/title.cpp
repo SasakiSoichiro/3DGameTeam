@@ -213,7 +213,6 @@ void UpdateTitle(void)
 //---------------
 void DrawTitle(void)
 {
-	SetCamera();
 
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
