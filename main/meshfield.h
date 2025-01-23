@@ -4,8 +4,8 @@
 
 #include "main.h"
 
-#define MESHFIELD_X (200)		//	X軸
-#define MESHFIELD_Z (200)		//	Z軸
+#define MESHFIELD_X (100)		//	X軸
+#define MESHFIELD_Z (100)		//	Z軸
 #define MESHFIELD_T ((MESHFIELD_X + 1) * (MESHFIELD_Z + 1))		//	頂点数
 #define MESHFIELD_P ((MESHFIELD_X * MESHFIELD_Z * 2 + (MESHFIELD_Z - 1) * 4))		//	ポリゴン数
 #define MESHFIELD_I ((MESHFIELD_X + 1) * 2 * MESHFIELD_Z + (MESHFIELD_Z - 1) * 2)	//	インデックス数
