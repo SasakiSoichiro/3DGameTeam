@@ -8,6 +8,9 @@
 #define _MODEL_H_//2銃インクルード防止のマクロ定義
 #include "main.h"
 
+//マクロ定義
+#define MAX_MODEL (128)
+
 //モデルの構造体
 typedef struct
 {
@@ -22,6 +25,7 @@ typedef struct
 	D3DXMATRIX mtxWorld;//ワールドマトリックス
 	LPDIRECT3DTEXTURE9 apTexture[128];
 	D3DCOLORVALUE Diffuse, firstDiffuse;
+	bool bUse;
 
 }Model;
 //プロトタイプ宣言
@@ -29,5 +33,6 @@ void InitModel(void);
 void UninitModel(void);
 void UpdateModel(void);
 void DrawModel(void);
+void SetModel(D3DXVECTOR3 pos);
 
 #endif

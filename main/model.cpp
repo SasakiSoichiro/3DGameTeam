@@ -16,6 +16,7 @@ DWORD g_dwNuMatModel = 0;						//	マテリアルの数
 D3DXVECTOR3 g_posModel;							//	位置
 D3DXVECTOR3 g_rotModel;							//	向き
 D3DXMATRIX g_mtxWoldModel;						//	ワールドマトリックス
+Model g_Model[MAX_MODEL];
 
 //========================
 //		初期化処理
@@ -28,6 +29,7 @@ void InitModel(void)
 
 	g_posModel = D3DXVECTOR3(300.0f, 0.0f, 0.0f);
 	g_rotModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_Model->bUse = false;
 
 	//	Xファイルの読み込み
 	D3DXLoadMeshFromX("data\\model\\house000.x",
@@ -128,4 +130,19 @@ void DrawModel(void)
 
 	//	保存したマテリアルを戻す
 	pDevice->SetMaterial(&matDef);
+}
+
+void SetModel(D3DXVECTOR3 pos)
+{
+	for (int nCntBuilding = 0; nCntBuilding < MAX_MODEL; nCntBuilding++)
+	{
+		if (g_Model[nCntBuilding].bUse == false)
+		{
+			g_Model[nCntBuilding].pos = pos;
+			//g_Model[nCntBuilding].rot = rot;
+			g_Model[nCntBuilding].bUse = true;
+			break;
+		}
+	}
+
 }
