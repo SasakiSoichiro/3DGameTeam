@@ -13,6 +13,7 @@
 #include "model.h"
 #include "player.h"
 #include "motion.h"
+#include "stage.h"
 
 // ƒQ[ƒ€‚Ìó‘Ô
 GAMESTATE g_gameState = GAMESTATE_NONE;
