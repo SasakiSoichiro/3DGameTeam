@@ -1,25 +1,28 @@
 ﻿  camera.cpp
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(38,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(39,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(40,31): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(41,32): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(123,50): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(123,29): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(125,34): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(126,35): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(38,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(39,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(40,31): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(41,32): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(123,50): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(123,29): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(125,34): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\camera.cpp(126,35): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
   fade.cpp
   game.cpp
+C:\Users\student\Desktop\3DGameTeam\main\game.cpp(60,2): error C3861: 'UpdataMeshWall': 識別子が見つかりませんでした
   input.cpp
   light.cpp
   main.cpp
   meshfield.cpp
   meshwall.cpp
+C:\Users\student\Desktop\3DGameTeam\main\meshwall.cpp(41,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DGameTeam\main\meshwall.cpp(220,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   model.cpp
   motion.cpp
   pause.cpp
   player.cpp
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\player.cpp(438,15): warning C4101: 'matDef': ローカル変数は 1 度も使われていません。
-C:\Users\student\Desktop\3DTeam\3DGameTeam\main\player.cpp(439,16): warning C4101: 'pMat': ローカル変数は 1 度も使われていません。
+C:\Users\student\Desktop\3DGameTeam\main\player.cpp(438,15): warning C4101: 'matDef': ローカル変数は 1 度も使われていません。
+C:\Users\student\Desktop\3DGameTeam\main\player.cpp(439,16): warning C4101: 'pMat': ローカル変数は 1 度も使われていません。
   ranking.cpp
   result.cpp
   score.cpp
@@ -27,4 +30,3 @@ C:\Users\student\Desktop\3DTeam\3DGameTeam\main\player.cpp(439,16): warning C410
   title3D.cpp
   tutrial.cpp
   コードを生成中...
-  3Dteam.vcxproj -> C:\Users\student\Desktop\3DTeam\3DGameTeam\main\Debug\3Dteam.exe
