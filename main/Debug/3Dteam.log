@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 ﻿  meshwall.cpp
 C:\Users\student\Desktop\3DGameTeam\main\meshwall.cpp(41,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\student\Desktop\3DGameTeam\main\meshwall.cpp(220,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   3Dteam.vcxproj -> C:\Users\student\Desktop\3DGameTeam\main\Debug\3Dteam.exe
+=======
+<<<<<<< HEAD
+﻿  game.cpp
+  3Dteam.vcxproj -> C:\Users\student\Desktop\3DTeam\3DGameTeam\main\Debug\3Dteam.exe
+=======
+﻿  3Dteam.vcxproj -> C:\Users\student\Desktop\3DGameTeam\main\Debug\3Dteam.exe
+>>>>>>> a72e3dd2190aa70a81480f00daa9e83fd7ba7587
+>>>>>>> 853099bce7ceb3a5aba954163ec58bb55b7e11d0
