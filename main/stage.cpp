@@ -8,7 +8,7 @@
 #include "model.h"
 
 
-void LoadStage()
+void LoadStage(void)
 {
 	//‰Æ000
 	SetModel(D3DXVECTOR3(0.0f, 0.0f, 0.0f));

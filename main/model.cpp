@@ -27,7 +27,7 @@ void InitModel(void)
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 	D3DXMATERIAL* pMat;
 
-	g_posModel = D3DXVECTOR3(300.0f, 0.0f, 0.0f);
+	g_posModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_rotModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Model->bUse = false;
 
