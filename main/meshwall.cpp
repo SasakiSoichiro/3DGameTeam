@@ -58,7 +58,7 @@ void InitMeshWall(void)
 			//D3DXVec3Cross(&nor, &vec1, &vec2);
 			nor = pVtx[nCnt].pos - D3DXVECTOR3(0.0f,0.0f,0.0f);
 			D3DXVec3Normalize(&pVtx[nCnt].nor,&nor);
-			pVtx[nCnt].col = D3DXCOLOR(1.0f, 0.5f, 0.5f, 1.0f);
+			pVtx[nCnt].col = D3DXCOLOR(1.0f, 0.5f, 0.5f, 0.5f);
 			pVtx[nCnt].tex = D3DXVECTOR2((1.0f / Vmesh) * nCntH, ((1.0f / Hmesh) * nCntH));
 		}
 	}
