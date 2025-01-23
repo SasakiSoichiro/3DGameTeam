@@ -14,6 +14,7 @@
 #include "player.h"
 #include "motion.h"
 #include "stage.h"
+#include "meshfan.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -32,6 +33,7 @@ void InitGame(void)
 	InitCamera();
 	InitLighr();
 	InitMeshWall();
+	InitMeshFan();
 	InitMeshfield();
 	InitModel();
 	InitPlayer();
@@ -46,6 +48,7 @@ void UinitGame(void)
 	UninitLight();
 	UninitMeshfield();
 	UninitMeshWall();
+	UninitMeshFan();
 	UninitCamera();
 	UninitModel();
 	UninitPlayer();
@@ -59,6 +62,7 @@ void UpdateGame(void)
 {
 	UpdataMeshfield();
 	UpdateMeshWall();
+	UpdateMeshFan();
 	UpdateCamera();
 	UpdateLight();
 	UpdateModel();
@@ -103,4 +107,5 @@ void DrawGame(void)
 	DrawModel();
 	DrawPlayer();
 	DrawMeshWall();
+	DrawMeshFan();
 }
