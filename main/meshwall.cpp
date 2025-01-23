@@ -1,195 +1,250 @@
-//=============================================================
-//
-//			壁			meshwall.cpp
-//
-//		Athor : ryuusei hirata
-//
-//==============================================================
-#include "main.h"
 #include "meshwall.h"
+#include"player.h"
 
-//	グローバル
-LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffMeshWall = NULL;	//	頂点バッファのポインタ
-LPDIRECT3DTEXTURE9 g_apTextureMeshWall = NULL;		//	テクスチャのポインタ
-LPDIRECT3DINDEXBUFFER9 g_pIdxBuffMeshWall = NULL;	//	インデックスのポインタ
-MESHWALL g_MeshWall = {};
+//グローバル変数宣言
+LPDIRECT3DTEXTURE9 g_pTextureMeshWall = NULL;//テクスチャへのポインタ
+LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffMeshWall = NULL;//頂点バッファへのポインタ
+LPDIRECT3DINDEXBUFFER9 g_pIdxBuffMeshWall = NULL;
+MeshWall g_MeshWall;
 
-//---------------
-//	初期化処理	
-//---------------
 void InitMeshWall(void)
 {
-	//	デバイスの取得
-	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+	LPDIRECT3DDEVICE9 pDevice;
+	pDevice = GetDevice();
 
-	//頂点バッファの設定
-	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * MESHWALL_T,
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data\\TEXTURE\\wall004.png",
+		&g_pTextureMeshWall);
+
+	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * VTXCNT,//(sizeof(VERTEX_3D)*必要な頂点数
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_3D,
 		D3DPOOL_MANAGED,
 		&g_pVtxBuffMeshWall,
 		NULL);
 
-	//	テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\ground02.png",
-		&g_apTextureMeshWall);
-
-	//	インデックスバッファの生成
-	pDevice->CreateIndexBuffer(sizeof(WORD) * MESHWALL_I,
+	pDevice->CreateIndexBuffer(sizeof(VERTEX_3D) * IDXCNT,//(sizeof(VERTEX_3D)*必要な頂点数
 		D3DUSAGE_WRITEONLY,
 		D3DFMT_INDEX16,
 		D3DPOOL_MANAGED,
 		&g_pIdxBuffMeshWall,
 		NULL);
 
-	//	pVtxの初期化
-	VERTEX_3D* pVtx = NULL;
-	WORD* pIdx = NULL;
+	VERTEX_3D* pVtx = 0;//頂点情報へのポインタ
 
-	//	頂点バッファのロック
+
+//頂点バッファをロックし、頂点情報へのポインタを取得
 	g_pVtxBuffMeshWall->Lock(0, 0, (void**)&pVtx, 0);
 
-	g_MeshWall.pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	g_MeshWall.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	int nCntPOS = 0;
+	int radius = 400.0f;
+	float Vmesh = (float)(VMESH);
+	float Hmesh = (float)(HMESH);
+	D3DXVECTOR3 nor;
+	D3DXVECTOR3 vec1, vec2; // ベクトル
+	// 外積を求める
 
-	int count = 0;
-	float radius = 200.0f;
-	D3DXVECTOR3 unti;
 
-	for (int nCntZ = 0; nCntZ <= SUITYOKU; nCntZ++)
+	int nCnt = 0;
+	for (int nCntV = 0; nCntV < VMESH +1; nCntV++)
 	{
-		//	人による処理ある
-
-		for (int nCntX = 0; nCntX <= SUIHEI; nCntX++)
+		for (int nCntH = 0; nCntH < HMESH+1; nCntH++, nCnt++)
 		{
-			//	角度
-			float Angle = D3DX_PI * 2.0f / (float)SUIHEI * -1.0f;
-
-			//	座標
-			pVtx[count].pos = D3DXVECTOR3(sinf(Angle * nCntX) * radius,
-											nCntZ * 100.0f,
-											cosf(Angle * nCntX) * radius);
-
-			//	法線
-			unti = pVtx[count].pos - g_MeshWall.pos;
-			D3DXVec3Normalize(&pVtx[count].nor, &unti);
-
-			//	カラー
-			pVtx[count].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-
-			//	テクスチャ
-			pVtx[count].tex.x = 0.125f * nCntX;
-			pVtx[count].tex.y = 0.125f * nCntZ;
-
-			//	大智
-			count++;
+			float Angle = ((D3DX_PI * 2) / (HMESH) * -nCntH)+D3DX_PI;
+			pVtx[nCnt].pos = D3DXVECTOR3(sinf(-Angle) * radius, OBJ_V - ((OBJ_V/ VMESH) * nCntV), cosf(-Angle) * radius);
+			//vec1= D3DXVECTOR3(0.0f, 0.0f, 0.0f)- pVtx[nCnt-1].pos;
+			//vec2 = D3DXVECTOR3(0.0f, 0.0f, 0.0f) - pVtx[nCnt].pos;
+			//D3DXVec3Cross(&nor, &vec1, &vec2);
+			nor = pVtx[nCnt].pos - g_MeshWall.pos;
+			D3DXVec3Normalize(&pVtx[nCnt].nor,&nor);
+			pVtx[nCnt].col = D3DXCOLOR(1.0f, 0.5f, 0.5f, 1.0f);
+			pVtx[nCnt].tex = D3DXVECTOR2((1.0f / Vmesh) * nCntH, ((1.0f / Hmesh) * nCntH));
 		}
 	}
 
-	//	頂点バッファのアンロック
+	
+	////テクスチャ座標の設定
+	//pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+	//pVtx[1].tex = D3DXVECTOR2(0.5f, 0.0f);
+	//pVtx[2].tex = D3DXVECTOR2(1.0f, 0.0f);
+	//pVtx[3].tex = D3DXVECTOR2(0.0f, 0.5f);
+	//pVtx[4].tex = D3DXVECTOR2(0.5f, 0.5f);
+	//pVtx[5].tex = D3DXVECTOR2(1.0f, 0.5f);
+	//pVtx[6].tex = D3DXVECTOR2(0.0f, 1.0f);
+	//pVtx[7].tex = D3DXVECTOR2(0.5f, 1.0f);
+	//pVtx[8].tex = D3DXVECTOR2(1.0f, 1.0f);
+
+	//頂点バッファをアンロックする
 	g_pVtxBuffMeshWall->Unlock();
 
-	//	インデックスのロック
+	//インデックスバッファをロック
+	WORD* pIdx;
 	g_pIdxBuffMeshWall->Lock(0, 0, (void**)&pIdx, 0);
 
-	//	インデックスの設定
-	int count2 = 0;
-	int count3 = 0;
-	int count4 = SUIHEI + 1;
+	//頂点座標の更新
+	//pIdx[0] = 2;
+	//pIdx[1] = 0;
 
-	//	インデックスの設定
-	for (int nCntX = 0; nCntX < SUITYOKU; nCntX++)
+	//pIdx[2] = 3;
+	//pIdx[3] = 1;
+
+	////pIdx[4] = 5;
+	////pIdx[5] = 2;
+
+	////pIdx[6] = 2;
+	////pIdx[7] = 6;
+
+	////pIdx[8] = 6;
+	////pIdx[9] = 3;
+
+	////pIdx[10] = 7;
+	////pIdx[11] = 4;
+
+	////pIdx[12] = 8;
+	////pIdx[13] = 5;
+	int nCntX{};
+	int A[IDXCNT], B[IDXCNT];
+
+
+	for (nCnt = 0; nCnt < IDXCNT; nCnt++, nCntX++)
 	{
-		for (int nCntZ = 0; nCntZ <= SUIHEI; nCntZ++)
+		if (nCnt == 0)
 		{
-			pIdx[count2] = count4;
-			pIdx[count2 + 1] = count3;
+			A[nCnt] = (2 * HMESH) + 3;
+			B[nCnt] = -HMESH - 1;
+			pIdx[nCnt] = HMESH + 1;
+		}
+		else
+		{
+			A[nCnt] = -1 * (A[nCnt - 1]);
 
-			count2 += 2;
-			count3++;
-			count4++;
+			B[nCnt] = B[nCnt - 1] + A[nCnt - 1];
+
+
+			if (nCntX == 2 * (HMESH + 1))
+			{
+				pIdx[nCnt] = pIdx[nCnt - 1];
+			}
+
+			else if (nCntX == 2 * (HMESH + 1) + 1)
+			{
+				pIdx[nCnt] = pIdx[nCnt - 2] + B[nCnt - 2];
+			}
+
+			else if (nCntX == 2 * (HMESH + 1) + 2)
+			{
+				nCntX = 0;
+
+				pIdx[nCnt] = pIdx[nCnt - 1];
+			}
+
+			else
+			{
+				pIdx[nCnt] = pIdx[nCnt - 1] + B[nCnt - 1];
+			}
+
 		}
 
-		pIdx[count2] = count3 - 1;
-		pIdx[count2 + 1] = count4;
-		count2 += 2;
 	}
 
-	//	インデックスのアンロック
+	//頂点バッファをアンロックする
 	g_pIdxBuffMeshWall->Unlock();
 
 }
 
-//---------------
-//	終了処理	
-//---------------
 void UninitMeshWall(void)
 {
+
+	//テクスチャの破棄
+	if (g_pTextureMeshWall != NULL)
+	{
+		g_pTextureMeshWall->Release();
+		g_pTextureMeshWall = NULL;
+	}
+
+
+	//頂点バッファの解放
 	if (g_pVtxBuffMeshWall != NULL)
 	{
 		g_pVtxBuffMeshWall->Release();
 		g_pVtxBuffMeshWall = NULL;
 	}
 
-	if (g_apTextureMeshWall != NULL)
-	{
-		g_apTextureMeshWall->Release();
-		g_apTextureMeshWall = NULL;
-	}
 
+	//インデックスバッファの解放
 	if (g_pIdxBuffMeshWall != NULL)
 	{
 		g_pIdxBuffMeshWall->Release();
 		g_pIdxBuffMeshWall = NULL;
 	}
-}
 
-//---------------
-//	更新処理	
-//---------------
-void UpdataMeshWall(void)
+}
+void UpdateMeshWall(void)
 {
 
 }
-
-//---------------
-//	描画処理	
-//---------------
 void DrawMeshWall(void)
 {
-	//	デバイスの取得
-	LPDIRECT3DDEVICE9 pDevice = GetDevice();
-
-	//	計算マトリックス
+	LPDIRECT3DDEVICE9 pDevice;
+	pDevice = GetDevice();
+	//計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
-
-	//	ワールドマトリックスの初期化
+	//ワールドマトリックスの初期化
 	D3DXMatrixIdentity(&g_MeshWall.mtxWorld);
-
-	//	向き反映
+	//向きを反映
 	D3DXMatrixRotationYawPitchRoll(&mtxRot, g_MeshWall.rot.y, g_MeshWall.rot.x, g_MeshWall.rot.z);
 	D3DXMatrixMultiply(&g_MeshWall.mtxWorld, &g_MeshWall.mtxWorld, &mtxRot);
 
-	//	位置の反映
+	//位置を反映
 	D3DXMatrixTranslation(&mtxTrans, g_MeshWall.pos.x, g_MeshWall.pos.y, g_MeshWall.pos.z);
 	D3DXMatrixMultiply(&g_MeshWall.mtxWorld, &g_MeshWall.mtxWorld, &mtxTrans);
 
-	//	ワールドマトリックスの設定
 	pDevice->SetTransform(D3DTS_WORLD, &g_MeshWall.mtxWorld);
-
-	//	頂点バッファをデバイスのデータストリームに設定
+	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, g_pVtxBuffMeshWall, 0, sizeof(VERTEX_3D));
-
-	//	インデックスをデバイスのデータストリームに設定
+	//インデックスバッファをデータストリームに設定
 	pDevice->SetIndices(g_pIdxBuffMeshWall);
-
-	//	テクスチャの設定
-	pDevice->SetTexture(0, g_apTextureMeshWall);
-
-	//	頂点フォーマットの設定
+	//テクスチャの設定
+	pDevice->SetTexture(0, g_pTextureMeshWall);
+	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
+	//ポリゴンの描画
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, VTXCNT, 0, POLYCNT);
+}
 
-	//	ポリゴンの描画
-	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, MESHWALL_T, 0, MESHWALL_P);
+void CollisionCyrynder(void)
+{
+
+	int nCntPOS = 0;
+	int radius = 400.0f;
+	int nCntVtx[2] = {};
+	float Vmesh = (float)(VMESH);
+	float Hmesh = (float)(HMESH);
+	Player* pPlayer = GetPlayer();
+	D3DXVECTOR3 nor[VMESH];
+	D3DXVECTOR3 vec1[VMESH], vec2[HMESH]; // ベクトル
+
+	for (int nCntVtx = 0; nCntVtx < VTXCNT; nCntVtx++)
+	{
+		float Angle = ((D3DX_PI * 2) / (HMESH) * -nCntVtx) + D3DX_PI;
+		g_MeshWall.VtxPos[nCntVtx]= D3DXVECTOR3(sinf(-Angle) * radius, OBJ_V - ((OBJ_V / VMESH) * nCntVtx), cosf(-Angle) * radius);
+	}
+	for (int nCnt = 0; nCnt < VMESH; nCnt++)
+	{
+		
+		nCntVtx[0] = nCnt % VMESH;
+		nCntVtx[1] = (nCnt+1)%VMESH;
+		vec1[nCnt] = g_MeshWall.VtxPos[nCntVtx[1]] - g_MeshWall.VtxPos[nCntVtx[0]];
+		D3DXVec3Normalize(&vec1[nCnt], &vec1[nCnt]);
+		vec2[nCnt] = pPlayer->pos - g_MeshWall.VtxPos[nCnt];
+		D3DXVec3Normalize(&vec2[nCnt], &vec2[nCnt]);
+		D3DXVec3Cross(&nor[nCnt], &vec1[nCnt], &vec2[nCnt]);
+		D3DXVec3Normalize(&nor[nCnt], &nor[nCnt]);
+		if (nor[nCnt].y < 0.0f)
+		{
+			pPlayer->pos.x = pPlayer->posOld.x;
+			pPlayer->pos.z = pPlayer->posOld.z;
+		}
+	}
 }
