@@ -63,18 +63,6 @@ void InitMeshWall(void)
 		}
 	}
 
-	
-	////テクスチャ座標の設定
-	//pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	//pVtx[1].tex = D3DXVECTOR2(0.5f, 0.0f);
-	//pVtx[2].tex = D3DXVECTOR2(1.0f, 0.0f);
-	//pVtx[3].tex = D3DXVECTOR2(0.0f, 0.5f);
-	//pVtx[4].tex = D3DXVECTOR2(0.5f, 0.5f);
-	//pVtx[5].tex = D3DXVECTOR2(1.0f, 0.5f);
-	//pVtx[6].tex = D3DXVECTOR2(0.0f, 1.0f);
-	//pVtx[7].tex = D3DXVECTOR2(0.5f, 1.0f);
-	//pVtx[8].tex = D3DXVECTOR2(1.0f, 1.0f);
-
 	//頂点バッファをアンロックする
 	g_pVtxBuffMeshWall->Unlock();
 
@@ -82,27 +70,6 @@ void InitMeshWall(void)
 	WORD* pIdx;
 	g_pIdxBuffMeshWall->Lock(0, 0, (void**)&pIdx, 0);
 
-	//頂点座標の更新
-	//pIdx[0] = 2;
-	//pIdx[1] = 0;
-
-	//pIdx[2] = 3;
-	//pIdx[3] = 1;
-
-	////pIdx[4] = 5;
-	////pIdx[5] = 2;
-
-	////pIdx[6] = 2;
-	////pIdx[7] = 6;
-
-	////pIdx[8] = 6;
-	////pIdx[9] = 3;
-
-	////pIdx[10] = 7;
-	////pIdx[11] = 4;
-
-	////pIdx[12] = 8;
-	////pIdx[13] = 5;
 	int nCntX{};
 	int A[IDXCNT], B[IDXCNT];
 
