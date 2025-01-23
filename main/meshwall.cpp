@@ -14,7 +14,7 @@ void InitMeshWall(void)
 
 	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\TEXTURE\\wall004.png",
+		"data\\texture\\wall004.png",
 		&g_pTextureMeshWall);
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * VTXCNT,//(sizeof(VERTEX_3D)*必要な頂点数
