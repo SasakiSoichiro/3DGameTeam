@@ -76,6 +76,10 @@ void UpdateCamera(void)
 	{
 		static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
 
+		g_camera[nCnt].posV.z = pPlayer->pos.z;
+		g_camera[nCnt].posV.x = pPlayer->pos.x;
+		g_camera[nCnt].posV.y = pPlayer->pos.y + 20.0f;
+
 		POINT cursorPos;
 
 		GetCursorPos(&cursorPos);

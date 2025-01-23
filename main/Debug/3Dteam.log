@@ -1,8 +1,10 @@
-<<<<<<< HEAD
-﻿  3Dteam.vcxproj -> C:\Users\student\Desktop\3DTeam\3DGameTeam\main\Debug\3Dteam.exe
-=======
-﻿  game.cpp
-  meshwall.cpp
-  コードを生成中...
-  3Dteam.vcxproj -> C:\Users\student\Desktop\3DGameTeam\main\Debug\3Dteam.exe
->>>>>>> 3304372ca78e6435e1161fc6f44accbe38585513
+﻿  camera.cpp
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(38,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(39,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(40,31): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(41,32): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(127,50): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(127,29): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(129,34): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(130,35): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
+  3Dteam.vcxproj -> C:\Users\student\Desktop\3DTeam\3DGameTeam\main\Debug\3Dteam.exe
