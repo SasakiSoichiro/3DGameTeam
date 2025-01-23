@@ -35,7 +35,7 @@ void InitGame(void)
 	InitMeshfield();
 	InitModel();
 	InitPlayer();
-	
+	LoadStage();
 }
 
 //---------------
