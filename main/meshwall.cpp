@@ -149,7 +149,8 @@ void UninitMeshWall(void)
 }
 void UpdateMeshWall(void)
 {
-
+	LPDIRECT3DDEVICE9 pDevice;
+	pDevice = GetDevice();
 }
 
 void DrawMeshWall(void)
