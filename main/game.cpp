@@ -101,5 +101,5 @@ void DrawGame(void)
 	DrawMeshfield();
 	DrawModel();
 	DrawPlayer();
-
+	DrawMeshWall();
 }
