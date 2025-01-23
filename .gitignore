@@ -31,7 +31,7 @@
 *.out
 *.app
 /main/.vs
-/main/Debug
+/main/Debug/
 /main/x64/Debug/*.log
 /main/x64/Debug/3Dteam.tlog/*.lastbuildstate
 /main/x64/Debug/3Dteam.tlog/*.tlog
