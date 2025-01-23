@@ -57,7 +57,7 @@ void UinitGame(void)
 void UpdateGame(void)
 {
 	UpdataMeshfield();
-	UpdataMeshWall();
+	UpdateMeshWall();
 	UpdateCamera();
 	UpdateLight();
 	UpdateModel();

@@ -38,7 +38,7 @@ void InitMeshWall(void)
 	g_pVtxBuffMeshWall->Lock(0, 0, (void**)&pVtx, 0);
 
 	int nCntPOS = 0;
-	int radius = 400.0f;
+	int radius = 400;
 	float Vmesh = (float)(VMESH);
 	float Hmesh = (float)(HMESH);
 	D3DXVECTOR3 nor;
@@ -184,6 +184,7 @@ void UpdateMeshWall(void)
 {
 
 }
+
 void DrawMeshWall(void)
 {
 	LPDIRECT3DDEVICE9 pDevice;
@@ -217,7 +218,7 @@ void CollisionCyrynder(void)
 {
 
 	int nCntPOS = 0;
-	int radius = 400.0f;
+	int radius = 400;
 	int nCntVtx[2] = {};
 	float Vmesh = (float)(VMESH);
 	float Hmesh = (float)(HMESH);
