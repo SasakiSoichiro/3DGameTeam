@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  camera.cpp
 C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(38,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
 C:\Users\student\Desktop\3DTeam\3DGameTeam\main\camera.cpp(39,27): warning C4244: '=': 'float' から 'DWORD' への変換です。データが失われる可能性があります。
@@ -18,3 +19,7 @@ C:\Users\student\Desktop\3DTeam\3DGameTeam\main\player.cpp(439,16): warning C410
   title3D.cpp
   コードを生成中...
   3Dteam.vcxproj -> C:\Users\student\Desktop\3DTeam\3DGameTeam\main\Debug\3Dteam.exe
+=======
+﻿  meshwall.cpp
+  3Dteam.vcxproj -> C:\Users\student\Desktop\3DGameTeam\main\Debug\3Dteam.exe
+>>>>>>> 980da6acecb0608b622b67741513d0f69786a5e6

@@ -31,7 +31,7 @@
 *.out
 *.app
 /main/.vs
-/main/Debug
+*.ilk
 /main/x64/Debug/*.log
 /main/x64/Debug/3Dteam.tlog/*.lastbuildstate
 /main/x64/Debug/3Dteam.tlog/*.tlog
@@ -41,10 +41,11 @@
 /main/Debug/vc142.pdb.BASE.pdb
 /main/Debug/vc142.pdb.LOCAL.pdb
 /main/Debug/vc142.pdb.REMOTE.pdb
-/main//Debug/*.log
-/main//Debug/3Dteam.tlog/*.lastbuildstate
-/main//Debug/3Dteam.tlog/*.tlog
-/main//Debug/*.idb
-/main//Debug/*.pdb
-/main//Debug/3Dteam.tlog
+/main/Debug/*.log
+/main/Debug/3Dteam.tlog/*.lastbuildstate
+/main/Debug/3Dteam.tlog/*.tlog
+/main/Debug/*.idb
+/main/Debug/*.pdb
+/main/Debug/3Dteam.tlog
+/main/Debug/3Dteam.ilk
 
