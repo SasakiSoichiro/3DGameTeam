@@ -9,13 +9,13 @@
 #include "main.h"
 
 //マクロ定義
-#define CORNERCNT (30)
+#define CORNERCNT (5)
 
 typedef struct
 {
 	D3DXVECTOR3 pos;
 	D3DXVECTOR3 rot;
-	D3DXVECTOR3 VtxPos[CORNERCNT];
+	D3DXVECTOR3 VtxPos[CORNERCNT+1];
 	D3DXMATRIX mtxWorld;
 }MeshFan;
 //プロトタイプ宣言
@@ -23,5 +23,4 @@ void InitMeshFan(void);
 void UninitMeshFan(void);
 void UpdateMeshFan(void);
 void DrawMeshFan(void);
-
 #endif

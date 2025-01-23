@@ -15,7 +15,7 @@ void InitMeshFan(void)
 
 	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\Fan004.png",
+		"data\\texture\\all004.png",
 		&g_pTextureMeshFan);
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * CORNERCNT+1,//(sizeof(VERTEX_3D)*必要な頂点数
@@ -56,7 +56,7 @@ void InitMeshFan(void)
 			nor = pVtx[nCnt].pos - g_MeshFan.pos;
 			D3DXVec3Normalize(&pVtx[nCnt].nor, &nor);
 			pVtx[nCnt].col = D3DXCOLOR(1.0f, 0.5f, 0.5f, 1.0f);
-			pVtx[nCnt].tex = D3DXVECTOR2((1.0f / Vmesh) * nCnt, ((1.0f / Hmesh) * nCnt));
+			//pVtx[nCnt].tex = D3DXVECTOR2((1.0f / Vmesh) * nCnt, ((1.0f / Hmesh) * nCnt));
 	}
 
 	//頂点バッファをアンロックする
@@ -136,5 +136,5 @@ void DrawMeshFan(void)
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 	//ポリゴンの描画
-	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLEFAN, 0, 0, CORNERCNT, 0, POLYCNT);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLEFAN, 0, 0, CORNERCNT, 0, 4);
 }
