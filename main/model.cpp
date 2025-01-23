@@ -91,54 +91,59 @@ void DrawModel(void)
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
-	D3DXMATRIX mtxRot, mtxTrans;
-	D3DMATERIAL9 matDef;
-	D3DXMATERIAL* pMat;
-
-	//	ワールドマトリックスの初期化
-	D3DXMatrixIdentity(&g_mtxWoldModel);
-
-	//	向き反映
-	D3DXMatrixRotationYawPitchRoll(&mtxRot, g_rotModel.y, g_rotModel.x, g_rotModel.z);
-	D3DXMatrixMultiply(&g_mtxWoldModel, &g_mtxWoldModel, &mtxRot);
-
-	//	位置の反映
-	D3DXMatrixTranslation(&mtxTrans, g_posModel.x, g_posModel.y, g_posModel.z);
-	D3DXMatrixMultiply(&g_mtxWoldModel, &g_mtxWoldModel, &mtxTrans);
-
-	//	ワールドマトリックスの設定
-	pDevice->SetTransform(D3DTS_WORLD, &g_mtxWoldModel);
-
-	//	現在のマテリアルを保存
-	pDevice->GetMaterial(&matDef);
-
-	//	マテリアルデータへのポインタあーを取得
-	pMat = (D3DXMATERIAL*)g_pBufferMatModel->GetBufferPointer();
-
-	//	描画
-	for (int nCntMat = 0; nCntMat < (int)g_dwNuMatModel; nCntMat++)
+	if (g_Model->bUse == true)
 	{
-		//	マテリアルの設定
-		pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
+		D3DXMATRIX mtxRot, mtxTrans;
+		D3DMATERIAL9 matDef;
+		D3DXMATERIAL* pMat;
 
-		//	テクスチャの設定
-		pDevice->SetTexture(0, g_apTextureModel[nCntMat]);
+		//	ワールドマトリックスの初期化
+		D3DXMatrixIdentity(&g_mtxWoldModel);
 
-		//	モデルの描画
-		g_pMeshModeel->DrawSubset(nCntMat);
+		//	向き反映
+		D3DXMatrixRotationYawPitchRoll(&mtxRot, g_rotModel.y, g_rotModel.x, g_rotModel.z);
+		D3DXMatrixMultiply(&g_mtxWoldModel, &g_mtxWoldModel, &mtxRot);
+
+		//	位置の反映
+		D3DXMatrixTranslation(&mtxTrans, g_posModel.x, g_posModel.y, g_posModel.z);
+		D3DXMatrixMultiply(&g_mtxWoldModel, &g_mtxWoldModel, &mtxTrans);
+
+		//	ワールドマトリックスの設定
+		pDevice->SetTransform(D3DTS_WORLD, &g_mtxWoldModel);
+
+		//	現在のマテリアルを保存
+		pDevice->GetMaterial(&matDef);
+
+		//	マテリアルデータへのポインタあーを取得
+		pMat = (D3DXMATERIAL*)g_pBufferMatModel->GetBufferPointer();
+
+		//	描画
+		for (int nCntMat = 0; nCntMat < (int)g_dwNuMatModel; nCntMat++)
+		{
+			//	マテリアルの設定
+			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
+
+			//	テクスチャの設定
+			pDevice->SetTexture(0, g_apTextureModel[nCntMat]);
+
+			//	モデルの描画
+			g_pMeshModeel->DrawSubset(nCntMat);
+		}
+
+		//	保存したマテリアルを戻す
+		pDevice->SetMaterial(&matDef);
+
 	}
-
-	//	保存したマテリアルを戻す
-	pDevice->SetMaterial(&matDef);
 }
 
-void SetModel(D3DXVECTOR3 pos)
+void SetModel(D3DXVECTOR3 pos, Mtype nType)
 {
 	for (int nCntBuilding = 0; nCntBuilding < MAX_MODEL; nCntBuilding++)
 	{
 		if (g_Model[nCntBuilding].bUse == false)
 		{
 			g_Model[nCntBuilding].pos = pos;
+			g_Model[nCntBuilding].nType = nType;
 			//g_Model[nCntBuilding].rot = rot;
 			g_Model[nCntBuilding].bUse = true;
 			break;

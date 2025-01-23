@@ -11,5 +11,11 @@
 void LoadStage(void)
 {
 	//‰Æ000
-	SetModel(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetModel(D3DXVECTOR3(0.0f, 0.0f, 0.0f),MODELTYPE_0);
+
+	//‰Æ01
+	SetModel(D3DXVECTOR3(500.0f, 0.0f, -500.0f), MODELTYPE_1);
+
+
+
 }
