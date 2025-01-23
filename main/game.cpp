@@ -14,6 +14,7 @@
 #include "player.h"
 #include "motion.h"
 #include "stage.h"
+#include "item.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -36,6 +37,8 @@ void InitGame(void)
 	InitModel();
 	InitPlayer();
 	LoadStage();
+	InitItem();
+	SetItem(D3DXVECTOR3(100.0f, 0.0f, 200.0f), ITEMTYPE_FIVE);
 }
 
 //---------------
@@ -49,7 +52,7 @@ void UinitGame(void)
 	UninitCamera();
 	UninitModel();
 	UninitPlayer();
-
+	UinitItem();
 }
 
 //---------------
@@ -63,6 +66,7 @@ void UpdateGame(void)
 	UpdateLight();
 	UpdateModel();
 	UpdatePlayer();
+	UpdateItem();
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
 	{
@@ -101,6 +105,7 @@ void DrawGame(void)
 {
 	DrawMeshfield();
 	DrawModel();
+	DrawItem();
 	DrawPlayer();
 	DrawMeshWall();
 }
