@@ -3,7 +3,7 @@
 #define _CAMERA_H_
 
 #include "main.h"
-#define MAX_CAMERA (2)
+#define MAX_CAMERA (1)
 
 //ç\ë¢ëÃ
 typedef struct

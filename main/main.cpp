@@ -518,6 +518,15 @@ void Draw(void)
 			//	FPSの表示
 			DrawFPS();
 
+			//カメラ注視点の描画処理
+			DrawCameraPosR();
+
+			//カメラ視点の描画処理
+			DrawCameraPosV();
+
+			//カメラ向きの描画処理
+			DrawCameraRot();
+
 #endif // DEBUG
 
 			//	終了
@@ -607,4 +616,40 @@ void DrawFPS(void)
 	//	テキスト表示
 	//===================
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 0, 0, 255));
+}
+
+//================================
+// カメラの位置座標の描画処理
+//================================
+void DrawCameraPosR(void)
+{
+	RECT rect = { 0,45,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Camera* pCamera = GetCamera();
+	sprintf(&aStr[0], "カメラ注視点座標　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->posR.x, pCamera->posR.y, pCamera->posR.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+}
+
+//================================
+// カメラの位置座標の描画処理
+//================================
+void DrawCameraPosV(void)
+{
+	RECT rect = { 0,60,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Camera* pCamera = GetCamera();
+	sprintf(&aStr[0], "カメラ視点座標　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->posV.x, pCamera->posV.y, pCamera->posV.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+}
+
+//================================
+// カメラの向きの描画処理
+//================================
+void DrawCameraRot(void)
+{
+	RECT rect = { 0,75,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Camera* pCamera = GetCamera();
+	sprintf(&aStr[0], "カメラの向き　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->rot.x, pCamera->rot.y, pCamera->rot.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
 }

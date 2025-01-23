@@ -20,8 +20,8 @@ void InitCamera(void)
 	//	視点・注視点・上方向を設定する
 	for (int count = 0; count < MAX_CAMERA; count++)
 	{
-		g_camera[count].posV = D3DXVECTOR3(0.0f, 120.0f, -300.0f);
-		g_camera[count].posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_camera[count].posV = D3DXVECTOR3(0.0f, 60.0f, 0.0f);
+		g_camera[count].posR = D3DXVECTOR3(0.0f, 50.0f, 0.0f);
 		g_camera[count].posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[count].posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[count].vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
@@ -37,18 +37,18 @@ void InitCamera(void)
 	//	ビューポート構成の保存	左
 	g_camera[0].viewport.X = 0.0f;
 	g_camera[0].viewport.Y = 0.0f;
-	g_camera[0].viewport.Width = 640.0f;
+	g_camera[0].viewport.Width = 1280.0f;
 	g_camera[0].viewport.Height = 720.0f;
 	g_camera[0].viewport.MinZ = 0.0f;
 	g_camera[0].viewport.MaxZ = 1.0f;
 
-	//	ビューポート構成の保存	右
-	g_camera[1].viewport.X = 640.0f;
-	g_camera[1].viewport.Y = 0.0f;
-	g_camera[1].viewport.Width = 640.0f;
-	g_camera[1].viewport.Height = 720.0f;
-	g_camera[1].viewport.MinZ = 0.0f;
-	g_camera[1].viewport.MaxZ = 1.0f;
+	////	ビューポート構成の保存	右
+	//g_camera[1].viewport.X = 640.0f;
+	//g_camera[1].viewport.Y = 0.0f;
+	//g_camera[1].viewport.Width = 640.0f;
+	//g_camera[1].viewport.Height = 720.0f;
+	//g_camera[1].viewport.MinZ = 0.0f;
+	//g_camera[1].viewport.MaxZ = 1.0f;
 
 	////	ビューポート構成の保存	真ん中
 	//g_camera[2].viewport.X = 450.0f;
@@ -161,7 +161,7 @@ void SetCamera(int nIdx)
 
 		//	プロジェクションマトリックスの初期化
 		D3DXMatrixPerspectiveFovLH(&g_camera[nIdx].mtxProjection,
-			D3DXToRadian(70.0f),								//	視野角
+			D3DXToRadian(40.0f),								//	視野角
 			SCREEN_WIDTH / SCREEN_HEIGHT,									//	アスペクト比
 			10.0f,												//	どこからどこまで
 			1000.0f);											//	カメラで表示するか
