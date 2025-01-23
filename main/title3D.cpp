@@ -20,7 +20,6 @@ void InitTitle3D(void)
 	InitTitle();
 	InitMeshfield();
 	InitLighr();
-	InitModel();
 }
 
 //タイトルの終了処理
@@ -30,7 +29,6 @@ void UninitTitle3D()
 	UninitTitle();
 	UninitMeshfield();
 	UninitLight();
-	UninitModel();
 }
 
 //タイトルの更新処理
@@ -40,7 +38,6 @@ void UpdateTitle3D()
 	UpdateTitle();
 	UpdataMeshfield();
 	UpdateLight();
-	UpdateModel();
 }
 
 //タイトルの描画処理
@@ -48,5 +45,4 @@ void DrawTitle3D()
 {
 	DrawTitle();
 	DrawMeshfield();
-	DrawModel();
 }

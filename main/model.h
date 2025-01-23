@@ -19,6 +19,12 @@ typedef enum
 	MODELTYPE_MAX
 }Mtype;
 
+static const char* MODEL[MODELTYPE_MAX] =
+{
+	"data\\model\\house000.x",
+	"data\\model\\flashlight.x",
+};
+
 //モデルの構造体
 typedef struct
 {
@@ -30,19 +36,20 @@ typedef struct
 	D3DXVECTOR3 rot;//向き
 	D3DXVECTOR3 posFirst;//位置(オフセット)
 	D3DXVECTOR3 rotFirst;//向き
+	D3DXVECTOR3 vtxMin, vtxMax;
 	D3DXMATRIX mtxWorld;//ワールドマトリックス
-	LPDIRECT3DTEXTURE9 apTexture[128];
+	LPDIRECT3DTEXTURE9 apTexture[256];
 	D3DCOLORVALUE Diffuse, firstDiffuse;
 	bool bUse;
-	Mtype nType;
+	int nType;
 
 }Model;
 
-//プロトタイプ宣言
-void InitModel(void);
-void UninitModel(void);
-void UpdateModel(void);
-void DrawModel(void);
-void SetModel(D3DXVECTOR3 pos, Mtype nType);
+////プロトタイプ宣言
+//void InitModel(void);
+//void UninitModel(void);
+//void UpdateModel(void);
+//void DrawModel(void);
+//void SetModel(D3DXVECTOR3 pos,int nType);
 
 #endif

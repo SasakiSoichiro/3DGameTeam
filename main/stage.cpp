@@ -5,17 +5,14 @@
 //
 //=========================================
 #include "stage.h"
-#include "model.h"
-
+#include "block.h"
 
 void LoadStage(void)
 {
 	//‰Æ000
-	SetModel(D3DXVECTOR3(0.0f, 0.0f, 0.0f),MODELTYPE_0);
+	SetBlock(D3DXVECTOR3(0.0f, 0.0f, 0.0f),BLOCK_HOUSE00);
 
 	//‰Æ01
-	SetModel(D3DXVECTOR3(500.0f, 0.0f, -500.0f), MODELTYPE_1);
-
-
+	SetBlock(D3DXVECTOR3(200.0f, 0.0f, -200.0f), BLOCK_HOUSE01);
 
 }

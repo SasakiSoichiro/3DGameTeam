@@ -21,6 +21,7 @@
     <ClCompile Include="title.cpp" />
     <ClCompile Include="title3D.cpp" />
     <ClCompile Include="tutrial.cpp" />
+    <ClCompile Include="block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -43,5 +44,6 @@
     <ClInclude Include="title.h" />
     <ClInclude Include="title3D.h" />
     <ClInclude Include="tutrial.h" />
+    <ClInclude Include="block.h" />
   </ItemGroup>
 </Project>

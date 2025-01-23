@@ -32,7 +32,7 @@ void InitMeshfield(void)
 
 	//	テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\ground.png",
+		"data\\texture\\grand.png",
 		&g_apTextureMeshfield);
 
 	//	インデックスバッファの生成

@@ -8,23 +8,13 @@
 #define _BLOCK_H_//2銃インクルード防止のマクロ定義
 #include "main.h"
 #include "player.h"
-#define NUM_BLOCK (128)
+#define NUM_BLOCK (16)
 typedef enum
 {
-	BLOCK_NORMAL=0,		//普通のブロック
-	BLOCK_PRESSUREPLATERED,//感圧版
-	BLOCK_PRESSUREPLATEBLUE,
-	BLOCK_PRESSUREPLATEGREEN,
-	BLOCK_WALL,			//壁
+	BLOCK_HOUSE00=0,		//普通のブロック
+	BLOCK_HOUSE01,
 	BLOCK_MAX
 }BLOCKTYPE;
-
-typedef struct
-{
-	bool red;
-	bool blue;
-	bool green;
-}BoolPressurePlate;
 
 typedef struct
 {
@@ -43,11 +33,8 @@ typedef struct
 
 static const char* X_BLOCK[BLOCK_MAX] =
 {
-	"data\\MODEL\\OBJ\\box000.x",
-	"data\\MODEL\\OBJ\\pressureplate.x",
-	"data\\MODEL\\OBJ\\pressureplate_blue.x",
-	"data\\MODEL\\OBJ\\pressureplate_green.x",
-	"data\\MODEL\\OBJ\\wall001.x"
+	"data\\model\\house000.x",
+	"data\\model\\house01.x",
 };
 
 //プロトタイプ宣言
@@ -57,7 +44,5 @@ void UpdateBlock(void);
 void DrawBlock(void);
 void SetBlock(D3DXVECTOR3 pos, int nType);
 void CollisionBlock(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld);
-void GimmickBlock(int nType);
-BoolPressurePlate GetPlate(void);
 
 #endif

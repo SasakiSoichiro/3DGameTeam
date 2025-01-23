@@ -1,17 +1,12 @@
 #include "block.h"
 //グローバル変数宣言
 BLOCK g_Block[BLOCK_MAX][NUM_BLOCK];
-BoolPressurePlate g_bPlate;
 //初期化処理
 void InitBlock(void)
 {
 	LPDIRECT3DDEVICE9 pDevice;
 
 	pDevice = GetDevice();
-
-	g_bPlate.red = true;
-	g_bPlate.blue = false;
-	g_bPlate.green = false;
 
 	for (int i = 0; i < BLOCK_MAX; i++)
 	{
@@ -20,7 +15,7 @@ void InitBlock(void)
 			//各種変数の初期化
 			g_Block[i][nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 			g_Block[i][nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-			g_Block[i][nCnt].nType = BLOCK_NORMAL;
+			g_Block[i][nCnt].nType = BLOCK_HOUSE00;
 			g_Block[i][nCnt].bUse = false;
 		}
 
@@ -241,14 +236,11 @@ void CollisionBlock(D3DXVECTOR3* pPos,		//現在の位置
 							//pPlayer->posをモデルの左側にくっつける
 							pos->x = g_Block[i][nCnt].pos.x + g_Block[i][nCnt].vtxMin.x - OBJ_P - 0.1f;
 
-							GimmickBlock(i);
-
 						}
 						if (posOld->x - OBJ_P > g_Block[i][nCnt].pos.x + g_Block[i][nCnt].vtxMax.x && pos->x - OBJ_P < g_Block[i][nCnt].pos.x + g_Block[i][nCnt].vtxMax.x)//Ｘが左から右にめり込んだ
 						{
 							//pPlayer->posをモデルの右側にくっつける
 							pos->x = g_Block[i][nCnt].pos.x + g_Block[i][nCnt].vtxMax.x + OBJ_P + 0.1f;
-							GimmickBlock(i);
 						}
 					}
 
@@ -260,13 +252,11 @@ void CollisionBlock(D3DXVECTOR3* pPos,		//現在の位置
 						{
 							//pPlayer->posをモデルの手前側にくっつける
 							pos->z = g_Block[i][nCnt].pos.z + g_Block[i][nCnt].vtxMin.z - OBJ_P - 0.1f;
-							GimmickBlock(i);
 						}
 						if (posOld->z - OBJ_P > g_Block[i][nCnt].pos.z + g_Block[i][nCnt].vtxMax.z && pos->z - OBJ_P < g_Block[i][nCnt].pos.z + g_Block[i][nCnt].vtxMax.z)//Zが上から下にめり込んだ
 						{
 							//pPlayer->posをモデルの奥側にくっつける
 							pos->z = g_Block[i][nCnt].pos.z + g_Block[i][nCnt].vtxMax.z + OBJ_P + 0.1f;
-							GimmickBlock(i);
 						}
 					}
 
@@ -278,13 +268,11 @@ void CollisionBlock(D3DXVECTOR3* pPos,		//現在の位置
 					{
 						//pPlayer->posをモデルの下側にくっつける
 						pos->y = g_Block[i][nCnt].pos.y + g_Block[i][nCnt].vtxMin.y - (OBJ_P * 2.0f) - 0.1f;
-						GimmickBlock(i);
 					}
 					if (posOld->y > g_Block[i][nCnt].pos.y + g_Block[i][nCnt].vtxMax.y && pos->y < g_Block[i][nCnt].pos.y + g_Block[i][nCnt].vtxMax.y)//Ｘが左から右にめり込んだ
 					{
 						//pPlayer->posをモデルの上側にくっつける
 						pos->y = g_Block[i][nCnt].pos.y + g_Block[i][nCnt].vtxMax.y + 0.1f;
-						GimmickBlock(i);
 					}
 
 				}
@@ -298,33 +286,3 @@ void CollisionBlock(D3DXVECTOR3* pPos,		//現在の位置
 
 }
 
-void GimmickBlock(int nType)
-{
-	int Type = nType;
-	switch(Type)
-	{
-	case BLOCK_PRESSUREPLATERED:
-		g_bPlate.red = true;
-		g_bPlate.blue = false;
-		g_bPlate.green = false;
-
-		break;
-	case BLOCK_PRESSUREPLATEBLUE:
-		g_bPlate.red = false;
-		g_bPlate.blue = true;
-		g_bPlate.green = false;
-		break;
-	case BLOCK_PRESSUREPLATEGREEN:
-		g_bPlate.red = false;
-		g_bPlate.blue = false;
-		g_bPlate.green = true;
-		break;
-	default:
-		break;
-	}
-}
-
-BoolPressurePlate GetPlate(void)
-{
-	return g_bPlate;
-}
