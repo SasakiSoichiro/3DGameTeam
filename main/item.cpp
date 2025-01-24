@@ -9,6 +9,7 @@
 //==================================================================
 #include "item.h"
 #include "player.h"
+#include "input.h"
 
 ITEM g_item[MAX_ITEM] = {};
 LPD3DXMESH g_pMeshItem[MAX_ITEM] = { NULL };				//	頂点情報のポインター
@@ -87,6 +88,7 @@ void InitItem(void)
 	{
 		g_item[count].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_item[count].bUse = false;
+		g_item[count].bHave = false;
 
 		//	テクスチャの読み込み
 		pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
@@ -126,7 +128,47 @@ void UinitItem(void)
 //	更新処理
 void UpdateItem(void)
 {
+	Player* pPlayer = GetPlayer();
 
+	for (int nCnt = 0; nCnt < MAX_ITEM; nCnt++)
+	{
+		if (g_item[nCnt].bUse == true)
+		{
+			//プレイヤーの半径の算出用変数
+			float fPRadPos = 30.0f;
+
+			//アイテムの半径の算出用変数
+			float fIRadPos = 30.0f;
+
+			//プレやーの位置を取得
+			D3DXVECTOR3 PlayerPos = GetPlayer()->pos;
+
+			//アイテムのプレイヤーの距離の差
+			D3DXVECTOR3 diff = PlayerPos - g_item[nCnt].pos;
+
+			//範囲計算
+			float fDisX = PlayerPos.x - g_item[nCnt].pos.x;
+			float fDisY = PlayerPos.y - g_item[nCnt].pos.y;
+			float fDisZ = PlayerPos.z - g_item[nCnt].pos.z;
+
+			//二つの半径を求める
+			float fRadX = fPRadPos + fIRadPos;
+
+			//プレイヤーがアイテムの範囲に入ったら
+			if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
+			{
+
+				if (KeybordTrigger(DIK_F) == true)
+				{//Fを押されたとき
+
+					//アイテムを拾う
+					g_item[3].bUse = false;
+				}
+			}
+		
+
+		}
+	}
 }
 
 //	描画処理
@@ -141,6 +183,8 @@ void DrawItem(void)
 
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
+		if (g_item[count].bUse == true)
+		{
 		//	ワールドマトリックスの初期化
 		D3DXMatrixIdentity(&g_item[count].mtxWorld);
 
@@ -155,15 +199,12 @@ void DrawItem(void)
 		pDevice->GetMaterial(&matDef);
 
 
-		for (int nCntModel = 0; nCntModel < MAX_ITEM; nCntModel++)
-		{
 			//	マテリアルデータへのポインタを取得
-			pMat = (D3DXMATERIAL*)g_pBufferMatItem[nCntModel]->GetBufferPointer();
+			pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
 
 			for (int nCntMat = 0; nCntMat < MAX_ITEM; nCntMat++)
 			{
-				if (g_item[nCntMat].bUse == true)
-				{
+				
 					//	マテリアルの設定
 					pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
@@ -171,10 +212,10 @@ void DrawItem(void)
 					pDevice->SetTexture(0, g_apTextureItem[nCntMat]);
 
 					//	モデルの描画
-					g_pMeshItem[nCntModel]->DrawSubset(nCntMat);
+					g_pMeshItem[count]->DrawSubset(nCntMat);
 				}
 			}
-		}
+		
 	}
 	//	保存したマテリアルを戻す		
 	pDevice->SetMaterial(&matDef);

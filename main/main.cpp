@@ -15,6 +15,7 @@
 #include "tutrial.h"
 #include "camera.h"
 #include "title3D.h"
+#include "item.h"
 
 //=====================
 //	グローバル宣言
@@ -169,6 +170,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hInstancePrev, _
 				//=============
 				//	描画処理
 				//=============
+
 				Draw();
 
 				//===========================
@@ -527,6 +529,9 @@ void Draw(void)
 			//カメラ向きの描画処理
 			DrawCameraRot();
 
+			//鍵を持っているかのデバッグ表示処理
+			DrawDebugKey();
+
 #endif // DEBUG
 
 			//	終了
@@ -652,4 +657,13 @@ void DrawCameraRot(void)
 	Camera* pCamera = GetCamera();
 	sprintf(&aStr[0], "カメラの向き　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->rot.x, pCamera->rot.y, pCamera->rot.z);
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+}
+void DrawDebugKey(void)
+{
+	RECT rect = { 0,90,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	ITEM* pITEM = GetItem();
+	sprintf(&aStr[0], "bHave:%d\n", pITEM->bHave);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+
 }

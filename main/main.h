@@ -86,5 +86,5 @@ void DrawFPS(void);
 void DrawCameraPosR(void);
 void DrawCameraPosV(void);
 void DrawCameraRot(void);
-
+void DrawDebugKey(void);
 #endif

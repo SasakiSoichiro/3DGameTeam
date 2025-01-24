@@ -20,6 +20,7 @@ typedef struct
 {
 	D3DXVECTOR3 pos;	
 	bool bUse;
+	bool bHave;
 	ITEMTYPE type;
 	D3DXMATRIX mtxWorld;
 }ITEM;

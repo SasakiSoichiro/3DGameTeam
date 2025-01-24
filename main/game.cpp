@@ -39,8 +39,8 @@ void InitGame(void)
 	InitBlock();
 	InitPlayer();
 	LoadStage();
-	//InitItem();
-	//SetItem(D3DXVECTOR3(100.0f, 0.0f, 200.0f), ITEMTYPE_FIVE);
+	InitItem();
+	SetItem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
 	InitTime();
 }
 
@@ -55,7 +55,7 @@ void UinitGame(void)
 	UninitCamera();
 	UninitBlock();
 	UninitPlayer();
-	//UinitItem();
+	UinitItem();
 	UninitTime();
 }
 
@@ -70,7 +70,7 @@ void UpdateGame(void)
 	UpdateLight();
 	UpdateBlock();
 	UpdatePlayer();
-	//UpdateItem();
+	UpdateItem();
 	UpdateTime();
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
@@ -110,7 +110,7 @@ void DrawGame(void)
 {
 	DrawMeshfield();
 	DrawBlock();
-	//DrawItem();
+	DrawItem();
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
