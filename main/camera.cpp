@@ -20,8 +20,8 @@ void InitCamera(void)
 	//	視点・注視点・上方向を設定する
 	for (int count = 0; count < MAX_CAMERA; count++)
 	{
-		g_camera[count].posV = D3DXVECTOR3(0.0f, 60.0f, 0.0f);
-		g_camera[count].posR = D3DXVECTOR3(0.0f, 50.0f, 0.0f);
+		g_camera[count].posV = D3DXVECTOR3(100.0f, 60.0f, 0.0f);
+		g_camera[count].posR = D3DXVECTOR3(100.0f, 50.0f, 0.0f);
 		g_camera[count].posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[count].posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[count].vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
@@ -76,10 +76,6 @@ void UpdateCamera(void)
 	{
 		static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
 
-		g_camera[nCnt].posV.z = pPlayer->pos.z;
-		g_camera[nCnt].posV.x = pPlayer->pos.x;
-		g_camera[nCnt].posV.y = pPlayer->pos.y + 20.0f;
-
 		POINT cursorPos;
 
 		GetCursorPos(&cursorPos);
@@ -105,23 +101,24 @@ void UpdateCamera(void)
 		{
 			g_camera[nCnt].rot.y += -D3DX_PI * 2.0f;
 		}
-		if (g_camera[nCnt].rot.x <= -D3DX_PI)
-		{
-			g_camera[nCnt].rot.x += D3DX_PI * 2.0f;
-		}
-		else if (g_camera[nCnt].rot.x >= D3DX_PI)
-		{
-			g_camera[nCnt].rot.x += -D3DX_PI * 2.0f;
-		}
+
+		//if (g_camera[nCnt].rot.x <= -D3DX_PI)
+		//{
+		//	g_camera[nCnt].rot.x += D3DX_PI * 2.0f;
+		//}
+		//else if (g_camera[nCnt].rot.x >= D3DX_PI)
+		//{
+		//	g_camera[nCnt].rot.x += -D3DX_PI * 2.0f;
+		//}
 
 		//角度制限
-		if (g_camera[nCnt].rot.x < 0.01f)
+		if (g_camera[nCnt].rot.x > 1.57f)
 		{
-			g_camera[nCnt].rot.x -= DeltaY;
+			g_camera[nCnt].rot.x = 1.57f;
 		}
-		else if (g_camera[nCnt].rot.x > 3.10f)
+		else if (g_camera[nCnt].rot.x < -1.57f)
 		{
-			g_camera[nCnt].rot.x -= DeltaY;
+			g_camera[nCnt].rot.x = -1.57f;
 		}
 
 		SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
@@ -129,10 +126,12 @@ void UpdateCamera(void)
 		prevCursorPos.x = SCREEN_WIDTH / 1.5;
 		prevCursorPos.y = SCREEN_HEIGHT / 1.5;
 
+		g_camera[nCnt].posV = pPlayer->pos;
+		g_camera[nCnt].posV.y += 20.0f;
 
-		g_camera[nCnt].posR.x = g_camera[nCnt].posV.x + sinf(g_camera[nCnt].rot.x) * sinf(g_camera[nCnt].rot.y);
-		g_camera[nCnt].posR.y = g_camera[nCnt].posV.y + cosf(g_camera[nCnt].rot.x);
-		g_camera[nCnt].posR.z = g_camera[nCnt].posV.z + sinf(g_camera[nCnt].rot.x) * cosf(g_camera[nCnt].rot.y);
+		g_camera[nCnt].posR.x = g_camera[nCnt].posV.x - sinf(g_camera[nCnt].rot.y) * cosf(g_camera[nCnt].rot.x);
+		g_camera[nCnt].posR.y = g_camera[nCnt].posV.y - sinf(g_camera[nCnt].rot.x);
+		g_camera[nCnt].posR.z = g_camera[nCnt].posV.z - cosf(g_camera[nCnt].rot.y) * cosf(g_camera[nCnt].rot.x);
 
 		//g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
 		//g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
