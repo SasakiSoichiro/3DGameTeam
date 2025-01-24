@@ -129,11 +129,12 @@ void UpdateEnemy(void)
 
 	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
 	{
-		//if (g_Enemy[nCntEnemy].nLife <= -1)
-		//{
-		//	g_Enemy[nCntEnemy].nLife = 0;
+		if (g_Enemy[nCntEnemy].nLife <= -1)
+		{
+			g_Enemy[nCntEnemy].nLife = 0;
 
-		//}
+		}
+
 		if (g_Enemy[nCntEnemy].bUse == true)
 		{
 
@@ -154,32 +155,6 @@ void UpdateEnemy(void)
 					g_Enemy[nCntEnemy].State = ENEMYSTATE_NORMAL;
 				}
 				break;
-			}
-			if (nCntTypeState >= 3600)
-			{
-				nCntTypeState = 0;
-			}
-
-			if (nCntTypeState >= 0 && nCntTypeState < 1200)
-			{
-				g_Enemy[nCntEnemy].nType = ETYPE_RED;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.r = 255;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.b = 0;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.g = 0;
-			}
-			else if (nCntTypeState >= 1200 && nCntTypeState < 2400)
-			{
-				g_Enemy[nCntEnemy].nType = ETYPE_BLUE;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.r = 0;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.b = 255;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.g = 0;
-			}
-			else if (nCntTypeState >= 2400 && nCntTypeState < 3600)
-			{
-				g_Enemy[nCntEnemy].nType = ETYPE_GREEN;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.r = 0;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.b = 0;
-				g_Enemy[nCntEnemy].aModel[0].Diffuse.g = 255;
 			}
 
 			g_Enemy[nCntEnemy].posOld = g_Enemy[nCntEnemy].pos;
@@ -671,7 +646,7 @@ void CollisionEnemy(void)
 
 				if (fDistance <= fRad&&g_Enemy[nCntEnemy].State!=ENEMYSTATE_DAMAGE)
 				{
-							HitEnemy(nCntEnemy, 15);
+					HitEnemy(nCntEnemy, 15);
 					
 				}
 			}
