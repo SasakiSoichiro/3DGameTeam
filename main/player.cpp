@@ -350,7 +350,7 @@ void UpdatePlayer(void)
 		g_player.pos.y = 0.0f;
 	}
 
-	//スティック移動
+	//左スティック移動
 	if (GetJoyStick() == true)
 	{
 		if (pStick->Gamepad.sThumbLX > 10922)
@@ -387,6 +387,77 @@ void UpdatePlayer(void)
 			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
 			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
 			g_player.rotDest.y = pCamera->rot.y;
+
+		}
+	}
+
+	//右スティック視点
+	if (GetJoyStick() == true)
+	{
+		if (pStick->Gamepad.sThumbRX > 10922)
+		{
+			//右回り
+			pCamera->rot.y += 0.05f;//回転量
+
+			//角度の正規化
+			if (pCamera->rot.y > D3DX_PI)
+			{
+				pCamera->rot.y = -D3DX_PI;
+			}
+			if (pCamera->rot.y < -D3DX_PI)
+			{
+				pCamera->rot.y = D3DX_PI;
+			}
+
+			pCamera->posV.x = pCamera->posR.x - sinf(pCamera->rot.y) * pCamera->fDistance;
+
+			pCamera->posV.z = pCamera->posR.z - cosf(pCamera->rot.y) * pCamera->fDistance;
+
+		}
+		else if (pStick->Gamepad.sThumbRX < -10922)
+		{
+			//左回り
+			pCamera->rot.y -= 0.05f;//回転量
+
+			//角度の正規化
+			if (pCamera->rot.y > D3DX_PI)
+			{
+				pCamera->rot.y = -D3DX_PI;
+			}
+			if (pCamera->rot.y < -D3DX_PI)
+			{
+				pCamera->rot.y = D3DX_PI;
+			}
+
+			pCamera->posV.x = pCamera->posR.x - sinf(pCamera->rot.y) * pCamera->fDistance;
+
+			pCamera->posV.z = pCamera->posR.z - cosf(pCamera->rot.y) * pCamera->fDistance;
+
+		}
+		else if (pStick->Gamepad.sThumbRY > 10922)
+		{
+			//上
+			pCamera->rot.y += 0.05f;//回転量
+
+			//角度の正規化
+			if (pCamera->rot.y > D3DX_PI)
+			{
+				pCamera->rot.y = -D3DX_PI;
+			}
+			if (pCamera->rot.y < -D3DX_PI)
+			{
+				pCamera->rot.y = D3DX_PI;
+			}
+
+			pCamera->posV.y = pCamera->posR.y - sinf(pCamera->rot.y) * pCamera->fDistance;
+
+			pCamera->posV.z = pCamera->posR.z - cosf(pCamera->rot.y) * pCamera->fDistance;
+
+
+		}
+		else if (pStick->Gamepad.sThumbRY < -10922)
+		{
+			//下
 
 		}
 	}
