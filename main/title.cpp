@@ -104,8 +104,6 @@ void InitTitle(void)
 	SetTitle(TITLE_TWO, D3DXVECTOR3(650.0f, 440.0f, 0.0f));//タイトル2
 	SetTitle(TITLE_THREE, D3DXVECTOR3(650.0f, 540.0f, 0.0f));//タイトル3
 
-	InitCamera();
-
 	//アンロック
 	g_pVtxBuffTitle->Unlock();
 }

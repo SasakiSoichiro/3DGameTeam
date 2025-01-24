@@ -17,7 +17,11 @@
 #include "item.h"
 #include "block.h"
 #include "time.h"
+<<<<<<< HEAD
 #include "billboard.h"
+=======
+#include "pause.h"
+>>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -41,10 +45,14 @@ void InitGame(void)
 	InitPlayer();
 	LoadStage();
 	Inititem();
-	Setitem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
 	InitTime();
+<<<<<<< HEAD
 	InitBillboard();
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
+=======
+	InitPause();
+
+>>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 }
 
 //---------------
@@ -60,7 +68,11 @@ void UinitGame(void)
 	UninitPlayer();
 	Uinititem();
 	UninitTime();
+<<<<<<< HEAD
 	UninitBillboard();
+=======
+	UninitPause();
+>>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 }
 
 //---------------
@@ -68,6 +80,7 @@ void UinitGame(void)
 //---------------
 void UpdateGame(void)
 {
+<<<<<<< HEAD
 	UpdataMeshfield();
 	UpdateMeshWall();
 	UpdateCamera();
@@ -79,28 +92,75 @@ void UpdateGame(void)
 	UpdateBillboard();
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
+=======
+	if (KeybordTrigger(DIK_TAB) == true)
+>>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 	{
-		SetResult(RESULT_CLEAR);
-		SetFade(MODE_RESULT);
+		g_bPause = g_bPause ? false : true;
 	}
 
-	if (KeybordTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_B) == true)
+	if (g_bPause == true)
 	{
-		SetResult(RESULT_GAMEOVER);
-		SetFade(MODE_RESULT);
+		UpdatePause();
 	}
 
+	if (g_bPause == false)
+	{
+		UpdataMeshfield();
+		UpdateMeshWall();
+		UpdateCamera();
+		UpdateLight();
+		UpdateBlock();
+		UpdatePlayer();
+		Updateitem();
+		UpdateTime();
+
+		if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
+		{
+			SetResult(RESULT_CLEAR);
+			SetFade(MODE_RESULT);
+		}
+
+		if (KeybordTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_B) == true)
+		{
+			SetResult(RESULT_GAMEOVER);
+			SetFade(MODE_RESULT);
+		}
+	}
 
 	switch (g_gameState)
 	{
 	case GAMESTATE_RESULT:
 		g_nCounterGameState++;
-		if (g_nCounterGameState >= 100)
+		if (g_nCounterGameState >= 60)
 		{
 			g_gameState = GAMESTATE_NONE;	// âΩÇ‡ÇµÇƒÇ¢Ç»Ç¢
+			SetResult(RESULT_GAMEOVER);
 			SetFade(MODE_RESULT);
 			g_nCounterGameState = 0;
 		}
+		break;
+
+	case GAMESTATE_RETRY:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 30)
+		{
+			g_gameState = GAMESTATE_NONE;	// âΩÇ‡ÇµÇƒÇ¢Ç»Ç¢
+			SetFade(MODE_GAME);
+			g_nCounterGameState = 0;
+		}
+
+		break;
+
+	case  GAMESTATE_QUIT:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 40)
+		{
+			g_gameState = GAMESTATE_NONE;	// âΩÇ‡ÇµÇƒÇ¢Ç»Ç¢
+			SetFade(MODE_TITLE);
+			g_nCounterGameState = 0;
+		}
+
 		break;
 
 	default:
@@ -119,5 +179,24 @@ void DrawGame(void)
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
+<<<<<<< HEAD
 	DrawBillboard();
+=======
+
+	if (g_bPause == true)
+	{
+		DrawPause();
+	}
+}
+
+//	Ç€Ç∏
+void SetEnablePause(bool bPause)
+{
+	g_bPause = bPause;
+}
+
+void SetGameState(GAMESTATE state)
+{
+	g_gameState = state;
+>>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 }

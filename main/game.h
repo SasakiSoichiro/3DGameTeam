@@ -11,6 +11,8 @@ typedef enum
 	GAMESTATE_TITLE,
 	GAMESTATE_TUTORIAL,
 	GAMESTATE_RESULT,
+	GAMESTATE_RETRY,
+	GAMESTATE_QUIT,
 	GAMESTATE_MAX
 }GAMESTATE;
 
@@ -18,5 +20,7 @@ void InitGame(void);
 void UinitGame(void);
 void UpdateGame(void);
 void DrawGame(void);
+void SetEnablePause(bool bPause);
+void SetGameState(GAMESTATE state);
 
 #endif // !_GAME_H_
