@@ -17,8 +17,11 @@
 #include "item.h"
 #include "block.h"
 #include "time.h"
+
 #include "billboard.h"
+
 #include "pause.h"
+
 #include "enemy.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
@@ -44,12 +47,13 @@ void InitGame(void)
 	LoadStage();
 	Inititem();
 	InitTime();
+
 	InitBillboard();
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
+
 	InitPause();
 
-	Setitem(D3DXVECTOR3(100.0f, 0.0f, 0.0f), ITEMTYPE_ONE);
-	Setitem(D3DXVECTOR3(100.0f, 0.0f, 10.0f), ITEMTYPE_TWO);}
+}
 
 //---------------
 //	èIóπèàóù
@@ -64,8 +68,11 @@ void UinitGame(void)
 	UninitPlayer();
 	Uinititem();
 	UninitTime();
+
 	UninitBillboard();
+
 	UninitPause();
+
 }
 
 //---------------
@@ -73,6 +80,7 @@ void UinitGame(void)
 //---------------
 void UpdateGame(void)
 {
+
 	UpdataMeshfield();
 	UpdateMeshWall();
 	UpdateCamera();
@@ -83,7 +91,10 @@ void UpdateGame(void)
 	UpdateTime();
 	UpdateBillboard();
 
+
+
 	if (KeybordTrigger(DIK_TAB) == true)
+
 	{
 		g_bPause = g_bPause ? false : true;
 	}
@@ -168,7 +179,9 @@ void DrawGame(void)
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
+
 	DrawBillboard();
+
 
 	if (g_bPause == true)
 	{
