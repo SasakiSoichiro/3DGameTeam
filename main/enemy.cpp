@@ -1,15 +1,8 @@
 #include "enemy.h"
 #include "input.h"
 #include "camera.h"
-#include "shadow.h"
-#include "bullet.h"
-#include "effect.h"
 #include "block.h"
-#include "wall.h"
-#include "explosion.h"
-#include "billlife.h"
 #include "score.h"
-#include "slow.h"
 
 #define MAX_ENEMY (32)
 
@@ -725,7 +718,6 @@ void LoadEnemy(int nType)
 void CollisionEnemy(void)
 {
 	Player* pPlayer = GetPlayer();
-	BoolPressurePlate bPlate = GetPlate();
 	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
 	{
 		if (g_Enemy[nCntEnemy].bUse == true)
@@ -736,15 +728,6 @@ void CollisionEnemy(void)
 			for (int nCnt = 0; nCnt < 4; nCnt++)
 			{
 				D3DXVECTOR3 pos;
-				switch (pPlayer->nType)
-				{
-				case RED:
-					break;
-				case BLUE:
-					break;
-				case GREEN:
-					break;
-				}
 				pos.x = pPlayer->motion.aModel[15].mtxWorld._41 + mtxX * 0.25f * nCnt;
 				pos.y = pPlayer->motion.aModel[15].mtxWorld._42 + mtxY * 0.25f * nCnt;
 				pos.z = pPlayer->motion.aModel[15].mtxWorld._43 + mtxZ * 0.25f * nCnt;
@@ -823,8 +806,6 @@ void HitEnemy(int nCnt, int nDamage)
 	{
 		//爆発の設定
 		g_Enemy[nCnt].bUse = false;
-		EraseGaugeLife(g_Enemy[nCnt].nIdxLife);
-		EraseShadow(g_Enemy[nCnt].IdxShadow);
 		AddScore(150);
 		g_nNumEnemy--;//敵の総数カウントダウン
 	}
@@ -834,7 +815,6 @@ void HitEnemy(int nCnt, int nDamage)
 		g_Enemy[nCnt].move.x = sinf(D3DX_PI) * 80.0f;
 		g_Enemy[nCnt].move.z = cosf(D3DX_PI) * 80.0f;
 		g_nCntEnemyState = 240;
-		DecreaseGaugeLife(g_Enemy[nCnt].nIdxLife, nDamage);
 	}
 	
 }

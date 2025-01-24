@@ -25,6 +25,7 @@
     <ClCompile Include="title3D.cpp" />
     <ClCompile Include="tutrial.cpp" />
     <ClCompile Include="sound.cpp" />
+    <ClCompile Include="enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h" />
@@ -51,5 +52,6 @@
     <ClInclude Include="title3D.h" />
     <ClInclude Include="tutrial.h" />
     <ClInclude Include="sound.h" />
+    <ClInclude Include="enemy.h" />
   </ItemGroup>
 </Project>

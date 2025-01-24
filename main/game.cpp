@@ -17,11 +17,9 @@
 #include "item.h"
 #include "block.h"
 #include "time.h"
-<<<<<<< HEAD
 #include "billboard.h"
-=======
 #include "pause.h"
->>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
+#include "enemy.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -46,10 +44,8 @@ void InitGame(void)
 	LoadStage();
 	Inititem();
 	InitTime();
-<<<<<<< HEAD
 	InitBillboard();
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
-=======
 	InitPause();
 
 	Setitem(D3DXVECTOR3(100.0f, 0.0f, 0.0f), ITEMTYPE_ONE);
@@ -68,11 +64,8 @@ void UinitGame(void)
 	UninitPlayer();
 	Uinititem();
 	UninitTime();
-<<<<<<< HEAD
 	UninitBillboard();
-=======
 	UninitPause();
->>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 }
 
 //---------------
@@ -80,7 +73,6 @@ void UinitGame(void)
 //---------------
 void UpdateGame(void)
 {
-<<<<<<< HEAD
 	UpdataMeshfield();
 	UpdateMeshWall();
 	UpdateCamera();
@@ -91,10 +83,7 @@ void UpdateGame(void)
 	UpdateTime();
 	UpdateBillboard();
 
-	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
-=======
 	if (KeybordTrigger(DIK_TAB) == true)
->>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 	{
 		g_bPause = g_bPause ? false : true;
 	}
@@ -179,9 +168,7 @@ void DrawGame(void)
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
-<<<<<<< HEAD
 	DrawBillboard();
-=======
 
 	if (g_bPause == true)
 	{
@@ -198,5 +185,4 @@ void SetEnablePause(bool bPause)
 void SetGameState(GAMESTATE state)
 {
 	g_gameState = state;
->>>>>>> 0982182f75b1e4b257d3d80362920d25963a9782
 }
