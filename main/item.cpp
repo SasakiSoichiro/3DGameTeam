@@ -89,6 +89,8 @@ void Inititem(void)
 		g_item[count].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_item[count].bUse = false;
 		g_item[count].bHave = false;
+		g_item[count].bKey_Top = false;
+		g_item[count].bKey_bottom = false;
 
 		//	テクスチャの読み込み
 		pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
@@ -175,6 +177,15 @@ void Updateitem(void)
 					//アイテムを拾う
 					g_item[nCnt].bHave = true;
 					g_item[nCnt].bUse = false;
+					
+					if (g_item[0].bUse == false)
+					{
+						g_item[0].bKey_Top = true;
+					}
+					else if(g_item[1].bUse == false)
+					{
+						g_item[1].bKey_bottom = true;
+					}
 				}
 			}
 		}

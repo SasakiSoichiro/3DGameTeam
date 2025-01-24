@@ -8,7 +8,6 @@
 #define _ENEMY_H_//2銃インクルード防止のマクロ定義
 #include "main.h"
 #include "model.h"
-#include "typeUI.h"
 #define GRAVI (0.05f)			//重力
 #define JUMP (2.0f)
 #define OBJ_E (20.0f)

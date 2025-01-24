@@ -23,6 +23,8 @@ typedef struct
 	bool bHave;
 	ITEMTYPE type;
 	D3DXMATRIX mtxWorld;
+	bool bKey_Top;
+	bool bKey_bottom;
 }ITEM;
 
 void Inititem(void);

@@ -18,14 +18,14 @@
 //アイテムの種類
 typedef enum
 {
-	ITEMTYPE_0,
-	ITEMTYPE_1,
-	ITEMTYPE_MAX
+	BILLBOARDTYPE_0,
+	BILLBOARDTYPE_1,
+	BILLBOARDTYPE_MAX
 }TYPE;
 
-static const char* ITEM_TEXTURE[ITEMTYPE_MAX] =
+static const char* ITEM_TEXTURE[BILLBOARDTYPE_MAX] =
 {
-	"data\\TEXTURE\\reta.png",
+	"data\\TEXTURE\\tree.png",
 
 };
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -35,19 +35,19 @@ typedef struct
 {
 	D3DXVECTOR3 pos;		//位置
 	D3DXVECTOR3 rot;		//向き(角度)
-	D3DXVECTOR3 VtxMaxItem;
-	D3DXVECTOR3 VtxMinItem;
+	D3DXVECTOR3 VtxMaxBillboard;
+	D3DXVECTOR3 VtxMinBillboard;
 	D3DXMATRIX mtxWorld;	//ワールドマトリックス
 	TYPE nType;
 	bool bUse;				//使用しているかどうか
-}Item;
+}Billboard;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //プロトタイプ宣言
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-void InitItem();
-void UninitItem();
-void UpdateItem();
-void DrawItem();
-void SetItem(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType);
+void InitBillboard();
+void UninitBillboard();
+void UpdateBillboard();
+void DrawBillboard();
+void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType);
 #endif

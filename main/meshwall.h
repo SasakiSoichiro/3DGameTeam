@@ -14,6 +14,7 @@
 #define VTXCNT ((VMESH+1)*(HMESH+1))
 #define POLYCNT ((2*VMESH*HMESH)+4*(VMESH-1))
 #define IDXCNT (((VMESH+1)*2*HMESH)+(HMESH-1)*4)
+#define RADIUS (1000)
 //#define IDXCNT (POLYCNT+2)
 
 

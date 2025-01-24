@@ -1,25 +1,13 @@
 #include "enemy.h"
 #include "input.h"
 #include "camera.h"
-#include "shadow.h"
-#include "bullet.h"
-#include "effect.h"
 #include "block.h"
-#include "wall.h"
-#include "explosion.h"
-#include "billlife.h"
 #include "score.h"
-#include "slow.h"
+#include "meshwall.h"
 
 #define MAX_ENEMY (32)
 
 //グローバル変数宣言
-//LPD3DXMESH g_pMeshPlayer = NULL;					//メッシュ（頂点情報)へのポインタ
-//LPDIRECT3DTEXTURE9 g_apTexturePlayer[1024] = {};	//テクスチャへのポインタ
-//LPD3DXBUFFER g_pBuffMatPlayer = NULL;				//マテリアルへのポインタ
-//DWORD g_dwNumMatPlayer = 0;						//マテリアルの数
-//D3DXVECTOR3 g_posPlayer;							//位置
-//D3DXVECTOR3 g_rotPlayer;							//向き
 Enemy g_Enemy[MAX_ENEMY];
 int g_nEIdxShadow;
 int nCntTypeState;
@@ -132,9 +120,7 @@ void UninitEnemy(void)
 void UpdateEnemy(void)
 {
 	Camera* pCamera = GetCamera();
-	BoolPressurePlate bPlate = GetPlate();
 	Player* pPlayer = GetPlayer();
-	Slow* pSlow = GetSlow();
 	float fAnglemove = 0.0f;
 	nCntTypeState++;
 
@@ -200,8 +186,6 @@ void UpdateEnemy(void)
 
 			g_Enemy[nCntEnemy].pos.x += g_Enemy[nCntEnemy].move.x*pSlow->fDivi;
 			g_Enemy[nCntEnemy].pos.z += g_Enemy[nCntEnemy].move.z*pSlow->fDivi;
-			SetPositionGaugeLife(g_Enemy[nCntEnemy].nIdxLife, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, g_Enemy[nCntEnemy].pos.y + 40.0f, g_Enemy[nCntEnemy].pos.z));
-
 
 			float fDistance = (g_Enemy[nCntEnemy].pos.x - pPlayer->pos.x) * (g_Enemy[nCntEnemy].pos.x - pPlayer->pos.x) + (g_Enemy[nCntEnemy].pos.y - pPlayer->pos.y) * (g_Enemy[nCntEnemy].pos.y - pPlayer->pos.y) + (g_Enemy[nCntEnemy].pos.z - pPlayer->pos.z) * (g_Enemy[nCntEnemy].pos.z - pPlayer->pos.z);
 			D3DXVECTOR3 fRadP(10.0f, 0.0f, 10.0f);
@@ -214,74 +198,9 @@ void UpdateEnemy(void)
 			if (fDistance <= fRadius && pPlayer->pState == PLAYERSTATE_NORMAL)
 			{
 				pPlayer->pState = PLAYERSTATE_DAMAGE;
-				switch (g_Enemy[nCntEnemy].nType)
-				{
-				case ETYPE_RED:
-
-					if (bPlate.red == true)
-					{
-						pPlayer->nLife -= 15;
+						pPlayer->nLife -= 1;
 						pPlayer->move.x = sinf(fAnglemove) * 5.0f;
 						pPlayer->move.z = cosf(fAnglemove) * 5.0f;
-					}
-					else if (bPlate.blue == true)
-					{
-						pPlayer->nLife -= 5;
-						pPlayer->move.x = sinf(fAnglemove) * 3.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 3.0f;
-					}
-					else
-					{
-						pPlayer->nLife -= 30;
-						pPlayer->move.x = sinf(fAnglemove) * 10.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 10.0f;
-					}
-					break;
-				case ETYPE_BLUE:
-					g_Enemy[nCntEnemy].aModel[0].Diffuse.r = 0;
-					g_Enemy[nCntEnemy].aModel[0].Diffuse.b = 255;
-					g_Enemy[nCntEnemy].aModel[0].Diffuse.g = 0;
-					if (bPlate.red == true)
-					{
-						pPlayer->nLife -= 30;
-						pPlayer->move.x = sinf(fAnglemove) * 10.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 10.0f;
-					}
-					else if (bPlate.blue == true)
-					{
-						pPlayer->nLife -= 15;
-						pPlayer->move.x = sinf(fAnglemove) * 5.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 5.0f;
-					}
-					else
-					{
-						pPlayer->nLife -= 5;
-						pPlayer->move.x = sinf(fAnglemove) * 3.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 3.0f;
-					}
-					break;
-				case ETYPE_GREEN:
-					SetExplosion(g_Enemy[nCntEnemy].pos, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f));
-					if (bPlate.red == true)
-					{
-						pPlayer->nLife -= 5;
-						pPlayer->move.x = sinf(fAnglemove) * 3.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 3.0f;
-					}
-					else if (bPlate.blue == true)
-					{
-						pPlayer->nLife -= 30;
-						pPlayer->move.x = sinf(fAnglemove) * 10.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 10.0f;
-					}
-					else
-					{
-						pPlayer->nLife -= 15;
-						pPlayer->move.x = sinf(fAnglemove) * 5.0f;
-						pPlayer->move.z = cosf(fAnglemove) * 5.0f;
-					}
-					break;
-				}
 
 			}
 
@@ -302,9 +221,8 @@ void UpdateEnemy(void)
 			}
 
 			g_Enemy[nCntEnemy].rot.y += (g_Enemy[nCntEnemy].rotDest.y - g_Enemy[nCntEnemy].rot.y) * 0.2f;
-			CollisionWall(&g_Enemy[nCntEnemy].pos, &g_Enemy[nCntEnemy].posOld);
 			CollisionEnemytoEnemy(nCntEnemy);
-			SetPositionShadow(g_Enemy[nCntEnemy].IdxShadow, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, 1.0f, g_Enemy[nCntEnemy].pos.z), g_Enemy[nCntEnemy].pos.y);
+			//SetPositionShadow(g_Enemy[nCntEnemy].IdxShadow, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, 1.0f, g_Enemy[nCntEnemy].pos.z), g_Enemy[nCntEnemy].pos.y);
 			if (g_Enemy[nCntEnemy].State != ENEMYSTATE_DAMAGE&& pPlayer->pState == PLAYERSTATE_ACTION)
 			{
 				CollisionEnemy();
@@ -464,8 +382,7 @@ void SetEnemy(D3DXVECTOR3 pos,int nType)
 		{
 			g_Enemy[nCnt] = g_LoadEnemy[nType];
 			g_Enemy[nCnt].pos = pos;
-			g_Enemy[nCnt].nIdxLife = SetGaugeLife(g_Enemy[nCnt].pos, g_Enemy[nCnt].rot, g_Enemy[nCnt].nLife);
-			g_Enemy[nCnt].IdxShadow = SetShadow(pos, g_Enemy[nCnt].rot, D3DXVECTOR3(10.0f, 1.0f, 10.0f));
+			//g_Enemy[nCnt].IdxShadow = SetShadow(pos, g_Enemy[nCnt].rot, D3DXVECTOR3(10.0f, 1.0f, 10.0f));
 			g_Enemy[nCnt].bUse = true;
 			g_nNumEnemy++;//敵の総数
 			break;
@@ -725,7 +642,6 @@ void LoadEnemy(int nType)
 void CollisionEnemy(void)
 {
 	Player* pPlayer = GetPlayer();
-	BoolPressurePlate bPlate = GetPlate();
 	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
 	{
 		if (g_Enemy[nCntEnemy].bUse == true)
@@ -736,15 +652,6 @@ void CollisionEnemy(void)
 			for (int nCnt = 0; nCnt < 4; nCnt++)
 			{
 				D3DXVECTOR3 pos;
-				switch (pPlayer->nType)
-				{
-				case RED:
-					break;
-				case BLUE:
-					break;
-				case GREEN:
-					break;
-				}
 				pos.x = pPlayer->motion.aModel[15].mtxWorld._41 + mtxX * 0.25f * nCnt;
 				pos.y = pPlayer->motion.aModel[15].mtxWorld._42 + mtxY * 0.25f * nCnt;
 				pos.z = pPlayer->motion.aModel[15].mtxWorld._43 + mtxZ * 0.25f * nCnt;
@@ -823,8 +730,6 @@ void HitEnemy(int nCnt, int nDamage)
 	{
 		//爆発の設定
 		g_Enemy[nCnt].bUse = false;
-		EraseGaugeLife(g_Enemy[nCnt].nIdxLife);
-		EraseShadow(g_Enemy[nCnt].IdxShadow);
 		AddScore(150);
 		g_nNumEnemy--;//敵の総数カウントダウン
 	}
@@ -834,7 +739,6 @@ void HitEnemy(int nCnt, int nDamage)
 		g_Enemy[nCnt].move.x = sinf(D3DX_PI) * 80.0f;
 		g_Enemy[nCnt].move.z = cosf(D3DX_PI) * 80.0f;
 		g_nCntEnemyState = 240;
-		DecreaseGaugeLife(g_Enemy[nCnt].nIdxLife, nDamage);
 	}
 	
 }

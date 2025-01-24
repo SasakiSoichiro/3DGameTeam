@@ -17,7 +17,9 @@
 #include "item.h"
 #include "block.h"
 #include "time.h"
+#include "billboard.h"
 #include "pause.h"
+#include "enemy.h"
 
 // ƒQ[ƒ€‚Ìó‘Ô
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -42,8 +44,12 @@ void InitGame(void)
 	LoadStage();
 	Inititem();
 	InitTime();
+
+	InitBillboard();
+	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
+
 	InitPause();
-	Setitem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
+
 }
 
 //---------------
@@ -59,7 +65,11 @@ void UinitGame(void)
 	UninitPlayer();
 	Uinititem();
 	UninitTime();
+
+	UninitBillboard();
+
 	UninitPause();
+
 }
 
 //---------------
@@ -67,7 +77,21 @@ void UinitGame(void)
 //---------------
 void UpdateGame(void)
 {
+
+	UpdataMeshfield();
+	UpdateMeshWall();
+	UpdateCamera();
+	UpdateLight();
+	UpdateBlock();
+	UpdatePlayer();
+	Updateitem();
+	UpdateTime();
+	UpdateBillboard();
+
+
+
 	if (KeybordTrigger(DIK_TAB) == true)
+
 	{
 		g_bPause = g_bPause ? false : true;
 	}
@@ -88,7 +112,7 @@ void UpdateGame(void)
 		Updateitem();
 		UpdateTime();
 
-		if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
+		if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
 		{
 			SetResult(RESULT_CLEAR);
 			SetFade(MODE_RESULT);
@@ -114,6 +138,28 @@ void UpdateGame(void)
 		}
 		break;
 
+	case GAMESTATE_RETRY:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 30)
+		{
+			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
+			SetFade(MODE_GAME);
+			g_nCounterGameState = 0;
+		}
+
+		break;
+
+	case  GAMESTATE_QUIT:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 40)
+		{
+			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
+			SetFade(MODE_TITLE);
+			g_nCounterGameState = 0;
+		}
+
+		break;
+
 	default:
 		break;
 	}
@@ -130,6 +176,9 @@ void DrawGame(void)
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
+
+	DrawBillboard();
+
 
 	if (g_bPause == true)
 	{
