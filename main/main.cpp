@@ -660,10 +660,15 @@ void DrawCameraRot(void)
 }
 void DrawDebugKey(void)
 {
-	RECT rect = { 0,90,SCREEN_WIDTH,SCREEN_HEIGHT };
-	char aStr[256];
 	ITEM* pITEM = Getitem();
-	sprintf(&aStr[0], "bHave:%d\n", pITEM->bHave);
-	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
 
+	for (int count = 0; count < MAX_ITEM; count++, pITEM++)
+	{
+		RECT rect = { 0,90 + count * 15,SCREEN_WIDTH,SCREEN_HEIGHT };
+		char aStr[MAX_ITEM][256];
+
+		sprintf(&aStr[count][0], "ƒAƒCƒeƒ€%d : %d \n", count + 1,pITEM->bHave);
+
+		g_pFont->DrawText(NULL, &aStr[count][0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+	}
 }

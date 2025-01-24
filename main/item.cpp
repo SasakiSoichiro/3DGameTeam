@@ -135,10 +135,10 @@ void Updateitem(void)
 		if (g_item[nCnt].bUse == true)
 		{
 			//プレイヤーの半径の算出用変数
-			float fPRadPos = 30.0f;
+			float fPRadPos = 28.0f;
 
 			//アイテムの半径の算出用変数
-			float fIRadPos = 30.0f;
+			float fIRadPos = 28.0f;
 
 			//プレやーの位置を取得
 			D3DXVECTOR3 PlayerPos = GetPlayer()->pos;
@@ -157,17 +157,14 @@ void Updateitem(void)
 			//プレイヤーがアイテムの範囲に入ったら
 			if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
 			{
-
 				if (KeybordTrigger(DIK_F) == true)
 				{//Fを押されたとき
 
 					//アイテムを拾う
-					g_item[3].bHave = true;
-					g_item[3].bUse = false;
+					g_item[nCnt].bHave = true;
+					g_item[nCnt].bUse = false;
 				}
 			}
-		
-
 		}
 	}
 }
@@ -184,8 +181,6 @@ void Drawitem(void)
 
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
-		if (g_item[count].bUse == true)
-		{
 		//	ワールドマトリックスの初期化
 		D3DXMatrixIdentity(&g_item[count].mtxWorld);
 
@@ -199,28 +194,27 @@ void Drawitem(void)
 		//	現在のマテリアルを保存
 		pDevice->GetMaterial(&matDef);
 
+		//	マテリアルデータへのポインタを取得
+		pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
 
-			//	マテリアルデータへのポインタを取得
-			pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
-
-			for (int nCntMat = 0; nCntMat < MAX_ITEM; nCntMat++)
+		for (int nCntMat = 0; nCntMat < MAX_ITEM; nCntMat++)
+		{
+			if (g_item[count].bUse == true)
 			{
-				
-					//	マテリアルの設定
-					pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
-					//	テクスチャの設定
-					pDevice->SetTexture(0, g_apTextureItem[nCntMat]);
+				//	マテリアルの設定
+				pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
-					//	モデルの描画
-					g_pMeshItem[count]->DrawSubset(nCntMat);
-				}
+				//	テクスチャの設定
+				pDevice->SetTexture(0, g_apTextureItem[nCntMat]);
+
+				//	モデルの描画
+				g_pMeshItem[count]->DrawSubset(nCntMat);
 			}
-		
+		}
 	}
 	//	保存したマテリアルを戻す		
 	pDevice->SetMaterial(&matDef);
-
 }
 
 //	取得処理
