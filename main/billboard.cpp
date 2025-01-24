@@ -51,10 +51,10 @@ void InitBillboard()
 		g_Billboard[nCnt].bUse = false;
 
 		//頂点情報の設定
-		pVtx[0].pos = D3DXVECTOR3(-15.0f, 15.0f, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(15.0f, 15.0f, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(-15.0f, -15.0f, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(15.0f, -15.0f, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(-15.0f, 35.0f, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(15.0f, 35.0f, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(-15.0f, -35.0f, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(15.0f, -35.0f, 0.0f);
 
 		//各頂点の法線の設定(ベクトルの大きさは1にする)
 		pVtx[0].nor = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
