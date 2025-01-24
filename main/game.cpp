@@ -16,6 +16,8 @@
 #include "stage.h"
 #include "item.h"
 #include "block.h"
+#include "time.h"
+
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
 
@@ -39,6 +41,7 @@ void InitGame(void)
 	LoadStage();
 	//InitItem();
 	//SetItem(D3DXVECTOR3(100.0f, 0.0f, 200.0f), ITEMTYPE_FIVE);
+	InitTime();
 }
 
 //---------------
@@ -53,6 +56,7 @@ void UinitGame(void)
 	UninitBlock();
 	UninitPlayer();
 	//UinitItem();
+	UninitTime();
 }
 
 //---------------
@@ -67,6 +71,7 @@ void UpdateGame(void)
 	UpdateBlock();
 	UpdatePlayer();
 	//UpdateItem();
+	UpdateTime();
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
 	{
@@ -108,4 +113,5 @@ void DrawGame(void)
 	//DrawItem();
 	DrawPlayer();
 	DrawMeshWall();
+	DrawTime();
 }
