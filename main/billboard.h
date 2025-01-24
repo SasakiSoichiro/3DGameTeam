@@ -25,7 +25,7 @@ typedef enum
 
 static const char* ITEM_TEXTURE[BILLBOARDTYPE_MAX] =
 {
-	"data\\TEXTURE\\tree.png",
+	"data\\TEXTURE\\Wood.png",
 
 };
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
