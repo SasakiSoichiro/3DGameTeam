@@ -135,10 +135,10 @@ void Updateitem(void)
 		if (g_item[nCnt].bUse == true)
 		{
 			//プレイヤーの半径の算出用変数
-			float fPRadPos = 30.0f;
+			float fPRadPos = 28.0f;
 
 			//アイテムの半径の算出用変数
-			float fIRadPos = 30.0f;
+			float fIRadPos = 28.0f;
 
 			//プレやーの位置を取得
 			D3DXVECTOR3 PlayerPos = GetPlayer()->pos;
@@ -157,17 +157,14 @@ void Updateitem(void)
 			//プレイヤーがアイテムの範囲に入ったら
 			if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
 			{
-
 				if (KeybordTrigger(DIK_F) == true)
 				{//Fを押されたとき
 
 					//アイテムを拾う
-					g_item[3].bHave = true;
-					g_item[3].bUse = false;
+					g_item[nCnt].bHave = true;
+					g_item[nCnt].bUse = false;
 				}
 			}
-		
-
 		}
 	}
 }
@@ -186,19 +183,18 @@ void Drawitem(void)
 	{
 		if (g_item[count].bUse == true)
 		{
-		//	ワールドマトリックスの初期化
-		D3DXMatrixIdentity(&g_item[count].mtxWorld);
+			//	ワールドマトリックスの初期化
+			D3DXMatrixIdentity(&g_item[count].mtxWorld);
 
-		//	位置の反映
-		D3DXMatrixTranslation(&mtxTrans, g_item[count].pos.x, g_item[count].pos.y, g_item[count].pos.z);
-		D3DXMatrixMultiply(&g_item[count].mtxWorld, &g_item[count].mtxWorld, &mtxTrans);
+			//	位置の反映
+			D3DXMatrixTranslation(&mtxTrans, g_item[count].pos.x, g_item[count].pos.y, g_item[count].pos.z);
+			D3DXMatrixMultiply(&g_item[count].mtxWorld, &g_item[count].mtxWorld, &mtxTrans);
 
-		//	ワールドマトリックスの設定
-		pDevice->SetTransform(D3DTS_WORLD, &g_item[count].mtxWorld);
+			//	ワールドマトリックスの設定
+			pDevice->SetTransform(D3DTS_WORLD, &g_item[count].mtxWorld);
 
-		//	現在のマテリアルを保存
-		pDevice->GetMaterial(&matDef);
-
+			//	現在のマテリアルを保存
+			pDevice->GetMaterial(&matDef);
 
 			//	マテリアルデータへのポインタを取得
 			pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
@@ -214,8 +210,8 @@ void Drawitem(void)
 
 					//	モデルの描画
 					g_pMeshItem[count]->DrawSubset(nCntMat);
-				}
 			}
+		}
 		
 	}
 	//	保存したマテリアルを戻す		
