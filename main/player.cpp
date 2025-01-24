@@ -160,9 +160,8 @@ void UpdatePlayer(void)
 			}
 			else
 			{
-
-				g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.75f;
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
 
@@ -179,9 +178,10 @@ void UpdatePlayer(void)
 			}
 			else
 			{
+
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.75f;
 
 			}
@@ -198,9 +198,9 @@ void UpdatePlayer(void)
 			{
 
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
-				g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
-				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
+				g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
 
 			}
 		}
@@ -220,11 +220,11 @@ void UpdatePlayer(void)
 			}
 			else
 			{
-
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.75f;
+
 
 			}
 		}
@@ -239,8 +239,9 @@ void UpdatePlayer(void)
 			else
 			{
 
-				g_player.pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+
+				g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.75f;
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
 
@@ -258,10 +259,11 @@ void UpdatePlayer(void)
 			else
 			{
 
+
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
-				g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
-				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
+				g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
 
 			}
 		}
@@ -279,11 +281,11 @@ void UpdatePlayer(void)
 		}
 		else
 		{
-
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y;
+
 
 		}
 	}
@@ -300,10 +302,11 @@ void UpdatePlayer(void)
 		else
 		{
 
+
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y;
+			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
 
 		}
 	}
@@ -357,36 +360,36 @@ void UpdatePlayer(void)
 		{
 			//‰EˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
-			g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
+			g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
 
 		}
 		else if (pStick->Gamepad.sThumbLX < -10922)
 		{
 			//¶ˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
-			g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
+			g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
 
 		}
 		else if (pStick->Gamepad.sThumbLY > 10922)
 		{
 			//ãˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y;
 
 		}
 		else if (pStick->Gamepad.sThumbLY < -10922)
 		{
 			//‰ºˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y;
+			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
 
 		}
 	}
