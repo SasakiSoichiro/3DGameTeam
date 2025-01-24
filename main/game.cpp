@@ -78,18 +78,6 @@ void UinitGame(void)
 void UpdateGame(void)
 {
 
-	UpdataMeshfield();
-	UpdateMeshWall();
-	UpdateCamera();
-	UpdateLight();
-	UpdateBlock();
-	UpdatePlayer();
-	Updateitem();
-	UpdateTime();
-	UpdateBillboard();
-
-
-
 	if (KeybordTrigger(DIK_TAB) == true)
 
 	{
