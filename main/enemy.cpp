@@ -4,6 +4,7 @@
 #include "block.h"
 #include "score.h"
 #include "meshwall.h"
+#include "slow.h"
 
 #define MAX_ENEMY (32)
 
@@ -121,6 +122,7 @@ void UpdateEnemy(void)
 {
 	Camera* pCamera = GetCamera();
 	Player* pPlayer = GetPlayer();
+	Slow* pSlow = GetSlow();
 	float fAnglemove = 0.0f;
 	nCntTypeState++;
 
@@ -669,52 +671,7 @@ void CollisionEnemy(void)
 
 				if (fDistance <= fRad&&g_Enemy[nCntEnemy].State!=ENEMYSTATE_DAMAGE)
 				{
-					switch (g_Enemy[nCntEnemy].nType)
-					{
-					case ETYPE_RED:
-
-						if (bPlate.red == true)
-						{
 							HitEnemy(nCntEnemy, 15);
-						}
-						else if (bPlate.blue == true)
-						{
-							HitEnemy(nCntEnemy, 30);
-						}
-						else
-						{
-							HitEnemy(nCntEnemy, 5);
-						}
-						break;
-					case ETYPE_BLUE:
-						if (bPlate.red == true)
-						{
-							HitEnemy(nCntEnemy, 5);
-						}
-						else if (bPlate.blue == true)
-						{
-							HitEnemy(nCntEnemy, 15);
-						}
-						else
-						{
-							HitEnemy(nCntEnemy, 30);
-						}
-						break;
-					case ETYPE_GREEN:
-						if (bPlate.red == true)
-						{
-							HitEnemy(nCntEnemy, 30);
-						}
-						else if (bPlate.blue == true)
-						{
-							HitEnemy(nCntEnemy, 5);
-						}
-						else
-						{
-							HitEnemy(nCntEnemy, 15);
-						}
-						break;
-					}
 					
 				}
 			}
