@@ -119,6 +119,19 @@ void UninitBlock(void)
 {
 	for (int i = 0; i < BLOCK_MAX; i++)
 	{
+		for (int nCnt = 0; nCnt < NUM_BLOCK; nCnt++)
+		{
+			for (int nCntTexture = 0; nCntTexture < 128; nCntTexture++)
+			{
+				if (g_Block[i][nCnt].apTexture[nCntTexture] != NULL)
+				{
+					g_Block[i][nCnt].apTexture[nCntTexture]->Release();
+					g_Block[i][nCnt].apTexture[nCntTexture] = NULL;
+
+				}
+			}
+
+		}
 
 		for (int nCnt = 0; nCnt < NUM_BLOCK; nCnt++)
 		{

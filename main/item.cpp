@@ -110,6 +110,18 @@ void Uinititem(void)
 {
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
+		for (int nCntMat = 0; nCntMat < (int)g_dwNuMatItem[count]; nCntMat++)
+		{
+			if (g_apTextureItem[nCntMat] != NULL)
+			{
+				g_apTextureItem[count]->Release();
+				g_apTextureItem[count] = NULL;
+			}
+		}
+	}
+
+	for (int count = 0; count < MAX_ITEM; count++)
+	{
 		if (g_pMeshItem[count] != NULL)
 		{
 			g_pMeshItem[count]->Release();
@@ -181,27 +193,26 @@ void Drawitem(void)
 
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
-		//	ワールドマトリックスの初期化
-		D3DXMatrixIdentity(&g_item[count].mtxWorld);
-
-		//	位置の反映
-		D3DXMatrixTranslation(&mtxTrans, g_item[count].pos.x, g_item[count].pos.y, g_item[count].pos.z);
-		D3DXMatrixMultiply(&g_item[count].mtxWorld, &g_item[count].mtxWorld, &mtxTrans);
-
-		//	ワールドマトリックスの設定
-		pDevice->SetTransform(D3DTS_WORLD, &g_item[count].mtxWorld);
-
-		//	現在のマテリアルを保存
-		pDevice->GetMaterial(&matDef);
-
-		//	マテリアルデータへのポインタを取得
-		pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
-
-		for (int nCntMat = 0; nCntMat < MAX_ITEM; nCntMat++)
+		if (g_item[count].bUse == true)
 		{
-			if (g_item[count].bUse == true)
-			{
+			//	ワールドマトリックスの初期化
+			D3DXMatrixIdentity(&g_item[count].mtxWorld);
 
+			//	位置の反映
+			D3DXMatrixTranslation(&mtxTrans, g_item[count].pos.x, g_item[count].pos.y, g_item[count].pos.z);
+			D3DXMatrixMultiply(&g_item[count].mtxWorld, &g_item[count].mtxWorld, &mtxTrans);
+
+			//	ワールドマトリックスの設定
+			pDevice->SetTransform(D3DTS_WORLD, &g_item[count].mtxWorld);
+
+			//	現在のマテリアルを保存
+			pDevice->GetMaterial(&matDef);
+
+			//	マテリアルデータへのポインタを取得
+			pMat = (D3DXMATERIAL*)g_pBufferMatItem[count]->GetBufferPointer();
+
+			for (int nCntMat = 0; nCntMat < (int)g_dwNuMatItem[count]; nCntMat++)
+			{
 				//	マテリアルの設定
 				pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
@@ -213,8 +224,6 @@ void Drawitem(void)
 			}
 		}
 	}
-	//	保存したマテリアルを戻す		
-	pDevice->SetMaterial(&matDef);
 }
 
 //	取得処理

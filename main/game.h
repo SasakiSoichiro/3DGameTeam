@@ -18,5 +18,7 @@ void InitGame(void);
 void UinitGame(void);
 void UpdateGame(void);
 void DrawGame(void);
+void SetEnablePause(bool bPause);
+void SetGameState(GAMESTATE state);
 
 #endif // !_GAME_H_
