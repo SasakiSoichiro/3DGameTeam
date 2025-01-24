@@ -18,7 +18,7 @@ LPD3DXBUFFER g_pBufferMatItem[MAX_ITEM] = { NULL };			//	マテリアルのポインター
 DWORD g_dwNuMatItem[MAX_ITEM] = { 0 };						//	マテリアルの数
 
 //	初期化処理
-void InitItem(void)
+void Inititem(void)
 {
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
@@ -106,7 +106,7 @@ void InitItem(void)
 }
 
 //	終了処理
-void UinitItem(void)
+void Uinititem(void)
 {
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
@@ -126,7 +126,7 @@ void UinitItem(void)
 }
 
 //	更新処理
-void UpdateItem(void)
+void Updateitem(void)
 {
 	Player* pPlayer = GetPlayer();
 
@@ -162,6 +162,7 @@ void UpdateItem(void)
 				{//Fを押されたとき
 
 					//アイテムを拾う
+					g_item[3].bHave = true;
 					g_item[3].bUse = false;
 				}
 			}
@@ -172,7 +173,7 @@ void UpdateItem(void)
 }
 
 //	描画処理
-void DrawItem(void)
+void Drawitem(void)
 {
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
@@ -223,13 +224,13 @@ void DrawItem(void)
 }
 
 //	取得処理
-ITEM* GetItem(void)
+ITEM* Getitem(void)
 {
 	return &g_item[0];
 }
 
 //	配置処理
-void SetItem(D3DXVECTOR3 pos, ITEMTYPE type)
+void Setitem(D3DXVECTOR3 pos, ITEMTYPE type)
 {
 	switch (type)
 	{
@@ -275,7 +276,7 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE type)
 }
 
 //	当たり判定処理
-void CollisionItem(D3DXVECTOR3 pos, ITEMTYPE type)
+void Collisionitem(D3DXVECTOR3 pos, ITEMTYPE type)
 {
 
 }

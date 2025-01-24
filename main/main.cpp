@@ -662,7 +662,7 @@ void DrawDebugKey(void)
 {
 	RECT rect = { 0,90,SCREEN_WIDTH,SCREEN_HEIGHT };
 	char aStr[256];
-	ITEM* pITEM = GetItem();
+	ITEM* pITEM = Getitem();
 	sprintf(&aStr[0], "bHave:%d\n", pITEM->bHave);
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
 

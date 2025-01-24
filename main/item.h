@@ -25,12 +25,12 @@ typedef struct
 	D3DXMATRIX mtxWorld;
 }ITEM;
 
-void InitItem(void);
-void UinitItem(void);
-void UpdateItem(void);
-void DrawItem(void);
-ITEM* GetItem(void);
-void SetItem(D3DXVECTOR3 pos, ITEMTYPE type);
-void CollisionItem(D3DXVECTOR3 pos, ITEMTYPE type);
+void Inititem(void);
+void Uinititem(void);
+void Updateitem(void);
+void Drawitem(void);
+ITEM* Getitem(void);
+void Setitem(D3DXVECTOR3 pos, ITEMTYPE type);
+void Collisionitem(D3DXVECTOR3 pos, ITEMTYPE type);
 
 #endif // !_ITEM_H_
