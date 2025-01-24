@@ -13,6 +13,8 @@ typedef enum
 {
 	BLOCK_HOUSE00=0,		//普通のブロック
 	BLOCK_HOUSE01,
+	BLOCK_WALL00,
+	BLOCK_WALL01,
 	BLOCK_MAX
 }BLOCKTYPE;
 
@@ -35,6 +37,8 @@ static const char* X_BLOCK[BLOCK_MAX] =
 {
 	"data\\model\\house000.x",
 	"data\\model\\house01.x",
+	"data\\model\\wallmaria.x",
+	"data\\model\\wallmaria2.x",
 };
 
 //プロトタイプ宣言

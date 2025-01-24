@@ -37,7 +37,6 @@ void InitGame(void)
 {
 	InitCamera();
 	InitLighr();
-	InitMeshWall();
 	InitMeshfield();
 	InitBlock();
 	InitPlayer();
@@ -59,7 +58,6 @@ void UinitGame(void)
 {
 	UninitLight();
 	UninitMeshfield();
-	UninitMeshWall();
 	UninitCamera();
 	UninitBlock();
 	UninitPlayer();
@@ -92,7 +90,6 @@ void UpdateGame(void)
 	if (g_bPause == false)
 	{
 		UpdataMeshfield();
-		UpdateMeshWall();
 		UpdateCamera();
 		UpdateLight();
 		UpdateBlock();
@@ -162,7 +159,6 @@ void DrawGame(void)
 	DrawBlock();
 	Drawitem();
 	DrawPlayer();
-	DrawMeshWall();
 	DrawTime();
 
 	DrawBillboard();
