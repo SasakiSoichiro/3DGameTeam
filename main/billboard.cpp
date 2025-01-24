@@ -11,25 +11,25 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 // グローバル変数宣言
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffItem = NULL;				//頂点バッファへのポインタ
-LPDIRECT3DTEXTURE9 g_pTextureItem[ITEMTYPE_MAX] = {};		//テクスチャへのポインタ
-Item g_Item[MAX_BILLBOARD];
+LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffBillboard = NULL;				//頂点バッファへのポインタ
+LPDIRECT3DTEXTURE9 g_pTextureBillboard[BILLBOARDTYPE_MAX] = {};		//テクスチャへのポインタ
+Billboard g_Billboard[MAX_BILLBOARD];
 
 //====================================================
 //アイテムの初期化処理
 //====================================================
-void InitItem()
+void InitBillboard()
 {
 	LPDIRECT3DDEVICE9 pDevice;								//デバイスへのポインタ
 
 	pDevice = GetDevice();									//デバイスの取得
 
 	//テクスチャの読み込み
-	for (int nCnt = 0; nCnt < ITEMTYPE_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < BILLBOARDTYPE_MAX; nCnt++)
 	{
 		D3DXCreateTextureFromFile(pDevice,
 			ITEM_TEXTURE[nCnt],
-			&g_pTextureItem[nCnt]);
+			&g_pTextureBillboard[nCnt]);
 	}
 
 	//頂点バッファの生成
@@ -37,18 +37,18 @@ void InitItem()
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_3D,
 		D3DPOOL_MANAGED,
-		&g_pVtxBuffItem, NULL);
+		&g_pVtxBuffBillboard, NULL);
 
 	VERTEX_3D* pVtx = NULL;
 
 	//頂点バッファをロック
-	g_pVtxBuffItem->Lock(0, 0, (void**)&pVtx, 0);
+	g_pVtxBuffBillboard->Lock(0, 0, (void**)&pVtx, 0);
 
 	for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
 	{
-		g_Item[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		g_Item[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		g_Item[nCnt].bUse = false;
+		g_Billboard[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_Billboard[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_Billboard[nCnt].bUse = false;
 
 		//頂点情報の設定
 		pVtx[0].pos = D3DXVECTOR3(-15.0f, 15.0f, 0.0f);
@@ -77,28 +77,28 @@ void InitItem()
 		pVtx += 4;
 	}
 	//頂点バッファのアンロック
-	g_pVtxBuffItem->Unlock();
+	g_pVtxBuffBillboard->Unlock();
 }
 
 //====================================================
 //アイテムの終了処理
 //====================================================
-void UninitItem()
+void UninitBillboard()
 {
 	//頂点バッファの解放
-	if (g_pVtxBuffItem != NULL)
+	if (g_pVtxBuffBillboard != NULL)
 	{
-		g_pVtxBuffItem->Release();
-		g_pVtxBuffItem = NULL;
+		g_pVtxBuffBillboard->Release();
+		g_pVtxBuffBillboard = NULL;
 	}
 
-	for (int nCnt = 0; nCnt < ITEMTYPE_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < BILLBOARDTYPE_MAX; nCnt++)
 	{
 		//テクスチャの破棄
-		if (g_pTextureItem[nCnt] != NULL)
+		if (g_pTextureBillboard[nCnt] != NULL)
 		{
-			g_pTextureItem[nCnt]->Release();
-			g_pTextureItem[nCnt] = NULL;
+			g_pTextureBillboard[nCnt]->Release();
+			g_pTextureBillboard[nCnt] = NULL;
 		}
 	}
 }
@@ -106,7 +106,7 @@ void UninitItem()
 //====================================================
 //アイテムの更新処理
 //====================================================
-void UpdateItem()
+void UpdateBillboard()
 {
 
 }
@@ -114,7 +114,7 @@ void UpdateItem()
 //====================================================
 //アイテムの描画処理
 //====================================================
-void DrawItem()
+void DrawBillboard()
 {
 	//デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
@@ -127,45 +127,45 @@ void DrawItem()
 
 	for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
 	{
-		if (g_Item[nCnt].bUse == true)
+		if (g_Billboard[nCnt].bUse == true)
 		{
 			//ワールドマトリックスの初期化
-			D3DXMatrixIdentity(&g_Item[nCnt].mtxWorld);
+			D3DXMatrixIdentity(&g_Billboard[nCnt].mtxWorld);
 
 			D3DXMATRIX mtxView;
 			pDevice->GetTransform(D3DTS_VIEW, &mtxView);
 
 			//カメラの逆行列を指定
-			g_Item[nCnt].mtxWorld._11 = mtxView._11;
-			g_Item[nCnt].mtxWorld._12 = mtxView._21;
-			g_Item[nCnt].mtxWorld._13 = mtxView._31;
-			g_Item[nCnt].mtxWorld._21 = mtxView._12;
-			g_Item[nCnt].mtxWorld._22 = mtxView._22;
-			g_Item[nCnt].mtxWorld._23 = mtxView._32;
-			g_Item[nCnt].mtxWorld._31 = mtxView._13;
-			g_Item[nCnt].mtxWorld._32 = mtxView._23;
-			g_Item[nCnt].mtxWorld._33 = mtxView._33;
+			g_Billboard[nCnt].mtxWorld._11 = mtxView._11;
+			g_Billboard[nCnt].mtxWorld._12 = mtxView._21;
+			g_Billboard[nCnt].mtxWorld._13 = mtxView._31;
+			g_Billboard[nCnt].mtxWorld._21 = mtxView._12;
+			g_Billboard[nCnt].mtxWorld._22 = mtxView._22;
+			g_Billboard[nCnt].mtxWorld._23 = mtxView._32;
+			g_Billboard[nCnt].mtxWorld._31 = mtxView._13;
+			g_Billboard[nCnt].mtxWorld._32 = mtxView._23;
+			g_Billboard[nCnt].mtxWorld._33 = mtxView._33;
 
 			////向きを反映
-			//D3DXMatrixRotationYawPitchRoll(&mtxRot, g_rotItem.y, g_rotItem.x, g_rotItem.z);
-			//D3DXMatrixMultiply(&g_mtxWorldItem, &g_mtxWorldItem, &mtxRot);
+			//D3DXMatrixRotationYawPitchRoll(&mtxRot, g_rotBillboard.y, g_rotBillboard.x, g_rotBillboard.z);
+			//D3DXMatrixMultiply(&g_mtxWorldBillboard, &g_mtxWorldBillboard, &mtxRot);
 
 			//位置を反映
-			D3DXMatrixTranslation(&mtxTrans, g_Item[nCnt].pos.x, g_Item[nCnt].pos.y, g_Item[nCnt].pos.z);
-			D3DXMatrixMultiply(&g_Item[nCnt].mtxWorld, &g_Item[nCnt].mtxWorld, &mtxTrans);
+			D3DXMatrixTranslation(&mtxTrans, g_Billboard[nCnt].pos.x, g_Billboard[nCnt].pos.y, g_Billboard[nCnt].pos.z);
+			D3DXMatrixMultiply(&g_Billboard[nCnt].mtxWorld, &g_Billboard[nCnt].mtxWorld, &mtxTrans);
 
 			////Zテスト
 			//pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);		//Zの比較方法
 			//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);		//Zバッファを書き込まない
 
 			//ワールドマトリックスの設定
-			pDevice->SetTransform(D3DTS_WORLD, &g_Item[nCnt].mtxWorld);
+			pDevice->SetTransform(D3DTS_WORLD, &g_Billboard[nCnt].mtxWorld);
 
 			//頂点バッファをデバイスのデータストリームに設定
-			pDevice->SetStreamSource(0, g_pVtxBuffItem, 0, sizeof(VERTEX_3D));
+			pDevice->SetStreamSource(0, g_pVtxBuffBillboard, 0, sizeof(VERTEX_3D));
 
 			//テクスチャの設定
-			pDevice->SetTexture(0, g_pTextureItem[g_Item[nCnt].nType]);
+			pDevice->SetTexture(0, g_pTextureBillboard[g_Billboard[nCnt].nType]);
 
 			//頂点フォーマット
 			pDevice->SetFVF(FVF_VERTEX_3D);
@@ -185,7 +185,7 @@ void DrawItem()
 //====================================================
 //アイテムの設定処理
 //====================================================
-void SetItem(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType)
+void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType)
 {
 	LPDIRECT3DDEVICE9 pDevice;								//デバイスへのポインタ
 
@@ -193,18 +193,18 @@ void SetItem(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType)
 
 	for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
 	{
-		if (g_Item[nCnt].bUse == false)
+		if (g_Billboard[nCnt].bUse == false)
 		{
-			g_Item[nCnt].pos = pos;							//位置
-			g_Item[nCnt].nType = nType;						//種類
-			g_Item[nCnt].bUse = true;						//使用しているとき
+			g_Billboard[nCnt].pos = pos;							//位置
+			g_Billboard[nCnt].nType = nType;						//種類
+			g_Billboard[nCnt].bUse = true;						//使用しているとき
 
 			//	//テクスチャの読み込み
 			//for (int nCnt = 0; nCnt < ITEMTYPE_MAX; nCnt++)
 			//{
 			//	D3DXCreateTextureFromFile(pDevice,
 			//		ITEM_TEXTURE[nCnt],
-			//		&g_pTextureItem[nCnt]);
+			//		&g_pTextureBillboard[nCnt]);
 			//}
 			break;
 		}

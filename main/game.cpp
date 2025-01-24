@@ -17,6 +17,7 @@
 #include "item.h"
 #include "block.h"
 #include "time.h"
+#include "billboard.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -42,6 +43,8 @@ void InitGame(void)
 	InitItem();
 	SetItem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
 	InitTime();
+	InitBillboard();
+	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
 }
 
 //---------------
@@ -57,6 +60,7 @@ void UinitGame(void)
 	UninitPlayer();
 	UinitItem();
 	UninitTime();
+	UninitBillboard();
 }
 
 //---------------
@@ -72,6 +76,7 @@ void UpdateGame(void)
 	UpdatePlayer();
 	UpdateItem();
 	UpdateTime();
+	UpdateBillboard();
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
 	{
@@ -114,4 +119,5 @@ void DrawGame(void)
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
+	DrawBillboard();
 }
