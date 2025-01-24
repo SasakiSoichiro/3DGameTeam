@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="billboard.cpp" />
+    <ClCompile Include="block.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
@@ -18,17 +20,15 @@
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="stage.cpp" />
+    <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="title3D.cpp" />
     <ClCompile Include="tutrial.cpp" />
-    <ClCompile Include="block.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="billboard.cpp" />
-=======
-    <ClCompile Include="time.cpp" />
->>>>>>> 3f1c3603baaa51d1eb655ec3d119d3975ffd50b1
+    <ClCompile Include="sound.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="billboard.h" />
+    <ClInclude Include="block.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
@@ -46,14 +46,10 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="stage.h" />
+    <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="title3D.h" />
     <ClInclude Include="tutrial.h" />
-    <ClInclude Include="block.h" />
-<<<<<<< HEAD
-    <ClInclude Include="billboard.h" />
-=======
-    <ClInclude Include="time.h" />
->>>>>>> 3f1c3603baaa51d1eb655ec3d119d3975ffd50b1
+    <ClInclude Include="sound.h" />
   </ItemGroup>
 </Project>
