@@ -17,11 +17,8 @@
 #include "item.h"
 #include "block.h"
 #include "time.h"
-
 #include "billboard.h"
-
 #include "pause.h"
-
 #include "enemy.h"
 
 // ƒQ[ƒ€‚Ìó‘Ô
