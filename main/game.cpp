@@ -44,6 +44,8 @@ void InitGame(void)
 	InitTime();
 	InitPause();
 
+	Setitem(D3DXVECTOR3(100.0f, 0.0f, 0.0f), ITEMTYPE_ONE);
+	Setitem(D3DXVECTOR3(100.0f, 0.0f, 10.0f), ITEMTYPE_TWO);
 }
 
 //---------------
