@@ -40,8 +40,8 @@ void InitGame(void)
 	InitBlock();
 	InitPlayer();
 	LoadStage();
-	InitItem();
-	SetItem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
+	Inititem();
+	Setitem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
 	InitTime();
 	InitBillboard();
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
@@ -58,7 +58,7 @@ void UinitGame(void)
 	UninitCamera();
 	UninitBlock();
 	UninitPlayer();
-	UinitItem();
+	Uinititem();
 	UninitTime();
 	UninitBillboard();
 }
@@ -74,7 +74,7 @@ void UpdateGame(void)
 	UpdateLight();
 	UpdateBlock();
 	UpdatePlayer();
-	UpdateItem();
+	Updateitem();
 	UpdateTime();
 	UpdateBillboard();
 
@@ -115,7 +115,7 @@ void DrawGame(void)
 {
 	DrawMeshfield();
 	DrawBlock();
-	DrawItem();
+	Drawitem();
 	DrawPlayer();
 	DrawMeshWall();
 	DrawTime();
