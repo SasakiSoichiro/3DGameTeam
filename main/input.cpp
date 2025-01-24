@@ -206,13 +206,25 @@ bool GetJoyStick(void)
 {
 	bool joykey = false;
 
+	//左スティック
 	if (g_joyKeyState.Gamepad.sThumbLX >= 100 ||
 		g_joyKeyState.Gamepad.sThumbLX <= -100 ||
 		g_joyKeyState.Gamepad.sThumbLY >= 100 ||
-		g_joyKeyState.Gamepad.sThumbLY <= -100)
+		g_joyKeyState.Gamepad.sThumbLY <= -100
+		)
 	{
 		joykey = true;
 	}
+	//右スティック
+	else if (g_joyKeyState.Gamepad.sThumbRX >= 100 ||
+		g_joyKeyState.Gamepad.sThumbRX <= -100 ||
+		g_joyKeyState.Gamepad.sThumbRY >= 100 ||
+		g_joyKeyState.Gamepad.sThumbRY <= -100
+		)
+	{
+		joykey = true;
+	}
+
 
 	return joykey;
 }
