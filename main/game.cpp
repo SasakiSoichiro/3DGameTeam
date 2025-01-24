@@ -43,7 +43,7 @@ void InitGame(void)
 	Inititem();
 	InitTime();
 	InitPause();
-	Setitem(D3DXVECTOR3(100.0f, 50.0f, 200.0f), ITEMTYPE_FOUR);
+
 }
 
 //---------------
@@ -88,7 +88,7 @@ void UpdateGame(void)
 		Updateitem();
 		UpdateTime();
 
-		if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true)
+		if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
 		{
 			SetResult(RESULT_CLEAR);
 			SetFade(MODE_RESULT);
@@ -112,6 +112,28 @@ void UpdateGame(void)
 			SetFade(MODE_RESULT);
 			g_nCounterGameState = 0;
 		}
+		break;
+
+	case GAMESTATE_RETRY:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 30)
+		{
+			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
+			SetFade(MODE_GAME);
+			g_nCounterGameState = 0;
+		}
+
+		break;
+
+	case  GAMESTATE_QUIT:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 40)
+		{
+			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
+			SetFade(MODE_TITLE);
+			g_nCounterGameState = 0;
+		}
+
 		break;
 
 	default:

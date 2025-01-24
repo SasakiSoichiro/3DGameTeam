@@ -204,10 +204,10 @@ void UpdatePause(void)
 	g_pVtxBuffPause2->Lock(0, 0, (void**)&pVtx, 0);
 
 	//頂点カラー
-	pVtx[0].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.5f);
-	pVtx[1].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.5f);
-	pVtx[2].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.5f);
-	pVtx[3].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.5f);
+	pVtx[0].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.8f);
+	pVtx[1].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.8f);
+	pVtx[2].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.8f);
+	pVtx[3].col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.8f);
 
 	//アンロック
 	g_pVtxBuffPause2->Unlock();
@@ -218,10 +218,10 @@ void UpdatePause(void)
 	for (nCntPause = 0; nCntPause < MAX_PAUSE; nCntPause++)
 	{//一度すべてを半透明に
 		//頂点カラーの設定
-		pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f);
-		pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f);
-		pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f);
-		pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f);
+		pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.3f);
+		pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.3f);
+		pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.3f);
+		pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.3f);
 
 		pVtx += 4;
 	}
@@ -273,15 +273,13 @@ void UpdatePause(void)
 			break;
 
 		case PAUSEMENYU_RETRY:
-			SetGameState(GAMESTATE_RESULT);
 			SetEnablePause(false);
-			SetFade(MODE_GAME);
+			SetGameState(GAMESTATE_RETRY);
 			break;
 
 		case PAUSEMENYU_QUIT:
-			SetGameState(GAMESTATE_RESULT);
 			SetEnablePause(false);
-			SetFade(MODE_TITLE);
+			SetGameState(GAMESTATE_QUIT);
 			break;
 		}
 	}
