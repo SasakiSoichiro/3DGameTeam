@@ -22,7 +22,11 @@
     <ClCompile Include="title3D.cpp" />
     <ClCompile Include="tutrial.cpp" />
     <ClCompile Include="block.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="billboard.cpp" />
+=======
+    <ClCompile Include="time.cpp" />
+>>>>>>> 3f1c3603baaa51d1eb655ec3d119d3975ffd50b1
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -46,6 +50,10 @@
     <ClInclude Include="title3D.h" />
     <ClInclude Include="tutrial.h" />
     <ClInclude Include="block.h" />
+<<<<<<< HEAD
     <ClInclude Include="billboard.h" />
+=======
+    <ClInclude Include="time.h" />
+>>>>>>> 3f1c3603baaa51d1eb655ec3d119d3975ffd50b1
   </ItemGroup>
 </Project>

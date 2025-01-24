@@ -161,6 +161,7 @@
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="stage.cpp" />
+    <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="title3D.cpp" />
     <ClCompile Include="tutrial.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="stage.h" />
+    <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="title3D.h" />
     <ClInclude Include="tutrial.h" />
