@@ -91,7 +91,7 @@ void UpdateGame(void)
 
 	if (g_bPause == false)
 	{
-		UpdataMeshfield();
+		UpdateMeshfield();
 		UpdateCamera();
 		UpdateLight();
 		UpdateBlock();

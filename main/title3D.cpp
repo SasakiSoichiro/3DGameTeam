@@ -36,7 +36,7 @@ void UpdateTitle3D()
 {
 	UpdateCamera();
 	UpdateTitle();
-	UpdataMeshfield();
+	UpdateMeshfield();
 	UpdateLight();
 }
 
