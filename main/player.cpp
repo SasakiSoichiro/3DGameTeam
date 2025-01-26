@@ -400,7 +400,7 @@ void UpdatePlayer(void)
 		if (pStick->Gamepad.sThumbRX > 10922)
 		{
 			//‰E‰ñ‚è
-			pCamera->rot.y += 0.05f;//‰ñ“]—Ê
+			pCamera->rot.y += 0.05f;//‰ñ“]—Êsss
 
 			//Šp“x‚Ì³‹K‰»
 			if (pCamera->rot.y > D3DX_PI)
