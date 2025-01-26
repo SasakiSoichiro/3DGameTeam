@@ -260,6 +260,10 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 		break;
+	case WM_MOUSEWHEEL:
+		int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+		MouseWheel(zDelta);
+		break;
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }

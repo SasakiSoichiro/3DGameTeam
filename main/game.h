@@ -22,5 +22,6 @@ void UpdateGame(void);
 void DrawGame(void);
 void SetEnablePause(bool bPause);
 void SetGameState(GAMESTATE state);
+bool GetEditState(void);
 
 #endif // !_GAME_H_

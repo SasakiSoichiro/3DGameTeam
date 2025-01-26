@@ -10,6 +10,7 @@
 #include "player.h"
 #define NUM_EDIT (16)
 #define EDITTEXTURE (128)	//テクスチャの最大数
+#define TEXTFILE "data\\STAGE\\stage.txt"
 typedef enum
 {
 	EDIT_HOUSE00 = 0,		//普通のブロック
@@ -29,8 +30,9 @@ typedef struct
 
 typedef struct
 {
-	EDITTEX tex[EDIT_MAX];						//テクスチャ情報
+	EDITTEX tex[EDIT_MAX];				//テクスチャ情報
 	D3DXVECTOR3 pos;					//位置
+	D3DXVECTOR3 move;					//位置
 	D3DXVECTOR3 rot;					//向き
 	D3DXMATRIX mtxWorld;				//ワールドマトリックス
 	D3DXVECTOR3 vtxMin, vtxMax;			//モデルの最小値,最大値
@@ -47,9 +49,12 @@ static const char* X_EDIT[EDIT_MAX] =
 	"data\\model\\wallmaria2.x",
 };
 
-////プロトタイプ宣言
-//void InitEdit(void);
-//void UninitEdit(void);
-//void UpdateEdit(void);
-//void DrawEdit(void);
+//プロトタイプ宣言
+void InitEdit(void);
+void UninitEdit(void);
+void UpdateEdit(void);
+void DrawEdit(void);
+void SaveEdit(void);
+void LoadEdit(void);
+void ReloadEdit(void);
 #endif
