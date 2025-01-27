@@ -26,6 +26,8 @@
     <ClCompile Include="tutrial.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="slow.cpp" />
+    <ClCompile Include="edit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h" />
@@ -53,5 +55,7 @@
     <ClInclude Include="tutrial.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="slow.h" />
+    <ClInclude Include="edit.h" />
   </ItemGroup>
 </Project>

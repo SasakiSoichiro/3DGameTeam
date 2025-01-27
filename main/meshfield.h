@@ -1,26 +1,24 @@
-#pragma once
-#ifndef _MESHFIELD_H_
-#define _MESHFIELD_H_
-
+//=============================================================================
+//
+//	メッシュフィールド処理 [Meshfield.h]
+// Author : 佐々木奏一郎
+//
+//=============================================================================
+#ifndef _MESHFIELD_H_//このマクロ定義がされていなかったら
+#define _MESHFIELD_H_//2銃インクルード防止のマクロ定義
 #include "main.h"
+#define OBJ_X (1850.0f)
+#define OBJ_Z (850.0f)
+#define XMESH (4)
+#define ZMESH (4)
+#define VTXCNT ((XMESH+1)*(ZMESH+1))
+#define POLYCNT ((2*XMESH*ZMESH)+4*(ZMESH-1))
+#define IDXCNT (((XMESH+1)*2*ZMESH)+(ZMESH-1)*4)
 
-#define MESHFIELD_X (100)		//	X軸
-#define MESHFIELD_Z (100)		//	Z軸
-#define MESHFIELD_T ((MESHFIELD_X + 1) * (MESHFIELD_Z + 1))		//	頂点数
-#define MESHFIELD_P ((MESHFIELD_X * MESHFIELD_Z * 2 + (MESHFIELD_Z - 1) * 4))		//	ポリゴン数
-#define MESHFIELD_I ((MESHFIELD_X + 1) * 2 * MESHFIELD_Z + (MESHFIELD_Z - 1) * 2)	//	インデックス数
-
-typedef struct
-{
-	D3DXVECTOR3 pos;
-	D3DXVECTOR3 rot;
-	D3DXMATRIX mtxWorld;
-}MESHFIELD;
-
-//	プロトタイプ宣言
+//プロトタイプ宣言
 void InitMeshfield(void);
 void UninitMeshfield(void);
-void UpdataMeshfield(void);
+void UpdateMeshfield(void);
 void DrawMeshfield(void);
 
-#endif // !_MESHFIELD_H_
+#endif

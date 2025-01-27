@@ -20,6 +20,7 @@
 #include "billboard.h"
 #include "pause.h"
 #include "enemy.h"
+#include "edit.h"
 
 // ゲームの状態
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -30,6 +31,8 @@ int g_nCounterGameState = 0;
 //	ポーズ
 bool g_bPause = false;
 
+bool g_bEdit = false;
+
 //---------------
 //	初期化処理
 //---------------
@@ -37,19 +40,23 @@ void InitGame(void)
 {
 	InitCamera();
 	InitLighr();
-	InitMeshWall();
 	InitMeshfield();
 	InitBlock();
 	InitPlayer();
-	LoadStage();
 	Inititem();
 	InitTime();
+	InitEdit();
+	LoadEdit();
+	Setitem(D3DXVECTOR3(50.0f, 0.0f, 0.0f), ITEMTYPE_ONE);
+	Setitem(D3DXVECTOR3(50.0f, 0.0f, -0.8f), ITEMTYPE_TWO);
 
 	InitBillboard();
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
 
 	InitPause();
 
+	//初期化処理
+	g_bEdit = false;
 }
 
 //---------------
@@ -59,13 +66,12 @@ void UinitGame(void)
 {
 	UninitLight();
 	UninitMeshfield();
-	UninitMeshWall();
 	UninitCamera();
 	UninitBlock();
 	UninitPlayer();
 	Uinititem();
 	UninitTime();
-
+	UninitEdit();
 	UninitBillboard();
 
 	UninitPause();
@@ -78,18 +84,6 @@ void UinitGame(void)
 void UpdateGame(void)
 {
 
-	UpdataMeshfield();
-	UpdateMeshWall();
-	UpdateCamera();
-	UpdateLight();
-	UpdateBlock();
-	UpdatePlayer();
-	Updateitem();
-	UpdateTime();
-	UpdateBillboard();
-
-
-
 	if (KeybordTrigger(DIK_TAB) == true)
 
 	{
@@ -100,29 +94,48 @@ void UpdateGame(void)
 	{
 		UpdatePause();
 	}
+	if (g_bEdit == true&&KeybordTrigger(DIK_F1))
+	{
+		g_bEdit = false;
 
+		InitBlock();
+		LoadEdit();
+	}
+	else if (g_bEdit == false && KeybordTrigger(DIK_F1))
+	{
+		g_bEdit = true;
+
+	}
 	if (g_bPause == false)
 	{
-		UpdataMeshfield();
-		UpdateMeshWall();
-		UpdateCamera();
-		UpdateLight();
-		UpdateBlock();
-		UpdatePlayer();
-		Updateitem();
-		UpdateTime();
-
-		if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
+		if (g_bEdit == false)
 		{
-			SetResult(RESULT_CLEAR);
-			SetFade(MODE_RESULT);
+			UpdateMeshfield();
+			UpdateCamera();
+			UpdateLight();
+			UpdateBlock();
+			UpdatePlayer();
+			Updateitem();
+			UpdateTime();
+			if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
+			{
+				SetResult(RESULT_CLEAR);
+				SetFade(MODE_RESULT);
+			}
+
+			if (KeybordTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_B) == true)
+			{
+				SetResult(RESULT_GAMEOVER);
+				SetFade(MODE_RESULT);
+			}
+
+		}
+		else if (g_bEdit == true)
+		{
+			UpdateCamera();
+			UpdateEdit();
 		}
 
-		if (KeybordTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_B) == true)
-		{
-			SetResult(RESULT_GAMEOVER);
-			SetFade(MODE_RESULT);
-		}
 	}
 
 	switch (g_gameState)
@@ -174,7 +187,6 @@ void DrawGame(void)
 	DrawBlock();
 	Drawitem();
 	DrawPlayer();
-	DrawMeshWall();
 	DrawTime();
 
 	DrawBillboard();
@@ -183,6 +195,10 @@ void DrawGame(void)
 	if (g_bPause == true)
 	{
 		DrawPause();
+	}
+	if (g_bEdit == true)
+	{
+		DrawEdit();
 	}
 }
 
@@ -195,4 +211,9 @@ void SetEnablePause(bool bPause)
 void SetGameState(GAMESTATE state)
 {
 	g_gameState = state;
+}
+
+bool GetEditState(void)
+{
+	return g_bEdit;
 }

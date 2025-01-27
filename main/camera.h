@@ -29,6 +29,7 @@ void InitCamera(void);
 void UninitCamera(void);
 void UpdateCamera(void);
 void SetCamera(int nIdx);
+void MouseWheel(int zDelta);
 Camera* GetCamera(void);
 
 #endif // !_CAMERA_H_

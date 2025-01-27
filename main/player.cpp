@@ -160,9 +160,8 @@ void UpdatePlayer(void)
 			}
 			else
 			{
-
-				g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.75f;
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
 
@@ -179,9 +178,10 @@ void UpdatePlayer(void)
 			}
 			else
 			{
+
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.75f;
 
 			}
@@ -198,8 +198,8 @@ void UpdatePlayer(void)
 			{
 
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
-				g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
+				g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
 
 			}
@@ -220,11 +220,11 @@ void UpdatePlayer(void)
 			}
 			else
 			{
-
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.75f;
+
 
 			}
 		}
@@ -239,8 +239,9 @@ void UpdatePlayer(void)
 			else
 			{
 
-				g_player.pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
-				g_player.pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+
+				g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+				g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.75f;
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
 
@@ -258,10 +259,11 @@ void UpdatePlayer(void)
 			else
 			{
 
+
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
-				g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
-				g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
-				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
+				g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
 
 			}
 		}
@@ -279,11 +281,11 @@ void UpdatePlayer(void)
 		}
 		else
 		{
-
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y;
+
 
 		}
 	}
@@ -300,10 +302,11 @@ void UpdatePlayer(void)
 		else
 		{
 
+
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y;
+			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
 
 		}
 	}
@@ -357,17 +360,17 @@ void UpdatePlayer(void)
 		{
 			//‰EˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
-			g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
+			g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
 
 		}
 		else if (pStick->Gamepad.sThumbLX < -10922)
 		{
 			//¶ˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
+			g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
 			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
 
 		}
@@ -375,18 +378,18 @@ void UpdatePlayer(void)
 		{
 			//ãˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y;
 
 		}
 		else if (pStick->Gamepad.sThumbLY < -10922)
 		{
 			//‰ºˆÚ“®
 			g_player.motion.motionType = MOTIONTYPE_MOVE;
-			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
-			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
-			g_player.rotDest.y = pCamera->rot.y;
+			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
 
 		}
 	}
@@ -397,7 +400,7 @@ void UpdatePlayer(void)
 		if (pStick->Gamepad.sThumbRX > 10922)
 		{
 			//‰E‰ñ‚è
-			pCamera->rot.y += 0.05f;//‰ñ“]—Ê
+			pCamera->rot.y += 0.05f;//‰ñ“]—Êsss
 
 			//Šp“x‚Ì³‹K‰»
 			if (pCamera->rot.y > D3DX_PI)
@@ -437,21 +440,6 @@ void UpdatePlayer(void)
 		else if (pStick->Gamepad.sThumbRY > 10922)
 		{
 			//ã
-			pCamera->rot.y += 0.05f;//‰ñ“]—Ê
-
-			//Šp“x‚Ì³‹K‰»
-			if (pCamera->rot.y > D3DX_PI)
-			{
-				pCamera->rot.y = -D3DX_PI;
-			}
-			if (pCamera->rot.y < -D3DX_PI)
-			{
-				pCamera->rot.y = D3DX_PI;
-			}
-
-			pCamera->posV.y = pCamera->posR.y - sinf(pCamera->rot.y) * pCamera->fDistance;
-
-			pCamera->posV.z = pCamera->posR.z - cosf(pCamera->rot.y) * pCamera->fDistance;
 
 
 		}
@@ -459,13 +447,14 @@ void UpdatePlayer(void)
 		{
 			//‰º
 
+
 		}
 	}
 
 	g_player.rot.y += (g_player.rotDest.y - g_player.rot.y) * 0.2f;
 	CollisionBlock(&g_player.pos, &g_player.posOld);
 	//CollisionWall(&g_player.pos, &g_player.posOld);
-	CollisionCyrynder();
+	//CollisionCyrynder();
 	//SetPositionShadow(g_nIdxShadow, D3DXVECTOR3(g_player.pos.x, 1.0f, g_player.pos.z), g_player.pos.y);
 	bOldLanding = bLanding;
 	UpdateMotion();

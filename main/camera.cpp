@@ -8,6 +8,7 @@
 #include "camera.h"
 #include "input.h"
 #include "player.h"
+#include "game.h"
 
 //	グローバル
 Camera g_camera[MAX_CAMERA] = {};	//カメラ情報
@@ -20,8 +21,8 @@ void InitCamera(void)
 	//	視点・注視点・上方向を設定する
 	for (int count = 0; count < MAX_CAMERA; count++)
 	{
-		g_camera[count].posV = D3DXVECTOR3(0.0f, 60.0f, 0.0f);
-		g_camera[count].posR = D3DXVECTOR3(0.0f, 50.0f, 0.0f);
+		g_camera[count].posV = D3DXVECTOR3(100.0f, 60.0f, 0.0f);
+		g_camera[count].posR = D3DXVECTOR3(100.0f, 50.0f, 0.0f);
 		g_camera[count].posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[count].posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[count].vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
@@ -68,71 +69,113 @@ void UninitCamera(void)
 void UpdateCamera(void)
 {
 	Player* pPlayer = GetPlayer();
-
+	MODE mode = GetMode();
 	D3DXVECTOR2 a = GetMouseVelocity();
 	D3DXVECTOR2 b = GetMouseVelocityOld();
 
 	for (int nCnt = 0; nCnt < MAX_CAMERA; nCnt++)
 	{
-		static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
-
-		g_camera[nCnt].posV.z = pPlayer->pos.z;
-		g_camera[nCnt].posV.x = pPlayer->pos.x;
-		g_camera[nCnt].posV.y = pPlayer->pos.y + 20.0f;
-
-		POINT cursorPos;
-
-		GetCursorPos(&cursorPos);
-
-		float DeltaX = (float)cursorPos.x - prevCursorPos.x;
-		float DeltaY = (float)cursorPos.y - prevCursorPos.y;
-
-		const float mouseSensitivity = 0.0009f;
-
-		DeltaX *= mouseSensitivity;
-		DeltaY *= mouseSensitivity;
-
-		g_camera[nCnt].rot.x += DeltaY;
-		g_camera[nCnt].rot.y += DeltaX;
-
-
-		//角度の正規化
-		if (g_camera[nCnt].rot.y <= -D3DX_PI)
+		if (GetEditState() == false&&mode==MODE_GAME)
 		{
-			g_camera[nCnt].rot.y += D3DX_PI * 2.0f;
-		}
-		else if (g_camera[nCnt].rot.y >= D3DX_PI)
-		{
-			g_camera[nCnt].rot.y += -D3DX_PI * 2.0f;
-		}
-		if (g_camera[nCnt].rot.x <= -D3DX_PI)
-		{
-			g_camera[nCnt].rot.x += D3DX_PI * 2.0f;
-		}
-		else if (g_camera[nCnt].rot.x >= D3DX_PI)
-		{
-			g_camera[nCnt].rot.x += -D3DX_PI * 2.0f;
-		}
+			static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
 
-		//角度制限
-		if (g_camera[nCnt].rot.x < 0.01f)
-		{
-			g_camera[nCnt].rot.x -= DeltaY;
-		}
-		else if (g_camera[nCnt].rot.x > 3.10f)
-		{
-			g_camera[nCnt].rot.x -= DeltaY;
-		}
+			POINT cursorPos;
 
-		SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
+			GetCursorPos(&cursorPos);
 
-		prevCursorPos.x = SCREEN_WIDTH / 1.5;
-		prevCursorPos.y = SCREEN_HEIGHT / 1.5;
+			float DeltaX = (float)cursorPos.x - prevCursorPos.x;
+			float DeltaY = (float)cursorPos.y - prevCursorPos.y;
+
+			const float mouseSensitivity = 0.0009f;
+
+			DeltaX *= mouseSensitivity;
+			DeltaY *= mouseSensitivity;
+
+			g_camera[nCnt].rot.x += DeltaY;
+			g_camera[nCnt].rot.y += DeltaX;
 
 
-		g_camera[nCnt].posR.x = g_camera[nCnt].posV.x + sinf(g_camera[nCnt].rot.x) * sinf(g_camera[nCnt].rot.y);
-		g_camera[nCnt].posR.y = g_camera[nCnt].posV.y + cosf(g_camera[nCnt].rot.x);
-		g_camera[nCnt].posR.z = g_camera[nCnt].posV.z + sinf(g_camera[nCnt].rot.x) * cosf(g_camera[nCnt].rot.y);
+			//角度の正規化
+			if (g_camera[nCnt].rot.y <= -D3DX_PI)
+			{
+				g_camera[nCnt].rot.y += D3DX_PI * 2.0f;
+			}
+			else if (g_camera[nCnt].rot.y >= D3DX_PI)
+			{
+				g_camera[nCnt].rot.y += -D3DX_PI * 2.0f;
+			}
+
+			//if (g_camera[nCnt].rot.x <= -D3DX_PI)
+			//{
+			//	g_camera[nCnt].rot.x += D3DX_PI * 2.0f;
+			//}
+			//else if (g_camera[nCnt].rot.x >= D3DX_PI)
+			//{
+			//	g_camera[nCnt].rot.x += -D3DX_PI * 2.0f;
+			//}
+
+			//角度制限
+			if (g_camera[nCnt].rot.x > 1.57f)
+			{
+				g_camera[nCnt].rot.x = 1.57f;
+			}
+			else if (g_camera[nCnt].rot.x < -1.57f)
+			{
+				g_camera[nCnt].rot.x = -1.57f;
+			}
+
+			SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
+
+			prevCursorPos.x = SCREEN_WIDTH / 1.5;
+			prevCursorPos.y = SCREEN_HEIGHT / 1.5;
+
+			g_camera[nCnt].posV = pPlayer->pos;
+			g_camera[nCnt].posV.y += 20.0f;
+
+			g_camera[nCnt].posR.x = g_camera[nCnt].posV.x - sinf(g_camera[nCnt].rot.y) * cosf(g_camera[nCnt].rot.x);
+			g_camera[nCnt].posR.y = g_camera[nCnt].posV.y - sinf(g_camera[nCnt].rot.x);
+			g_camera[nCnt].posR.z = g_camera[nCnt].posV.z - cosf(g_camera[nCnt].rot.y) * cosf(g_camera[nCnt].rot.x);
+
+		}
+		else if (GetEditState() == true)
+		{
+			static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
+
+			POINT cursorPos;
+
+			GetCursorPos(&cursorPos);
+
+			float DeltaX = (float)cursorPos.x - prevCursorPos.x;
+			float DeltaY = (float)cursorPos.y - prevCursorPos.y;
+
+			const float mouseSensitivity = 0.0009f;
+
+			DeltaX *= mouseSensitivity;
+			DeltaY *= mouseSensitivity;
+
+			g_camera[nCnt].rot.x += DeltaY;
+			g_camera[nCnt].rot.y += DeltaX;
+
+
+			//角度の正規化
+			if (g_camera[nCnt].rot.y <= -D3DX_PI)
+			{
+				g_camera[nCnt].rot.y += D3DX_PI * 2.0f;
+			}
+			else if (g_camera[nCnt].rot.y >= D3DX_PI)
+			{
+				g_camera[nCnt].rot.y += -D3DX_PI * 2.0f;
+			}
+			SetCursorPos(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT / 1.5);
+
+			prevCursorPos.x = SCREEN_WIDTH / 1.5;
+			prevCursorPos.y = SCREEN_HEIGHT / 1.5;
+
+			g_camera[nCnt].posR.x = g_camera[nCnt].posV.x+ sinf(g_camera[nCnt].rot.x) * sinf(g_camera[nCnt].rot.y)* g_camera[nCnt].fDistance;
+			g_camera[nCnt].posR.y = g_camera[nCnt].posV.y+ cosf(g_camera[nCnt].rot.x) * g_camera[nCnt].fDistance;
+			g_camera[nCnt].posR.z = g_camera[nCnt].posV.z+ sinf(g_camera[nCnt].rot.x) * cosf(g_camera[nCnt].rot.y) * g_camera[nCnt].fDistance;
+
+		}
 
 		//g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
 		//g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
@@ -173,6 +216,25 @@ void SetCamera(int nIdx)
 		//	プロジェクトマトリックスの設定
 		pDevice->SetTransform(D3DTS_PROJECTION, &g_camera[nIdx].mtxProjection);
 }
+void MouseWheel(int zDelta)
+{
+	if (zDelta > 0)
+	{
+		g_camera[0].fDistance -= 15.0f;
+
+	}
+	else if (zDelta < 0)
+	{
+		g_camera[0].fDistance += 15.0f;
+
+	}
+	//カメラの視点の情報
+	g_camera[0].posV.x = g_camera[0].posR.x - sinf(g_camera[0].rot.x) * sinf(g_camera[0].rot.y) * g_camera[0].fDistance;
+	g_camera[0].posV.y = g_camera[0].posR.y - cosf(g_camera[0].rot.x) * g_camera[0].fDistance;
+	g_camera[0].posV.z = g_camera[0].posR.z - sinf(g_camera[0].rot.x) * cosf(g_camera[0].rot.y) * g_camera[0].fDistance;
+
+}
+
 
 Camera* GetCamera(void)
 {

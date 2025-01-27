@@ -29,9 +29,9 @@ void InitLighr(void)
 		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
 		//	ÉâÉCÉgÇÃï˚å¸
-		vecDir[0] = D3DXVECTOR3(0.2f, -0.8f, -1.0f);
-		vecDir[1] = D3DXVECTOR3(0.4f, -0.8f, -0.5f);
-		vecDir[2] = D3DXVECTOR3(0.6f, -0.8f, 0.0f);
+		vecDir[0] = D3DXVECTOR3(-0.2f, -0.8f, -0.4f);
+		vecDir[1] = D3DXVECTOR3(0.3f, -0.8f, 0.4f);
+		vecDir[2] = D3DXVECTOR3(-0.4f, 0.8f, -0.9f);
 
 		//	ê≥ãKâªÇ∑ÇÈ
 		D3DXVec3Normalize(&vecDir[nCntLight], &vecDir[nCntLight]);

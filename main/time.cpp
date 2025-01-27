@@ -270,10 +270,10 @@ void UpdateTime(void)
 	if (g_ntime <= 0)
 	{
 		
-		SubNs(-60);
+		SubNs(-59);
 
 		SubMin(1);
-		;
+		
 	}
 
 	//ƒQ[ƒ€I‚í‚ç‚¹‚éˆ—
