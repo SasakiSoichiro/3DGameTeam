@@ -26,7 +26,7 @@ void InitLighr(void)
 		g_light[nCntLight].Type = D3DLIGHT_DIRECTIONAL;
 
 		//	ライトの拡散光
-		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		g_light[nCntLight].Diffuse = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.5f);
 
 		//	ライトの方向
 		vecDir[0] = D3DXVECTOR3(-0.2f, -0.8f, -0.4f);
