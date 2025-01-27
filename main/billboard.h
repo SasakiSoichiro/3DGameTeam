@@ -25,7 +25,8 @@ typedef enum
 
 static const char* ITEM_TEXTURE[BILLBOARDTYPE_MAX] =
 {
-	"data\\TEXTURE\\Wood.png",
+	"data\\texture\\Wood.png",
+	"data\\texture\\itembilbord.jpg",
 
 };
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -49,5 +50,5 @@ void InitBillboard();
 void UninitBillboard();
 void UpdateBillboard();
 void DrawBillboard();
-void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType);
+void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType, D3DXVECTOR3 size);
 #endif
