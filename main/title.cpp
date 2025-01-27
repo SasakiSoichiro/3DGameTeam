@@ -40,7 +40,7 @@ void InitTitle(void)
 		&g_apTextureTitle[1]);
 
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\gamestart000.png",
+		"data\\texture\\Start1.png",
 		&g_apTextureTitle[2]);
 
 	//頂点バッファの生成
