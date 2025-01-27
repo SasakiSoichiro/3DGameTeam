@@ -380,7 +380,7 @@ void LoadEnemy(int nType)
 	int nBool;
 	char str[MAX_WORD];
 
-	pFile = fopen("data\\MOTION\\motion04.txt", "r");
+	pFile = fopen("data\\motion\\motion04.txt", "r");
 
 	if (pFile != NULL)
 	{

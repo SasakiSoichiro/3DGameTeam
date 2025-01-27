@@ -11,8 +11,8 @@
 #define GRAVI (0.05f)			//重力
 #define JUMP (2.0f)
 #define OBJ_E (20.0f)
-#define EPARTS_MAX (2)
-#define EUSEPARTS_MAX (2)
+#define EPARTS_MAX (16)
+#define EUSEPARTS_MAX (16)
 
 //敵の状態
 typedef enum
@@ -89,7 +89,7 @@ typedef struct
 	Model aModel[EPARTS_MAX];	//モデルのパーツ数
 	int nNumModel;		//モデルのパーツ総数
 
-	EMOTION_INFO aMotionInfo[1];//モーションの最大数
+	EMOTION_INFO aMotionInfo[8];//モーションの最大数
 	int nNumMotion;//モーションの総数
 	EMOTIONTYPE motionType;//モーションの種類
 	bool bLoopMotion;//ループするかどうか
