@@ -2,7 +2,7 @@
 #include "edit.h"
 #include "input.h"
 //グローバル変数宣言
-EDITINFO g_Edit[NUM_BLOCK];
+EDITINFO g_Edit[NUM_EDIT];
 EDITTEX g_EditTex[EDIT_MAX];
 int g_EditCnt;
 int g_nReloadCnt;
@@ -132,13 +132,50 @@ void UpdateEdit(void)
 
 	if (g_Edit[g_EditCnt].bUse == true)
 	{
+		//移動量の更新
+		g_Edit[g_EditCnt].move.x += (0.0f - g_Edit[g_EditCnt].move.x) * 0.25f;
+		//移動量の更新
+		g_Edit[g_EditCnt].move.z += (0.0f - g_Edit[g_EditCnt].move.z) * 0.25f;
+
+		//位置更新
 		g_Edit[g_EditCnt].pos.x += g_Edit[g_EditCnt].move.x;
+		//位置更新
+		g_Edit[g_EditCnt].pos.z += g_Edit[g_EditCnt].move.z;
 
 		if (GetKeyboardPress(DIK_A) == true)
-		{
-			g_Edit[g_EditCnt].move.x -= 2.0f;
-		}
+		{//左に移動
+			g_Edit[g_EditCnt].move.z -= EDIT_MOVE;
 
+		}
+		else if (GetKeyboardPress(DIK_D) == true)
+		{//左に移動
+			g_Edit[g_EditCnt].move.z += EDIT_MOVE;
+		}
+		else if (GetKeyboardPress(DIK_W) == true)
+		{//左に移動
+			g_Edit[g_EditCnt].move.x -= EDIT_MOVE;
+		}
+		else if (GetKeyboardPress(DIK_S) == true)
+		{//左に移動
+			g_Edit[g_EditCnt].move.x += EDIT_MOVE;
+		}
+		else if (KeybordTrigger(DIK_T) == true)
+		{//左に移動
+			if (g_Edit[g_EditCnt].nType >= 1)
+			{
+				g_Edit[g_EditCnt].nType -= 1;
+				g_Edit[g_EditCnt].tex[g_Edit[g_EditCnt].nType] = g_EditTex[g_Edit[g_EditCnt].nType];
+			}
+		}
+		else if (KeybordTrigger(DIK_G) == true)
+		{//左に移動
+			if (g_Edit[g_EditCnt].nType < EDIT_MAX - 1)
+			{
+				g_Edit[g_EditCnt].nType += 1;
+				g_Edit[g_EditCnt].tex[g_Edit[g_EditCnt].nType] = g_EditTex[g_Edit[g_EditCnt].nType];
+			}
+
+		}
 		if (KeybordTrigger(DIK_RETURN) == true)
 		{
 			g_Edit[g_EditCnt + 1].pos = g_Edit[g_EditCnt].pos;
@@ -195,11 +232,13 @@ void DrawEdit(void)
 		pDevice->SetTransform(D3DTS_WORLD, &g_Edit[nCntBlock].mtxWorld);
 
 		pDevice->GetMaterial(&matDef);
-		//マテリアルデータへのポインタを取得
-		pMat = (D3DXMATERIAL*)g_Edit[nCntBlock].tex[nType].pBuffMat->GetBufferPointer();
+
 
 		for (int nCntMat = 0; nCntMat < (int)g_Edit[nCntBlock].tex[nType].dwNumMat; nCntMat++)
 		{
+			//マテリアルデータへのポインタを取得
+			pMat = (D3DXMATERIAL*)g_Edit[nCntBlock].tex[nType].pBuffMat->GetBufferPointer();
+
 			//マテリアルの設定
 			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
