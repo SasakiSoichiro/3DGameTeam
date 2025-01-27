@@ -125,7 +125,6 @@ void UpdateEnemy(void)
 	float fAnglemove = 0.0f;
 	nCntTypeState++;
 
-
 	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
 	{
 		//if (g_Enemy[nCntEnemy].nLife <= -1)
@@ -135,27 +134,33 @@ void UpdateEnemy(void)
 		//}
 		if (g_Enemy[nCntEnemy].bUse == true)
 		{
-
 			switch (g_Enemy[nCntEnemy].State)
 			{
 			case ENEMYSTATE_NORMAL:
-				g_Enemy[nCntEnemy].rot.y = atan2f((pPlayer->pos.x - g_Enemy[nCntEnemy].pos.x), (pPlayer->pos.z - g_Enemy[nCntEnemy].pos.z));
-				fAnglemove = atan2f((pPlayer->pos.x - g_Enemy[nCntEnemy].pos.x), (pPlayer->pos.z - g_Enemy[nCntEnemy].pos.z));
+				g_Enemy[nCntEnemy].rot.y = atan2f(g_Enemy[nCntEnemy].pos.x - pPlayer->pos.x, g_Enemy[nCntEnemy].pos.z - pPlayer->pos.z);
+				fAnglemove = atan2f(pPlayer->pos.x - g_Enemy[nCntEnemy].pos.x, pPlayer->pos.z - g_Enemy[nCntEnemy].pos.z);
+
 				g_Enemy[nCntEnemy].move.x = sinf(fAnglemove) * 0.5f;
 				g_Enemy[nCntEnemy].move.z = cosf(fAnglemove) * 0.5f;
+
 				break;
+
 			case ENEMYSTATE_DAMAGE:
 				g_nCntEnemyState--;
+
 				g_Enemy[nCntEnemy].move.x = 0.0f;
 				g_Enemy[nCntEnemy].move.z = 0.0f;
+
 				if (g_nCntEnemyState <= 0)
 				{
 					g_Enemy[nCntEnemy].State = ENEMYSTATE_NORMAL;
 				}
+
 				break;
 			}
 
 			g_Enemy[nCntEnemy].posOld = g_Enemy[nCntEnemy].pos;
+
 			//d—Í‰ÁŽZ
 			g_Enemy[nCntEnemy].move.y -= GRAVI;
 
@@ -187,24 +192,30 @@ void UpdateEnemy(void)
 			{
 				g_Enemy[nCntEnemy].rot.y = g_Enemy[nCntEnemy].rot.y - (D3DX_PI * 2);
 			}
+
 			g_Enemy[nCntEnemy].pos += g_Enemy[nCntEnemy].move * pSlow->fDivi;
+
 			if (g_Enemy[nCntEnemy].pos.y < 0.0f)
 			{
 				g_Enemy[nCntEnemy].pos.y = 0.0f;
 			}
 
 			g_Enemy[nCntEnemy].rot.y += (g_Enemy[nCntEnemy].rotDest.y - g_Enemy[nCntEnemy].rot.y) * 0.2f;
+
 			//CollisionWall(&g_Enemy[nCntEnemy].pos, &g_Enemy[nCntEnemy].posOld);
+
 			CollisionEnemytoEnemy(nCntEnemy);
+
 			//SetPositionShadow(g_Enemy[nCntEnemy].IdxShadow, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, 1.0f, g_Enemy[nCntEnemy].pos.z), g_Enemy[nCntEnemy].pos.y);
+
 			if (g_Enemy[nCntEnemy].State != ENEMYSTATE_DAMAGE && pPlayer->pState == PLAYERSTATE_ACTION)
 			{
 				CollisionEnemy();
 			}
 
 			//SetPositionShadow(g_nEIdxShadow, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, 0.1f, g_Enemy[nCntEnemy].pos.z));
-
 		}
+
 		g_Enemy[nCntEnemy].motionType = EMOTIONTYPE_MOVE;
 
 
