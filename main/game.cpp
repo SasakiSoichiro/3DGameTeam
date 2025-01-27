@@ -45,13 +45,17 @@ void InitGame(void)
 	InitPlayer();
 	Inititem();
 	InitTime();
+	InitEnemy();
+
+	
 	InitEdit();
 	LoadEdit();
-	Setitem(D3DXVECTOR3(50.0f, 0.0f, 0.0f), ITEMTYPE_ONE);
-	Setitem(D3DXVECTOR3(50.0f, 0.0f, -0.8f), ITEMTYPE_TWO);
+	Setitem(D3DXVECTOR3(50.0f, 40.0f, 0.0f), ITEMTYPE_ONE);
 
 	InitBillboard();
-	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0);
+	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0,D3DXVECTOR3(15.0f,35.0f,0.0f));
+	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
+	SetEnemy(D3DXVECTOR3(0.0f, 0.0f, 0.0f), 0);
 
 	InitPause();
 
@@ -69,6 +73,7 @@ void UinitGame(void)
 	UninitCamera();
 	UninitBlock();
 	UninitPlayer();
+	UninitEnemy();
 	Uinititem();
 	UninitTime();
 	UninitEdit();
@@ -115,8 +120,11 @@ void UpdateGame(void)
 			UpdateLight();
 			UpdateBlock();
 			UpdatePlayer();
+			UpdateEnemy();
+			UpdateBillboard();
 			Updateitem();
 			UpdateTime();
+
 			if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
 			{
 				SetResult(RESULT_CLEAR);
@@ -187,6 +195,7 @@ void DrawGame(void)
 	DrawBlock();
 	Drawitem();
 	DrawPlayer();
+	DrawEnemy();
 	DrawTime();
 
 	DrawBillboard();

@@ -7,6 +7,8 @@
 
 #include "billboard.h"
 #include "player.h"
+#include "item.h"
+#include "input.h"
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 // グローバル変数宣言
@@ -108,7 +110,60 @@ void UninitBillboard()
 //====================================================
 void UpdateBillboard()
 {
+	ITEM* pItem = Getitem();
 
+	for (int count = 0; count < MAX_ITEM; count++, pItem++)
+	{
+		if (pItem->bUse == true)
+		{
+			//プレイヤーの半径の算出用変数
+			float fPRadPos = 28.0f;
+
+			//アイテムの半径の算出用変数
+			float fIRadPos = 28.0f;
+
+			//プレやーの位置を取得
+			D3DXVECTOR3 PlayerPos = GetPlayer()->pos;
+
+			//アイテムのプレイヤーの距離の差
+			D3DXVECTOR3 diff = PlayerPos - pItem->pos;
+
+			//範囲計算
+			float fDisX = PlayerPos.x - pItem->pos.x;
+			float fDisY = PlayerPos.y - pItem->pos.y;
+			float fDisZ = PlayerPos.z - pItem->pos.z;
+
+			//二つの半径を求める
+			float fRadX = fPRadPos + fIRadPos;
+
+			for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
+			{
+				//プレイヤーがアイテムの範囲に入ったら
+				if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
+				{
+					if (g_Billboard[nCnt].nType == BILLBOARDTYPE_1)
+					{
+						g_Billboard[nCnt].bUse = true;
+						g_Billboard[nCnt].pos.x = pItem->pos.x + 5.0f;
+						g_Billboard[nCnt].pos.y = pItem->pos.y - 10.0f;
+						g_Billboard[nCnt].pos.z = pItem->pos.z;
+
+						if (KeybordTrigger(DIK_F) == true)
+						{//Fを押されたとき
+							g_Billboard[nCnt].bUse = false;
+						}
+					}
+				}
+				else
+				{
+					if (g_Billboard[nCnt].nType == BILLBOARDTYPE_1)
+					{
+						g_Billboard[nCnt].bUse = false;
+					}
+				}
+			}
+		}
+	}
 }
 
 //====================================================
@@ -146,17 +201,9 @@ void DrawBillboard()
 			g_Billboard[nCnt].mtxWorld._32 = mtxView._23;
 			g_Billboard[nCnt].mtxWorld._33 = mtxView._33;
 
-			////向きを反映
-			//D3DXMatrixRotationYawPitchRoll(&mtxRot, g_rotBillboard.y, g_rotBillboard.x, g_rotBillboard.z);
-			//D3DXMatrixMultiply(&g_mtxWorldBillboard, &g_mtxWorldBillboard, &mtxRot);
-
 			//位置を反映
 			D3DXMatrixTranslation(&mtxTrans, g_Billboard[nCnt].pos.x, g_Billboard[nCnt].pos.y, g_Billboard[nCnt].pos.z);
 			D3DXMatrixMultiply(&g_Billboard[nCnt].mtxWorld, &g_Billboard[nCnt].mtxWorld, &mtxTrans);
-
-			////Zテスト
-			//pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);		//Zの比較方法
-			//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);		//Zバッファを書き込まない
 
 			//ワールドマトリックスの設定
 			pDevice->SetTransform(D3DTS_WORLD, &g_Billboard[nCnt].mtxWorld);
@@ -173,9 +220,6 @@ void DrawBillboard()
 			//アイテムの描画
 			pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, nCnt * 4, 2);
 
-			////Zテスト
-			//pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);	//Zの比較方法
-			//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);		//Zバッファを書き込む
 		}
 	}
 	//ライトを有効にする
@@ -185,28 +229,43 @@ void DrawBillboard()
 //====================================================
 //アイテムの設定処理
 //====================================================
-void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType)
+void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType, D3DXVECTOR3 size)
 {
+	VERTEX_3D* pVtx = NULL;
 	LPDIRECT3DDEVICE9 pDevice;								//デバイスへのポインタ
 
 	pDevice = GetDevice();									//デバイスの取得
+
+		//頂点バッファをロック
+	g_pVtxBuffBillboard->Lock(0, 0, (void**)&pVtx, 0);
 
 	for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
 	{
 		if (g_Billboard[nCnt].bUse == false)
 		{
-			g_Billboard[nCnt].pos = pos;							//位置
-			g_Billboard[nCnt].nType = nType;						//種類
-			g_Billboard[nCnt].bUse = true;						//使用しているとき
+			g_Billboard[nCnt].pos = pos;			//	位置
+			g_Billboard[nCnt].nType = nType;		//	種類
+			if (nType == BILLBOARDTYPE_1)
+			{
+				g_Billboard[nCnt].bUse = false;			//	使用しているとき
+			}
+			else
+			{
+				g_Billboard[nCnt].bUse = true;			//	使用しているとき
+			}
 
-			//	//テクスチャの読み込み
-			//for (int nCnt = 0; nCnt < ITEMTYPE_MAX; nCnt++)
-			//{
-			//	D3DXCreateTextureFromFile(pDevice,
-			//		ITEM_TEXTURE[nCnt],
-			//		&g_pTextureBillboard[nCnt]);
-			//}
+			//	頂点情報の設定
+			pVtx[0].pos = D3DXVECTOR3(-size.x, size.y, size.z);
+			pVtx[1].pos = D3DXVECTOR3(size.x, size.y, size.z);
+			pVtx[2].pos = D3DXVECTOR3(-size.x, -size.y, size.z);
+			pVtx[3].pos = D3DXVECTOR3(size.x, -size.y, size.z);
+
 			break;
 		}
+
+		pVtx += 4;
 	}
+
+	//頂点バッファのアンロック
+	g_pVtxBuffBillboard->Unlock();
 }

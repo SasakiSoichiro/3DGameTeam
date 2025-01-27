@@ -13,11 +13,13 @@
 
 ITEM g_item[MAX_ITEM] = {};
 LPD3DXMESH g_pMeshItem[MAX_ITEM] = { NULL };				//	頂点情報のポインター
-LPDIRECT3DTEXTURE9 g_apTextureItem[128] = {};	//	テクスチャのポインター
+LPDIRECT3DTEXTURE9 g_apTextureItem[128] = {};				//	テクスチャのポインター
 LPD3DXBUFFER g_pBufferMatItem[MAX_ITEM] = { NULL };			//	マテリアルのポインター
 DWORD g_dwNuMatItem[MAX_ITEM] = { 0 };						//	マテリアルの数
 
+//=================
 //	初期化処理
+//=================
 void Inititem(void)
 {
 	//	デバイスの取得
@@ -97,6 +99,7 @@ void Inititem(void)
 
 		for (int nCntMat = 0; nCntMat < (int)g_dwNuMatItem[count]; nCntMat++)
 		{
+			//	テクスチャの読み込み
 			if (pMat[nCntMat].pTextureFilename != NULL)
 			{
 				D3DXCreateTextureFromFile(pDevice,
@@ -107,13 +110,16 @@ void Inititem(void)
 	}
 }
 
+//=================
 //	終了処理
+//=================
 void Uinititem(void)
 {
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
 		for (int nCntMat = 0; nCntMat < (int)g_dwNuMatItem[count]; nCntMat++)
 		{
+			//	テクスチャの破棄
 			if (g_apTextureItem[nCntMat] != NULL)
 			{
 				g_apTextureItem[count]->Release();
@@ -124,6 +130,7 @@ void Uinititem(void)
 
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
+		//	メッシュの破棄
 		if (g_pMeshItem[count] != NULL)
 		{
 			g_pMeshItem[count]->Release();
@@ -139,7 +146,9 @@ void Uinititem(void)
 	}
 }
 
+//=================
 //	更新処理
+//=================
 void Updateitem(void)
 {
 	Player* pPlayer = GetPlayer();
@@ -178,6 +187,7 @@ void Updateitem(void)
 					g_item[nCnt].bHave = true;
 					g_item[nCnt].bUse = false;
 					
+					//	脱出条件
 					if (g_item[0].bUse == false)
 					{
 						g_item[0].bKey_Top = true;
@@ -192,12 +202,15 @@ void Updateitem(void)
 	}
 }
 
+//=================
 //	描画処理
+//=================
 void Drawitem(void)
 {
 	//	デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
+	//	計算用
 	D3DXMATRIX mtxRot, mtxTrans;
 	D3DMATERIAL9 matDef;
 	D3DXMATERIAL* pMat;
@@ -237,48 +250,52 @@ void Drawitem(void)
 	}
 }
 
+//=================
 //	取得処理
+//=================
 ITEM* Getitem(void)
 {
 	return &g_item[0];
 }
 
+//=================
 //	配置処理
+//=================
 void Setitem(D3DXVECTOR3 pos, ITEMTYPE type)
 {
 	switch (type)
 	{
-	case ITEMTYPE_ONE:
+	case ITEMTYPE_ONE:			//	鍵の上部
 		g_item[0].bUse = true;
 		g_item[0].pos = pos;
 		
 		break;
 
-	case ITEMTYPE_TWO:
+	case ITEMTYPE_TWO:			//	鍵の下部
 		g_item[1].bUse = true;
 		g_item[1].pos = pos;
 
 		break;
 
-	case ITEMTYPE_THREE:
+	case ITEMTYPE_THREE:		//	鍵本体
 		g_item[2].bUse = true;
 		g_item[2].pos = pos;
 
 		break;
 
-	case ITEMTYPE_FOUR:
+	case ITEMTYPE_FOUR:			//	なぎなた
 		g_item[3].bUse = true;
 		g_item[3].pos = pos;
 
 		break;
 
-	case ITEMTYPE_FIVE:
+	case ITEMTYPE_FIVE:			//	救急箱
 		g_item[4].bUse = true;
 		g_item[4].pos = pos;
 
 		break;
 
-	case ITEMTYPE_SIX:
+	case ITEMTYPE_SIX:			//	懐中時計
 		g_item[5].bUse = true;
 		g_item[5].pos = pos;
 
@@ -289,7 +306,9 @@ void Setitem(D3DXVECTOR3 pos, ITEMTYPE type)
 	}
 }
 
+//===================
 //	当たり判定処理
+//===================
 void Collisionitem(D3DXVECTOR3 pos, ITEMTYPE type)
 {
 
