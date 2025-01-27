@@ -16,6 +16,7 @@ typedef enum
 {
 	EDIT_HOUSE00 = 0,		//ïÅí ÇÃÉuÉçÉbÉN
 	EDIT_HOUSE01,
+	EDIT_HOUSE02,
 	EDIT_WALL00,
 	EDIT_WALL01,
 	EDIT_MAX
@@ -46,6 +47,7 @@ static const char* X_EDIT[EDIT_MAX] =
 {
 	"data\\model\\house000.x",
 	"data\\model\\house01.x",
+	"data\\model\\house04.x",
 	"data\\model\\wallmaria.x",
 	"data\\model\\wallmaria2.x",
 };
