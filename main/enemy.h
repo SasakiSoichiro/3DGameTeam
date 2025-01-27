@@ -59,16 +59,8 @@ typedef struct
 {
 	bool bLoop;//ループするかどうか
 	int nNumKey;//キーの総数
-	EKEY_INFO aKeyInfo[2];//キーの最大数//キー情報
+	EKEY_INFO aKeyInfo[10];//キーの最大数//キー情報
 }EMOTION_INFO;
-
-typedef enum
-{
-	ETYPE_RED=0,
-	ETYPE_BLUE,
-	ETYPE_GREEN,
-	ETYPE_MAX
-}ETYPE;
 
 //プレイヤー構造体
 typedef struct
@@ -110,6 +102,7 @@ void SetEnemy(D3DXVECTOR3 pos, int nType);
 void LoadEnemy(int nType);
 void CollisionEnemy(void);
 void HitEnemy(int nCnt, int nDamage);
+void CollisionEnemytoEnemy(int nCnt);
 Enemy*GetEnemy(void);
 int GetNumEnemy();
 static const char* EPARTS_FILE[EPARTS_MAX] =

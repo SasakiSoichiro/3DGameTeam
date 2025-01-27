@@ -314,91 +314,91 @@ void UpdatePlayer(void)
 }
 void DrawPlayer(void)
 {
-	//LPDIRECT3DDEVICE9 pDevice;
-	//pDevice = GetDevice();
+	LPDIRECT3DDEVICE9 pDevice;
+	pDevice = GetDevice();
 
-	////計算用マトリックス
-	//D3DXMATRIX mtxRot, mtxTrans;
-	////現在のマテリアルの保存用
-	//D3DMATERIAL9 matDef;//現在のマテリアルの保存用
-	//D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
-	//int nCnt = 0;
+	//計算用マトリックス
+	D3DXMATRIX mtxRot, mtxTrans;
+	//現在のマテリアルの保存用
+	D3DMATERIAL9 matDef;//現在のマテリアルの保存用
+	D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
+	int nCnt = 0;
 
-	////ワールドマトリックスの初期化
-	//D3DXMatrixIdentity(&g_player.mtxWorld);
-	////向きを反映
-	//D3DXMatrixRotationYawPitchRoll(&mtxRot, g_player.rot.y, g_player.rot.x, g_player.rot.z);
-	//D3DXMatrixMultiply(&g_player.mtxWorld, &g_player.mtxWorld, &mtxRot);
+	//ワールドマトリックスの初期化
+	D3DXMatrixIdentity(&g_player.mtxWorld);
+	//向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, g_player.rot.y, g_player.rot.x, g_player.rot.z);
+	D3DXMatrixMultiply(&g_player.mtxWorld, &g_player.mtxWorld, &mtxRot);
 
-	////位置を反映
-	//D3DXMatrixTranslation(&mtxTrans, g_player.pos.x, g_player.pos.y, g_player.pos.z);
-	//D3DXMatrixMultiply(&g_player.mtxWorld, &g_player.mtxWorld, &mtxTrans);
+	//位置を反映
+	D3DXMatrixTranslation(&mtxTrans, g_player.pos.x, g_player.pos.y, g_player.pos.z);
+	D3DXMatrixMultiply(&g_player.mtxWorld, &g_player.mtxWorld, &mtxTrans);
 
-	//pDevice->SetTransform(D3DTS_WORLD, &g_player.mtxWorld);
+	pDevice->SetTransform(D3DTS_WORLD, &g_player.mtxWorld);
 
-	//pDevice->GetMaterial(&matDef);
-	////全モデル（パーツ）の描画
-	//for (int nCntModel = 0; nCntModel < g_player.motion.nNumModel; nCntModel++)
-	//{
-	//	//計算用マトリックス
-	//	D3DXMATRIX mtxRotModel, mtxTransModel;
-	//	D3DXMATRIX mtxParent;//親のマトリックス
+	pDevice->GetMaterial(&matDef);
+	//全モデル（パーツ）の描画
+	for (int nCntModel = 0; nCntModel < g_player.motion.nNumModel; nCntModel++)
+	{
+		//計算用マトリックス
+		D3DXMATRIX mtxRotModel, mtxTransModel;
+		D3DXMATRIX mtxParent;//親のマトリックス
 
-	//	//パーツのワールドマトリックスの初期化
-	//	D3DXMatrixIdentity(&g_player.motion.aModel[nCntModel].mtxWorld);
+		//パーツのワールドマトリックスの初期化
+		D3DXMatrixIdentity(&g_player.motion.aModel[nCntModel].mtxWorld);
 
-	//	//向きを反映
-	//	D3DXMatrixRotationYawPitchRoll(&mtxRotModel, g_player.motion.aModel[nCntModel].rot.y, g_player.motion.aModel[nCntModel].rot.x, g_player.motion.aModel[nCntModel].rot.z);
-	//	D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld, &g_player.motion.aModel[nCntModel].mtxWorld, &mtxRotModel);
+		//向きを反映
+		D3DXMatrixRotationYawPitchRoll(&mtxRotModel, g_player.motion.aModel[nCntModel].rot.y, g_player.motion.aModel[nCntModel].rot.x, g_player.motion.aModel[nCntModel].rot.z);
+		D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld, &g_player.motion.aModel[nCntModel].mtxWorld, &mtxRotModel);
 
-	//	//位置を反映
-	//	D3DXMatrixTranslation(&mtxTransModel, g_player.motion.aModel[nCntModel].pos.x, g_player.motion.aModel[nCntModel].pos.y, g_player.motion.aModel[nCntModel].pos.z);
-	//	D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld, &g_player.motion.aModel[nCntModel].mtxWorld, &mtxTransModel);
+		//位置を反映
+		D3DXMatrixTranslation(&mtxTransModel, g_player.motion.aModel[nCntModel].pos.x, g_player.motion.aModel[nCntModel].pos.y, g_player.motion.aModel[nCntModel].pos.z);
+		D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld, &g_player.motion.aModel[nCntModel].mtxWorld, &mtxTransModel);
 
-	//	//パーツの「親のマトリックス」を設定
-	//	if (g_player.motion.aModel[nCntModel].nIdxModelParent != -1)
-	//	{//親モデルがある場合
-	//		mtxParent = g_player.motion.aModel[g_player.motion.aModel[nCntModel].nIdxModelParent].mtxWorld;
+		//パーツの「親のマトリックス」を設定
+		if (g_player.motion.aModel[nCntModel].nIdxModelParent != -1)
+		{//親モデルがある場合
+			mtxParent = g_player.motion.aModel[g_player.motion.aModel[nCntModel].nIdxModelParent].mtxWorld;
 
-	//	}
-	//	else
-	//	{
-	//		mtxParent = g_player.mtxWorld;
-	//	}
+		}
+		else
+		{
+			mtxParent = g_player.mtxWorld;
+		}
 
-	//	//算出した「パーツのワールドマトリックス」と「親のマトリックス」を掛け合わせる
-	//	D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld,
-	//		&g_player.motion.aModel[nCntModel].mtxWorld,
-	//		&mtxParent);
-	//	//パーツのワールドマトリックスの設定
-	//	pDevice->SetTransform(D3DTS_WORLD,
-	//		&g_player.motion.aModel[nCntModel].mtxWorld);
+		//算出した「パーツのワールドマトリックス」と「親のマトリックス」を掛け合わせる
+		D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld,
+			&g_player.motion.aModel[nCntModel].mtxWorld,
+			&mtxParent);
+		//パーツのワールドマトリックスの設定
+		pDevice->SetTransform(D3DTS_WORLD,
+			&g_player.motion.aModel[nCntModel].mtxWorld);
 
 
-	//	//マテリアルデータへのポインタを取得
-	//	pMat = (D3DXMATERIAL*)g_player.motion.aModel[nCntModel].pBuffMat->GetBufferPointer();
+		//マテリアルデータへのポインタを取得
+		pMat = (D3DXMATERIAL*)g_player.motion.aModel[nCntModel].pBuffMat->GetBufferPointer();
 
-	//	for (int nCntMat = 0; nCntMat < (int)g_player.motion.aModel[nCntModel].dwNumMat; nCntMat++)
-	//	{
+		for (int nCntMat = 0; nCntMat < (int)g_player.motion.aModel[nCntModel].dwNumMat; nCntMat++)
+		{
 
-	//		//マテリアルの設定
-	//		pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
+			//マテリアルの設定
+			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
-	//		//テクスチャの設定
-	//		pDevice->SetTexture(0, g_player.motion.aModel[nCntModel].apTexture[nCntMat]);
+			//テクスチャの設定
+			pDevice->SetTexture(0, g_player.motion.aModel[nCntModel].apTexture[nCntMat]);
 
-	//		//モデル（パーツ）の描画
-	//		g_player.motion.aModel[nCntModel].pMesh->DrawSubset(nCntMat);
+			//モデル（パーツ）の描画
+			g_player.motion.aModel[nCntModel].pMesh->DrawSubset(nCntMat);
 
-	//	}
-	//	nCnt++;
-	//	if (nCnt == 15)
-	//	{
-	//		SetMatrix();
-	//	}
-	//}
+		}
+		nCnt++;
+		if (nCnt == 15)
+		{
+			SetMatrix();
+		}
+	}
 
-	//pDevice->SetMaterial(&matDef);
+	pDevice->SetMaterial(&matDef);
 }
 
 void SetMatrix(void)

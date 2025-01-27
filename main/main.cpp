@@ -16,7 +16,8 @@
 #include "camera.h"
 #include "title3D.h"
 #include "item.h"
-
+#include "enemy.h"
+#include "sound.h"
 //=====================
 //	グローバル宣言
 //=====================
@@ -374,6 +375,8 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 		return E_FAIL;
 	}
 
+	InitSound(hWnd);
+
 	SetMode(g_mode);
 
 	InitFade(g_mode);
@@ -385,6 +388,9 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 //==================
 void Uninit(void)
 {
+	//　音の終了
+	UninitSound();
+
 	//	キーボード終了
 	UninitKeyboard();
 
@@ -486,7 +492,7 @@ void Draw(void)
 		pDevice->SetViewport(&pCamera->viewport);
 
 		//	画面クリア
-		g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(255, 255, 255, 255), 1.0f, 0);
+		g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(0, 0, 0, 255), 1.0f, 0);
 
 		//	描画開始
 		if (SUCCEEDED(g_pD3DDeviec->BeginScene()))
@@ -535,6 +541,8 @@ void Draw(void)
 
 			//鍵を持っているかのデバッグ表示処理
 			DrawDebugKey();
+
+			DrawEnemyPos();
 
 #endif // DEBUG
 
@@ -675,4 +683,16 @@ void DrawDebugKey(void)
 
 		g_pFont->DrawText(NULL, &aStr[count][0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
 	}
+}
+
+//================================
+// カメラの位置座標の描画処理
+//================================
+void DrawEnemyPos(void)
+{
+	RECT rect = { 0,120,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Enemy* pCamera = GetEnemy();
+	sprintf(&aStr[0], "カメラ注視点座標　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->pos.x, pCamera->pos.y, pCamera->pos.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
 }

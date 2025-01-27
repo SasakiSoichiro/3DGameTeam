@@ -7,6 +7,7 @@
 #include "title.h"
 #include "fade.h"
 #include "camera.h"
+#include "sound.h"
 
 //	マクロ
 #define MAX_TITLE (3)
@@ -26,6 +27,9 @@ int nSelect2 = 0;
 //---------------
 void InitTitle(void)
 {
+	//BGMを鳴らす
+	PlaySound(SOUND_LABEL_BGM);
+
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
 
@@ -113,6 +117,9 @@ void InitTitle(void)
 //---------------
 void UninitTitle(void)
 {
+	// 音楽を止める
+	StopSound();
+
 	UninitCamera();
 
 	for (int nCnt = 0; nCnt < MAX_TITLE; nCnt++)
@@ -193,6 +200,10 @@ void UpdateTitle(void)
 
 	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true || OnMouseDown(MOUSE_H) == true)
 	{//決定キーが押された
+
+		// 音楽を鳴らす
+		PlaySound(SOUND_LABEL_SHOT01);
+
 		//メニューに合わせてモードの切り替え
 		switch (nSelect2)
 		{
