@@ -5,6 +5,9 @@
 //
 //=============================================================================
 #include"time.h"
+#include"fade.h"
+#include"game.h"
+#include"result.h"
 
 //=============================================================================
 //グローバル宣言
@@ -227,7 +230,7 @@ void UninitTime(void)
 
 	//頂点バッファの破棄（秒）
 	if (g_pVtxBuffns != NULL)
-	{
+	{  
 		g_pVtxBuffns->Release();
 
 		g_pVtxBuffns = NULL;
@@ -255,7 +258,6 @@ void UninitTime(void)
 //=============================================================================
 void UpdateTime(void)
 {
-
 	g_ns++;
 
 	//1秒経過
@@ -269,19 +271,20 @@ void UpdateTime(void)
 	//1分経過
 	if (g_ntime <= 0)
 	{
-		
-		SubNs(-59);
+		if (g_min <= 0)
+		{//0分0秒になったらゲーム処理
 
-		SubMin(1);
-		
+			SetGameState(GAMESTATE_RESULT);
+		}
+		else
+		{//それ以外
+			SubNs(-59);
+
+			SubMin(1);
+		}
+
 	}
 
-	//ゲーム終わらせる処理
-	if (g_ntime <= 0&& g_min <= 0)
-	{
-
-		
-	}
 
 }
 //=============================================================================

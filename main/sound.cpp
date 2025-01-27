@@ -35,7 +35,7 @@ SOUNDINFO g_aSoundInfo[SOUND_LABEL_MAX] =
 {
 	{"data/BGM/Silent.wav", -1},		// BGM1
 	{"data/BGM/Darkdrama.wav", -1},		// BGM2
-	{"data/SE/bummer3.wav", 0},			// SE1
+	{"data/SE/bummer.wav", 0},			// SE1
 
 };
 
