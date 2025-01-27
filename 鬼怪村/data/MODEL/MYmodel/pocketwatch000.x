@@ -10994,7 +10994,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\§ì•¨\\‰æ‘œ\\watch2.jpg";
+    "data\\TEXTURE\\MYTEXTURE\\watch2.jpg";
    }
   }
   Material {
