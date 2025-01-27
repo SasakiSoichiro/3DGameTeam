@@ -38,16 +38,14 @@ bool g_bEdit = false;
 //---------------
 void InitGame(void)
 {
-	InitCamera();
 	InitLighr();
+	InitCamera();
 	InitMeshfield();
 	InitBlock();
 	InitPlayer();
 	Inititem();
 	InitTime();
 	InitEnemy();
-
-	
 	InitEdit();
 	LoadEdit();
 	Setitem(D3DXVECTOR3(50.0f, 40.0f, 0.0f), ITEMTYPE_ONE);
@@ -78,7 +76,6 @@ void UinitGame(void)
 	UninitTime();
 	UninitEdit();
 	UninitBillboard();
-
 	UninitPause();
 
 }
