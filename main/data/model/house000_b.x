@@ -19520,7 +19520,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "G:\\マイドライブ\\写真動画\\ieei.jpg";
+    "data\\TEXTURE\\MYTEXTURE\\ieei.jpg";
    }
   }
   Material {

@@ -313,7 +313,7 @@ Mesh {
    0.170000;0.170000;0.170000;;
    0.606690;0.486000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\sabi.jpg";
+    "data\\TEXTURE\\MYTEXTURE\\sabi.jpg";
    }
   }
  }

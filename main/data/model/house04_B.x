@@ -6512,7 +6512,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Downloads\\af18.jpg";
+    "data\\TEXTURE\\MYTEXTURE\\ieei.jpg";
    }
   }
   Material {
@@ -6521,7 +6521,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Downloads\\ieei (1).jpg";
+    "data\\TEXTURE\\MYTEXTURE\\ieei (1).jpg";
    }
   }
  }

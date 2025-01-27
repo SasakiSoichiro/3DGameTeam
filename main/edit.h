@@ -42,6 +42,39 @@ typedef enum
 	EDIT_HOUSE03_R,
 	EDIT_HOUSE03_B,
 
+	//慰霊碑
+	EDIT_IREIHI,
+
+	//看板
+	EDIT_KANBAN,
+
+	//蔵
+	EDIT_KURA,
+
+	//クモとクモの巣
+	EDIT_KUMO,
+	EDIT_KUMONOSU,
+
+	//鳥小屋
+	EDIT_TORIGOYA,
+
+	//井戸
+	EDIT_WELL,
+
+	//電柱(木製)
+	EDIT_WTPOLE,
+
+	//枯れてる木
+	EDIT_DEADTREE,
+
+	//スピーカー
+	EDIT_SPEACAR,
+
+	//鍵
+	EDIT_KEY,
+	EDIT_KEYBOTTOM,
+	EDIT_KEYTOP,
+
 	//壁
 	EDIT_WALL00,
 	EDIT_WALL01,
@@ -95,6 +128,38 @@ static const char* X_EDIT[EDIT_MAX] =
 	"data\\model\\house04_R.x",
 	"data\\model\\house04_B.x",
 
+	//慰霊碑
+	"data\\model\\ireihi.x",
+
+	//看板
+	"data\\model\\kanban.x",
+
+	//蔵
+	"data\\model\\kura.x",
+
+	//クモ、クモの巣
+	"data\\model\\kumo.x",
+	"data\\model\\kumonosu.x",
+
+	//鳥小屋
+	"data\\model\\torigoya.x",
+
+	//井戸
+	"data\\model\\Well.x",
+
+	//電柱(木製)
+	"data\\model\\WoodenTelephonePole.x",
+
+	//枯れてる木
+	"data\\model\\deadtree.x",
+
+	//スピーカー
+	"data\\model\\speacar.x",
+
+	//鍵
+	"data\\model\\key.x",
+	"data\\model\\key_bottom.x",
+	"data\\model\\key_top.x",
 
 	//壁
 	"data\\model\\wallmaria.x",

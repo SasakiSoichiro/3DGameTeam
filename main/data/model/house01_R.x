@@ -9660,7 +9660,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Downloads\\ieei.jpg";
+    "data\\TEXTURE\\MYTEXTURE\\ieei.jpg";
    }
   }
   Material {
@@ -9675,7 +9675,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "af18.jpg";
+    "data\\TEXTURE\\MYTEXTURE\\af18.jpg";
    }
   }
   Material {
