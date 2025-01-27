@@ -153,7 +153,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\‹S‰ö‘º\\data\\TEXTURE\\MYTEXTURE\\kumonosu.png";
+    "data\\TEXTURE\\MYTEXTURE\\kumonosu.png";
    }
   }
  }
