@@ -16,12 +16,8 @@
 #include "camera.h"
 #include "title3D.h"
 #include "item.h"
-<<<<<<< HEAD
 #include "enemy.h"
-=======
 #include "sound.h"
-
->>>>>>> f28dad4cc372f0bad4153051986ce8c79358c349
 //=====================
 //	ƒOƒ[ƒoƒ‹éŒ¾
 //=====================
