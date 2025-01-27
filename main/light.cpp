@@ -6,6 +6,7 @@
 //======================================================
 #include "light.h"
 #include "main.h"
+#include "player.h"
 
 //	グローバル
 D3DLIGHT9 g_light[MAX_LIGHT] = {};	//	ライト情報
@@ -17,25 +18,36 @@ void InitLighr(void)
 
 	D3DXVECTOR3 vecDir[MAX_LIGHT];
 
+	//プレイヤー情報の取得
+	Player* pPlayer = GetPlayer();
+
 	//	ライトをクリアする
 	ZeroMemory(&g_light, sizeof(D3DLIGHT9) * MAX_LIGHT);
 
 	for (int nCntLight = 0; nCntLight < MAX_LIGHT; nCntLight++)
 	{
-		//	ライトの種類を設定
-		g_light[nCntLight].Type = D3DLIGHT_DIRECTIONAL;
-
-		//	ライトの拡散光
-		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		g_light[nCntLight].Type = D3DLIGHT_SPOT;  // スポットライト
+		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);  // 白色の拡散光
+		g_light[nCntLight].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);  // 白色の鏡面反射光
+		g_light[nCntLight].Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.0f);  // 暗めの周囲光
+		g_light[nCntLight].Position = D3DXVECTOR3(0.0f, 10.0f, 0.0f);  // ライトの位置
+		g_light[nCntLight].Direction = D3DXVECTOR3(0.0f, -1.0f, 0.0f);  // ライトの向き（下向き）
+		g_light[nCntLight].Range = 50.0f;  // ライトの範囲
+		g_light[nCntLight].Falloff = 1.0f;  // 減衰
+		g_light[nCntLight].Attenuation0 = 1.0f;  // 減衰定数
+		g_light[nCntLight].Attenuation1 = 0.0f;
+		g_light[nCntLight].Attenuation2 = 0.0f;
+		g_light[nCntLight].Theta = D3DXToRadian(30.0f);  // コーン角度
+		g_light[nCntLight].Phi = D3DXToRadian(60.0f);   // 広がり角度
 
 		//	ライトの方向
-		vecDir[0] = D3DXVECTOR3(-0.2f, -0.8f, -0.4f);
-		vecDir[1] = D3DXVECTOR3(0.3f, -0.8f, 0.4f);
-		vecDir[2] = D3DXVECTOR3(-0.4f, 0.8f, -0.9f);
+		//vecDir[0] = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
+		//vecDir[1] = D3DXVECTOR3(0.3f, -0.8f, 0.4f);
+		//vecDir[2] = D3DXVECTOR3(-0.4f, 0.8f, -0.9f);
 
-		//	正規化する
-		D3DXVec3Normalize(&vecDir[nCntLight], &vecDir[nCntLight]);
-		g_light[nCntLight].Direction = vecDir[nCntLight];
+		////	正規化する
+		//D3DXVec3Normalize(&vecDir[nCntLight], &vecDir[nCntLight]);
+		//g_light[nCntLight].Direction = vecDir[nCntLight];
 
 		//	ライトを設定する
 		pDevice->SetLight(nCntLight, &g_light[nCntLight]);
