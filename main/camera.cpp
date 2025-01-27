@@ -75,6 +75,7 @@ void UpdateCamera(void)
 
 	for (int nCnt = 0; nCnt < MAX_CAMERA; nCnt++)
 	{
+
 		if (GetEditState() == false&&mode==MODE_GAME)
 		{
 			static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
