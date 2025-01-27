@@ -70,12 +70,13 @@ void UpdateCamera(void)
 {
 	Player* pPlayer = GetPlayer();
 	MODE mode = GetMode();
+	XINPUT_STATE* pStick;
+	pStick = GetJoyStickAngle();
 	D3DXVECTOR2 a = GetMouseVelocity();
 	D3DXVECTOR2 b = GetMouseVelocityOld();
 
 	for (int nCnt = 0; nCnt < MAX_CAMERA; nCnt++)
 	{
-
 		if (GetEditState() == false&&mode==MODE_GAME)
 		{
 			static POINT prevCursorPos = { (long)(SCREEN_WIDTH / 1.5), (long)(SCREEN_HEIGHT / 1.5) };
@@ -95,6 +96,30 @@ void UpdateCamera(void)
 			g_camera[nCnt].rot.x += DeltaY;
 			g_camera[nCnt].rot.y += DeltaX;
 
+			//右スティック視点
+			if (GetJoyStick() == true)
+			{
+				if (pStick->Gamepad.sThumbRX > 10922)
+				{
+					//右回り
+					g_camera[nCnt].rot.y += 0.03f;
+				}
+				else if (pStick->Gamepad.sThumbRX < -10922)
+				{
+					//左回り
+					g_camera[nCnt].rot.y -= 0.03f;
+				}
+				else if (pStick->Gamepad.sThumbRY > 10922)
+				{
+					//上
+					g_camera[nCnt].rot.x -= 0.03f;
+				}
+				else if (pStick->Gamepad.sThumbRY < -10922)
+				{
+					//下
+					g_camera[nCnt].rot.x += 0.03f;
+				}
+			}
 
 			//角度の正規化
 			if (g_camera[nCnt].rot.y <= -D3DX_PI)
@@ -157,7 +182,6 @@ void UpdateCamera(void)
 			g_camera[nCnt].rot.x += DeltaY;
 			g_camera[nCnt].rot.y += DeltaX;
 
-
 			//角度の正規化
 			if (g_camera[nCnt].rot.y <= -D3DX_PI)
 			{
@@ -177,11 +201,6 @@ void UpdateCamera(void)
 			g_camera[nCnt].posR.z = g_camera[nCnt].posV.z+ sinf(g_camera[nCnt].rot.x) * cosf(g_camera[nCnt].rot.y) * g_camera[nCnt].fDistance;
 
 		}
-
-		//g_camera[nCntCamera].posV.x = pPlayer->pos.x - sinf(g_camera[nCntCamera].rot.x) * 15.0f + cosf(g_camera[nCntCamera].rot.y);
-		//g_camera[nCntCamera].posV.y = pPlayer->pos.y - cosf(g_camera[nCntCamera].rot.x) + 30.0f;
-		//g_camera[nCntCamera].posV.z = pPlayer->pos.z - cosf(g_camera[nCntCamera].rot.x) * 15.0f + sinf(g_camera[nCntCamera].rot.y);
-
 	}
 	
 }

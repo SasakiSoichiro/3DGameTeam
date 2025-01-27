@@ -302,50 +302,6 @@ void UpdatePlayer(void)
 		}
 	}
 
-	//右スティック視点
-	if (GetJoyStick() == true)
-	{
-		if (pStick->Gamepad.sThumbRX > 10922)
-		{
-			//右回り
-			pCamera->rot.y += 0.05f;
-
-			//角度の正規化
-			if (pCamera->rot.y <= -D3DX_PI)
-			{
-				pCamera->rot.y += D3DX_PI * 2.0f;
-			}
-			else if (pCamera->rot.y >= D3DX_PI)
-			{
-				pCamera->rot.y += -D3DX_PI * 2.0f;
-			}
-			
-			pCamera->posV = g_player.pos;
-			pCamera->posV.y += 20.0f;
-
-			pCamera->posR.x = pCamera->posV.x + sinf(pCamera->rot.x) * sinf(pCamera->rot.y) * pCamera->fDistance;
-			pCamera->posR.z = pCamera->posV.z + sinf(pCamera->rot.x) * cosf(pCamera->rot.y) * pCamera->fDistance;
-
-		}
-		else if (pStick->Gamepad.sThumbRX < -10922)
-		{
-			//左回り
-
-		}
-		else if (pStick->Gamepad.sThumbRY > 10922)
-		{
-			//上
-
-
-		}
-		else if (pStick->Gamepad.sThumbRY < -10922)
-		{
-			//下
-
-
-		}
-	}
-
 	g_player.rot.y += (g_player.rotDest.y - g_player.rot.y) * 0.2f;
 	CollisionBlock(&g_player.pos, &g_player.posOld);
 	//CollisionWall(&g_player.pos, &g_player.posOld);
@@ -452,9 +408,8 @@ void SetMatrix(void)
 
 	//計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
+
 	//現在のマテリアルの保存用
-	D3DMATERIAL9 matDef;//現在のマテリアルの保存用
-	D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
 	D3DXMATRIX mtxParent;//親のマトリックス
 
 	//ワールドマトリックスの初期化
