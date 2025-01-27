@@ -144,6 +144,7 @@ static const char* X_EDIT[EDIT_MAX] =
 	//íπè¨âÆ
 	"data\\model\\torigoya.x",
 
+
 	//à‰åÀ
 	"data\\model\\Well.x",
 
