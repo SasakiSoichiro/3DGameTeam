@@ -212,12 +212,21 @@ void UpdatePlayer(void)
 
 	else if (GetKeyboardPress(DIK_W) == true)
 	{//Wキーが押された
-
-		g_player.motion.motionType = MOTIONTYPE_MOVE;
-		g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
-		g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
-		g_player.rotDest.y = pCamera->rot.y;
-
+		if (GetKeyboardPress(DIK_LSHIFT) == true)
+		{
+			//	LShift押されたら
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 5.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 5.0f;
+			g_player.rotDest.y = pCamera->rot.y;
+		}
+		else
+		{
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y;
+		}
 	}
 	else if (GetKeyboardPress(DIK_S) == true)
 	{//Sキーが押された
