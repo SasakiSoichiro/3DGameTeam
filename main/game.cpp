@@ -65,7 +65,7 @@ void InitGame(void)
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
 
-	//SetEnemy(D3DXVECTOR3(20.0f, 0.0f, 0.0f),0);
+	SetEnemy(D3DXVECTOR3(20.0f, 0.0f, 0.0f),0);
 
 	InitPause();
 
