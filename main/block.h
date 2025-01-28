@@ -15,26 +15,18 @@ typedef enum
 {
 	//‰Æ1
 	BLOCK_HOUSE00 = 0,		//•’Ê‚ÌƒuƒƒbƒN
-	BLOCK_HOUSE00_L,
-	BLOCK_HOUSE00_R,
 	BLOCK_HOUSE00_B,
 
 	////‰Æ2
 	BLOCK_HOUSE01,
-	BLOCK_HOUSE01_L,
-	BLOCK_HOUSE01_R,
 	BLOCK_HOUSE01_B,
 
 	////‰Æ3
 	BLOCK_HOUSE02,
-	BLOCK_HOUSE02_L,
-	BLOCK_HOUSE02_R,
 	BLOCK_HOUSE02_B,
 
 	////‰Æ4
 	BLOCK_HOUSE03,
-	BLOCK_HOUSE03_L,
-	BLOCK_HOUSE03_R,
 	BLOCK_HOUSE03_B,
 
 	////ˆÔ—ì”è
@@ -103,26 +95,18 @@ static const char* X_BLOCK[BLOCK_MAX] =
 {
 	//‰Æ1ŒÂ–Ú
 	"data\\model\\house.x",
-	"data\\model\\house_L.x",
-	"data\\model\\house_R.x",
 	"data\\model\\house_B.x",
 
 	//‰Æ2ŒÂ–Ú
 	"data\\model\\house000.x",
-	"data\\model\\house000_L.x",
-	"data\\model\\house000_r.x",
 	"data\\model\\house000_b.x",
 
 	////‰Æ3ŒÂ–Ú
 	"data\\model\\house01.x",
-	"data\\model\\house01_L.x",
-	"data\\model\\house01_R.x",
 	"data\\model\\house01_B.x",
 
 	////‰Æ4ŒÂ–Ú
 	"data\\model\\house04.x",
-	"data\\model\\house04_L.x",
-	"data\\model\\house04_R.x",
 	"data\\model\\house04_B.x",
 
 	////ˆÔ—ì”è
