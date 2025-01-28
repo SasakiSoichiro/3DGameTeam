@@ -130,7 +130,7 @@ void SetResult(RESULT type)
 	case RESULT_CLEAR:
 		//	テクスチャ読み込み
 		D3DXCreateTextureFromFile(pDevice,
-			"data\\texture\\result.png",
+			"data\\texture\\GameClear.png",
 			&g_apTextureResult);
 
 		break;
