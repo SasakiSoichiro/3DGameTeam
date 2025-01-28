@@ -29,7 +29,7 @@ void InitPlayer(void)
 	pDevice = GetDevice();
 
 	//Šeí•Ï”‚Ì‰Šú‰»
-	g_player.pos = D3DXVECTOR3(100.0f, 100.0f, 0.0f);
+	g_player.pos = D3DXVECTOR3(1200.0f, 100.0f, 0.0f);
 	g_player.posOld = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_player.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_player.rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
