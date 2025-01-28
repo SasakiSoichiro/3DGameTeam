@@ -14,7 +14,7 @@ void InitEdit(void)
 	pDevice = GetDevice();
 
 
-	for (int nCnt = 0; nCnt < NUM_BLOCK; nCnt++)
+	for (int nCnt = 0; nCnt < NUM_EDIT; nCnt++)
 	{
 		//各種変数の初期化
 		g_Edit[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -212,7 +212,7 @@ void DrawEdit(void)
 	D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
 
 
-	for (int nCntBlock = 0; nCntBlock < NUM_BLOCK; nCntBlock++)
+	for (int nCntBlock = 0; nCntBlock < NUM_EDIT; nCntBlock++)
 	{
 		if (g_Edit[nCntBlock].bUse == false)
 		{
