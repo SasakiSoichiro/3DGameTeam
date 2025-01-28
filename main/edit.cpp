@@ -40,7 +40,6 @@ void InitEdit(void)
 	//マテリアルの取得
 	for (int nCnt = 0; nCnt < BLOCK_MAX; nCnt++)
 	{
-
 			D3DXMATERIAL* pMat;//マテリアルへのポインタ
 
 			//マテリアルデータへのポインタを取得
