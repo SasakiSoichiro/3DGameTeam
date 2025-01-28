@@ -5,6 +5,7 @@
 #include "score.h"
 #include "meshwall.h"
 #include "slow.h"
+#include "game.h"
 
 #define MAX_ENEMY (36)
 
@@ -176,10 +177,10 @@ void UpdateEnemy(void)
 
 			float fRadius = (fRadP.x + fRadE.x) * (fRadP.x + fRadE.x) + (fRadP.y + fRadE.y) * (fRadP.y + fRadE.y) + (fRadP.z + fRadE.z) * (fRadP.z + fRadE.z);
 
-
+			//“–‚½‚è”»’è
 			if (fDistance <= fRadius && pPlayer->pState == PLAYERSTATE_NORMAL)
 			{
-
+				SetGameState(GAMESTATE_RESULT);
 			}
 
 
@@ -204,13 +205,15 @@ void UpdateEnemy(void)
 
 			//CollisionWall(&g_Enemy[nCntEnemy].pos, &g_Enemy[nCntEnemy].posOld);
 
+			//“G“¯Žm‚Ì“–‚½‚è”»’è
 			CollisionEnemytoEnemy(nCntEnemy);
 
 			//SetPositionShadow(g_Enemy[nCntEnemy].IdxShadow, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, 1.0f, g_Enemy[nCntEnemy].pos.z), g_Enemy[nCntEnemy].pos.y);
 
 			if (g_Enemy[nCntEnemy].State != ENEMYSTATE_DAMAGE && pPlayer->pState == PLAYERSTATE_ACTION)
 			{
-				CollisionEnemy();
+				//CollisionEnemy();
+
 			}
 
 			//SetPositionShadow(g_nEIdxShadow, D3DXVECTOR3(g_Enemy[nCntEnemy].pos.x, 0.1f, g_Enemy[nCntEnemy].pos.z));
@@ -688,7 +691,7 @@ void HitEnemy(int nCnt, int nDamage)
 	}
 
 }
-
+//“G“¯Žm‚Ì“–‚½‚è”»’è
 void CollisionEnemytoEnemy(int nCnt)
 {
 
