@@ -144,9 +144,6 @@ void UpdateBillboard()
 					if (g_Billboard[nCnt].nType == BILLBOARDTYPE_1)
 					{
 						g_Billboard[nCnt].bUse = true;
-						g_Billboard[nCnt].pos.x = pItem->pos.x + 5.0f;
-						g_Billboard[nCnt].pos.y = pItem->pos.y - 10.0f;
-						g_Billboard[nCnt].pos.z = pItem->pos.z;
 
 						if (KeybordTrigger(DIK_F) == true)
 						{//F‚ð‰Ÿ‚³‚ê‚½‚Æ‚«
