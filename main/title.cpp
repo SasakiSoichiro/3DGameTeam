@@ -7,6 +7,7 @@
 #include "title.h"
 #include "fade.h"
 #include "camera.h"
+#include "sound.h"
 
 //	マクロ
 #define MAX_TITLE (3)
@@ -26,6 +27,9 @@ int nSelect2 = 0;
 //---------------
 void InitTitle(void)
 {
+	//BGMを鳴らす
+	PlaySound(SOUND_LABEL_BGM);
+
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
 
@@ -40,7 +44,7 @@ void InitTitle(void)
 		&g_apTextureTitle[1]);
 
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\texture\\gamestart000.png",
+		"data\\texture\\Start1.png",
 		&g_apTextureTitle[2]);
 
 	//頂点バッファの生成
@@ -104,8 +108,6 @@ void InitTitle(void)
 	SetTitle(TITLE_TWO, D3DXVECTOR3(650.0f, 440.0f, 0.0f));//タイトル2
 	SetTitle(TITLE_THREE, D3DXVECTOR3(650.0f, 540.0f, 0.0f));//タイトル3
 
-	InitCamera();
-
 	//アンロック
 	g_pVtxBuffTitle->Unlock();
 }
@@ -115,6 +117,9 @@ void InitTitle(void)
 //---------------
 void UninitTitle(void)
 {
+	// 音楽を止める
+	StopSound();
+
 	UninitCamera();
 
 	for (int nCnt = 0; nCnt < MAX_TITLE; nCnt++)
@@ -138,6 +143,9 @@ void UninitTitle(void)
 //---------------
 void UpdateTitle(void)
 {
+	XINPUT_STATE* pStick;
+	pStick = GetJoyStickAngle();
+
 	UpdateCamera();
 
 	//スティック状態の取得
@@ -159,11 +167,11 @@ void UpdateTitle(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffTitle->Unlock();
 
-	if (KeybordTrigger(DIK_W) == true || OnMouseDown(MOUSE_L) == true)//W
+	if (KeybordTrigger(DIK_W) == true || OnMouseDown(MOUSE_L) == true || JoyPadTrigger(JOYKEY_UP) == true)//W
 	{//Wキーが押された
 		nSelect2--;
 	}
-	else if (KeybordTrigger(DIK_S) == true || OnMouseDown(MOUSE_R) == true)//S
+	else if (KeybordTrigger(DIK_S) == true || OnMouseDown(MOUSE_R) == true || JoyPadTrigger(JOYKEY_DOWN) == true)//S
 	{//Sキーが押された
 		nSelect2++;
 	}
@@ -193,8 +201,12 @@ void UpdateTitle(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffTitle->Unlock();
 
-	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true || OnMouseDown(MOUSE_H) == true)
+	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true || OnMouseDown(MOUSE_H) == true || JoyPadTrigger(JOYKEY_START) == true)
 	{//決定キーが押された
+
+		// 音楽を鳴らす
+		PlaySound(SOUND_LABEL_SHOT01);
+
 		//メニューに合わせてモードの切り替え
 		switch (nSelect2)
 		{
@@ -213,7 +225,6 @@ void UpdateTitle(void)
 //---------------
 void DrawTitle(void)
 {
-	SetCamera();
 
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();

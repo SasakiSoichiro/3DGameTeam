@@ -8,6 +8,9 @@
 #include "player.h"
 #include "input.h"
 #include "camera.h"
+#include "block.h"
+#include "meshwall.h"
+#include "gimmick.h"
 
 //グローバル変数宣言
 Player g_player;
@@ -25,9 +28,14 @@ void InitPlayer(void)
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
 
+<<<<<<< HEAD
 
 	//各種変数の初期化
 	g_player.pos = D3DXVECTOR3(100.0f, 100.0f, 0.0f);
+=======
+	//各種変数の初期化
+	g_player.pos = D3DXVECTOR3(1200.0f, 100.0f, 0.0f);
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 	g_player.posOld = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_player.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_player.rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -88,6 +96,12 @@ void UpdatePlayer(void)
 {
 	Camera* pCamera = GetCamera();
 
+<<<<<<< HEAD
+=======
+	XINPUT_STATE* pStick;
+	pStick = GetJoyStickAngle();
+
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 	g_nCntStop++;
 	OldType = g_player.nType;
 	g_player.motion.motionTypeOld = g_player.motion.motionType;//モーションの種類
@@ -146,6 +160,7 @@ void UpdatePlayer(void)
 	if (GetKeyboardPress(DIK_A) == true)
 	{//Aキーが押された
 		if (GetKeyboardPress(DIK_W) == true)
+<<<<<<< HEAD
 		{
 			if (g_player.pState == PLAYERSTATE_JUMP)
 			{
@@ -191,6 +206,32 @@ void UpdatePlayer(void)
 				g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.5f) * 2.0f;
 				g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
 			}
+=======
+		{//左上
+			g_player.pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+			g_player.pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.75f;
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+
+
+		}
+		else if (GetKeyboardPress(DIK_S) == true)
+		{//左下
+
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.75f;
+
+		}
+		else
+		{//左
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
+
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 		}
 	}
 
@@ -198,6 +239,7 @@ void UpdatePlayer(void)
 	{//Dキーが押された
 
 
+<<<<<<< HEAD
 
 		if (GetKeyboardPress(DIK_W) == true)
 		{
@@ -246,17 +288,53 @@ void UpdatePlayer(void)
 				g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
 				g_player.motion.motionType = MOTIONTYPE_MOVE;
 			}
+=======
+		if (GetKeyboardPress(DIK_W) == true)
+		{//右上
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x += sinf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+			g_player.pos.z += cosf(pCamera->rot.y - D3DX_PI * 0.75f) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.75f;
+
+
+		}
+		else if (GetKeyboardPress(DIK_S) == true)
+		{//右下
+			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.75f;
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+
+		}
+		else
+		{//右
+
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
+
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 		}
 	}
 
 	else if (GetKeyboardPress(DIK_W) == true)
 	{//Wキーが押された
+<<<<<<< HEAD
 
 
 		if (g_player.pState == PLAYERSTATE_JUMP)
 		{
 			g_player.pos.x -= sinf(pCamera->rot.y) * 1.0f;
 			g_player.pos.z -= cosf(pCamera->rot.y) * 1.0f;
+=======
+		if (GetKeyboardPress(DIK_LSHIFT) == true)
+		{
+			//	LShift押されたら
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 5.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 5.0f;
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 			g_player.rotDest.y = pCamera->rot.y;
 		}
 		else
@@ -269,6 +347,7 @@ void UpdatePlayer(void)
 	}
 	else if (GetKeyboardPress(DIK_S) == true)
 	{//Sキーが押された
+<<<<<<< HEAD
 
 
 		if (g_player.pState == PLAYERSTATE_JUMP)
@@ -286,6 +365,15 @@ void UpdatePlayer(void)
 		}
 	}
 
+=======
+
+		g_player.motion.motionType = MOTIONTYPE_MOVE;
+		g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
+		g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
+		g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
+
+	}
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 	else
 	{
 		if (g_player.motion.motionType == MOTIONTYPE_MOVE)
@@ -294,6 +382,7 @@ void UpdatePlayer(void)
 		}
 	}
 
+<<<<<<< HEAD
 	if (KeybordTrigger(DIK_SPACE) == true && bLanding == true)
 	{//Sキーが押された
 		g_player.pState = PLAYERSTATE_JUMP;
@@ -311,6 +400,17 @@ void UpdatePlayer(void)
 		g_player.rot.y = g_player.rot.y - (D3DX_PI * 2);
 	}
 
+=======
+	if (g_player.rotDest.y - g_player.rot.y > D3DX_PI)
+	{
+		g_player.rot.y = g_player.rot.y + (D3DX_PI * 2);
+	}
+	else if (g_player.rot.y - g_player.rotDest.y > D3DX_PI)
+	{
+		g_player.rot.y = g_player.rot.y - (D3DX_PI * 2);
+	}
+
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 	g_player.move.x += (0.0f - g_player.move.x) * 0.05f;
 	g_player.move.z += (0.0f - g_player.move.z) * 0.05f;
 
@@ -328,8 +428,55 @@ void UpdatePlayer(void)
 		g_player.pos.y = 0.0f;
 	}
 
+<<<<<<< HEAD
 	g_player.rot.y += (g_player.rotDest.y - g_player.rot.y) * 0.2f;
 	//CollisionBlock(&g_player.pos, &g_player.posOld);
+=======
+	//左スティック移動
+	if (GetJoyStick() == true)
+	{
+		if (pStick->Gamepad.sThumbLX > 10922)
+		{
+			//右移動
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x += cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z -= sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI * 0.5f;
+
+		}
+		else if (pStick->Gamepad.sThumbLX < -10922)
+		{
+			//左移動
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= cosf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.pos.z += sinf(pCamera->rot.y - D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y - D3DX_PI * 0.5f;
+
+		}
+		else if (pStick->Gamepad.sThumbLY > 10922)
+		{
+			//上移動
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= sinf(pCamera->rot.y) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y;
+
+		}
+		else if (pStick->Gamepad.sThumbLY < -10922)
+		{
+			//下移動
+			g_player.motion.motionType = MOTIONTYPE_MOVE;
+			g_player.pos.x -= sinf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.pos.z -= cosf(pCamera->rot.y + D3DX_PI) * 2.0f;
+			g_player.rotDest.y = pCamera->rot.y + D3DX_PI;
+
+		}
+	}
+
+	g_player.rot.y += (g_player.rotDest.y - g_player.rot.y) * 0.2f;
+	CollisionBlock(&g_player.pos, &g_player.posOld);
+	CollisionGimmick(&g_player.pos, &g_player.posOld);
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 	//CollisionWall(&g_player.pos, &g_player.posOld);
 	//CollisionCyrynder();
 	//SetPositionShadow(g_nIdxShadow, D3DXVECTOR3(g_player.pos.x, 1.0f, g_player.pos.z), g_player.pos.y);
@@ -340,6 +487,7 @@ void UpdatePlayer(void)
 }
 void DrawPlayer(void)
 {
+<<<<<<< HEAD
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
 
@@ -425,6 +573,93 @@ void DrawPlayer(void)
 	}
 
 	pDevice->SetMaterial(&matDef);
+=======
+	//LPDIRECT3DDEVICE9 pDevice;
+	//pDevice = GetDevice();
+
+	////計算用マトリックス
+	//D3DXMATRIX mtxRot, mtxTrans;
+	////現在のマテリアルの保存用
+	//D3DMATERIAL9 matDef;//現在のマテリアルの保存用
+	//D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
+	//int nCnt = 0;
+
+	////ワールドマトリックスの初期化
+	//D3DXMatrixIdentity(&g_player.mtxWorld);
+	////向きを反映
+	//D3DXMatrixRotationYawPitchRoll(&mtxRot, g_player.rot.y, g_player.rot.x, g_player.rot.z);
+	//D3DXMatrixMultiply(&g_player.mtxWorld, &g_player.mtxWorld, &mtxRot);
+
+	////位置を反映
+	//D3DXMatrixTranslation(&mtxTrans, g_player.pos.x, g_player.pos.y, g_player.pos.z);
+	//D3DXMatrixMultiply(&g_player.mtxWorld, &g_player.mtxWorld, &mtxTrans);
+
+	//pDevice->SetTransform(D3DTS_WORLD, &g_player.mtxWorld);
+
+	//pDevice->GetMaterial(&matDef);
+	////全モデル（パーツ）の描画
+	//for (int nCntModel = 0; nCntModel < g_player.motion.nNumModel; nCntModel++)
+	//{
+	//	//計算用マトリックス
+	//	D3DXMATRIX mtxRotModel, mtxTransModel;
+	//	D3DXMATRIX mtxParent;//親のマトリックス
+
+	//	//パーツのワールドマトリックスの初期化
+	//	D3DXMatrixIdentity(&g_player.motion.aModel[nCntModel].mtxWorld);
+
+	//	//向きを反映
+	//	D3DXMatrixRotationYawPitchRoll(&mtxRotModel, g_player.motion.aModel[nCntModel].rot.y, g_player.motion.aModel[nCntModel].rot.x, g_player.motion.aModel[nCntModel].rot.z);
+	//	D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld, &g_player.motion.aModel[nCntModel].mtxWorld, &mtxRotModel);
+
+	//	//位置を反映
+	//	D3DXMatrixTranslation(&mtxTransModel, g_player.motion.aModel[nCntModel].pos.x, g_player.motion.aModel[nCntModel].pos.y, g_player.motion.aModel[nCntModel].pos.z);
+	//	D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld, &g_player.motion.aModel[nCntModel].mtxWorld, &mtxTransModel);
+
+	//	//パーツの「親のマトリックス」を設定
+	//	if (g_player.motion.aModel[nCntModel].nIdxModelParent != -1)
+	//	{//親モデルがある場合
+	//		mtxParent = g_player.motion.aModel[g_player.motion.aModel[nCntModel].nIdxModelParent].mtxWorld;
+
+	//	}
+	//	else
+	//	{
+	//		mtxParent = g_player.mtxWorld;
+	//	}
+
+	//	//算出した「パーツのワールドマトリックス」と「親のマトリックス」を掛け合わせる
+	//	D3DXMatrixMultiply(&g_player.motion.aModel[nCntModel].mtxWorld,
+	//		&g_player.motion.aModel[nCntModel].mtxWorld,
+	//		&mtxParent);
+	//	//パーツのワールドマトリックスの設定
+	//	pDevice->SetTransform(D3DTS_WORLD,
+	//		&g_player.motion.aModel[nCntModel].mtxWorld);
+
+
+	//	//マテリアルデータへのポインタを取得
+	//	pMat = (D3DXMATERIAL*)g_player.motion.aModel[nCntModel].pBuffMat->GetBufferPointer();
+
+	//	for (int nCntMat = 0; nCntMat < (int)g_player.motion.aModel[nCntModel].dwNumMat; nCntMat++)
+	//	{
+
+	//		//マテリアルの設定
+	//		pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
+
+	//		//テクスチャの設定
+	//		pDevice->SetTexture(0, g_player.motion.aModel[nCntModel].apTexture[nCntMat]);
+
+	//		//モデル（パーツ）の描画
+	//		g_player.motion.aModel[nCntModel].pMesh->DrawSubset(nCntMat);
+
+	//	}
+	//	nCnt++;
+	//	if (nCnt == 15)
+	//	{
+	//		SetMatrix();
+	//	}
+	//}
+
+	//pDevice->SetMaterial(&matDef);
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 }
 
 void SetMatrix(void)
@@ -434,9 +669,14 @@ void SetMatrix(void)
 
 	//計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
+<<<<<<< HEAD
 	//現在のマテリアルの保存用
 	D3DMATERIAL9 matDef;//現在のマテリアルの保存用
 	D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
+=======
+
+	//現在のマテリアルの保存用
+>>>>>>> 23891c79b96ee74a6351c6c16f6fc744b0b13246
 	D3DXMATRIX mtxParent;//親のマトリックス
 
 	//ワールドマトリックスの初期化

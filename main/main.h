@@ -83,5 +83,9 @@ void SetMode(MODE mode);
 MODE GetMode(void);
 void ToggleFullscreen(HWND hWnd);				// ウィンドウをフルスクリーンにする方法
 void DrawFPS(void);
-
+void DrawCameraPosR(void);
+void DrawCameraPosV(void);
+void DrawCameraRot(void);
+void DrawDebugKey(void);
+void DrawEnemyPos(void);
 #endif

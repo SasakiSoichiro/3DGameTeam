@@ -3,7 +3,7 @@
 //	DirectX基盤		[main.cpp]
 //
 //			Athor : ryuusei hirata 
-//
+// 
 //===========================================================
 #include "main.h"
 #include "input.h"
@@ -15,7 +15,9 @@
 #include "tutrial.h"
 #include "camera.h"
 #include "title3D.h"
-
+#include "item.h"
+#include "enemy.h"
+#include "sound.h"
 //=====================
 //	グローバル宣言
 //=====================
@@ -169,6 +171,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hInstancePrev, _
 				//=============
 				//	描画処理
 				//=============
+
 				Draw();
 
 				//===========================
@@ -239,6 +242,7 @@ void ToggleFullscreen(HWND hWnd)
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	const RECT rect = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };	//	ウィンドウの領域
+	bool bEdit=GetEditState();
 
 	switch (uMsg)
 	{
@@ -256,6 +260,13 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case VK_F11:
 			ToggleFullscreen(hWnd);
 			break;
+		}
+		break;
+	case WM_MOUSEWHEEL:
+		if (bEdit == true)
+		{
+			int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+			MouseWheel(zDelta);
 		}
 		break;
 	}
@@ -368,6 +379,8 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 		return E_FAIL;
 	}
 
+	InitSound(hWnd);
+
 	SetMode(g_mode);
 
 	InitFade(g_mode);
@@ -379,6 +392,9 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 //==================
 void Uninit(void)
 {
+	//　音の終了
+	UninitSound();
+
 	//	キーボード終了
 	UninitKeyboard();
 
@@ -480,11 +496,14 @@ void Draw(void)
 		pDevice->SetViewport(&pCamera->viewport);
 
 		//	画面クリア
-		g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(255, 255, 0, 255), 1.0f, 0);
+		g_pD3DDeviec->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(0, 0, 0, 255), 1.0f, 0);
 
 		//	描画開始
 		if (SUCCEEDED(g_pD3DDeviec->BeginScene()))
 		{
+			//カメラを設定する
+			SetCamera(n);
+
 			switch (g_mode)
 			{
 			case MODE_TITLE:
@@ -514,6 +533,20 @@ void Draw(void)
 #ifdef _DEBUG
 			//	FPSの表示
 			DrawFPS();
+
+			//カメラ注視点の描画処理
+			DrawCameraPosR();
+
+			//カメラ視点の描画処理
+			DrawCameraPosV();
+
+			//カメラ向きの描画処理
+			DrawCameraRot();
+
+			//鍵を持っているかのデバッグ表示処理
+			DrawDebugKey();
+
+			DrawEnemyPos();
 
 #endif // DEBUG
 
@@ -604,4 +637,66 @@ void DrawFPS(void)
 	//	テキスト表示
 	//===================
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 0, 0, 255));
+}
+
+//================================
+// カメラの位置座標の描画処理
+//================================
+void DrawCameraPosR(void)
+{
+	RECT rect = { 0,45,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Camera* pCamera = GetCamera();
+	sprintf(&aStr[0], "カメラ注視点座標　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->posR.x, pCamera->posR.y, pCamera->posR.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+}
+
+//================================
+// カメラの位置座標の描画処理
+//================================
+void DrawCameraPosV(void)
+{
+	RECT rect = { 0,60,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Camera* pCamera = GetCamera();
+	sprintf(&aStr[0], "カメラ視点座標　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->posV.x, pCamera->posV.y, pCamera->posV.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+}
+
+//================================
+// カメラの向きの描画処理
+//================================
+void DrawCameraRot(void)
+{
+	RECT rect = { 0,75,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Camera* pCamera = GetCamera();
+	sprintf(&aStr[0], "カメラの向き　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->rot.x, pCamera->rot.y, pCamera->rot.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+}
+void DrawDebugKey(void)
+{
+	ITEM* pITEM = Getitem();
+
+	for (int count = 0; count < MAX_ITEM; count++, pITEM++)
+	{
+		RECT rect = { 0,90 + count * 15,SCREEN_WIDTH,SCREEN_HEIGHT };
+		char aStr[MAX_ITEM][256];
+
+		sprintf(&aStr[count][0], "アイテム%d : %d \n", count + 1,pITEM->bHave);
+
+		g_pFont->DrawText(NULL, &aStr[count][0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
+	}
+}
+
+//================================
+// カメラの位置座標の描画処理
+//================================
+void DrawEnemyPos(void)
+{
+	RECT rect = { 0,120,SCREEN_WIDTH,SCREEN_HEIGHT };
+	char aStr[256];
+	Enemy* pCamera = GetEnemy();
+	sprintf(&aStr[0], "カメラ注視点座標　X:%.2f　Y:%.2f  Z:%.2f\n", pCamera->pos.x, pCamera->pos.y, pCamera->pos.z);
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(0, 0, 0, 255));
 }

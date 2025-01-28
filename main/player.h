@@ -20,14 +20,6 @@
 
 typedef enum
 {
-	RED = 0,
-	BLUE,
-	GREEN,
-	PTYPE_MAX
-}PTYPE;
-
-typedef enum
-{
 	PLAYERSTATE_NORMAL = 0,
 	PLAYERSTATE_DAMAGE,
 	PLAYERSTATE_MOVE,
