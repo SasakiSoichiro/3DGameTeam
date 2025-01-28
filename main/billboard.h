@@ -45,6 +45,7 @@ typedef struct
 	D3DXMATRIX mtxWorld;	//ワールドマトリックス
 	TYPE nType;
 	bool bDisplay;
+	bool bTest;
 	bool bUse;				//使用しているかどうか
 }Billboard;
 

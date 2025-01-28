@@ -9,6 +9,7 @@
 #include "Input.h"
 #include "enemy.h"
 #include "game.h"
+#include "item.h"
 
 //グローバル変数宣言
 LPDIRECT3DTEXTURE9 g_apTextureDoor[MAX_DOOR] = {};//テクスチャへのポインタ
@@ -162,7 +163,7 @@ void UpdateGimmick(void)
 {
 	Player* pPlayer = GetPlayer();
 	Enemy* pEnemy = GetEnemy();
-
+	ITEM* pItem = Getitem();
 	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
 	{
 		if (g_Door[nCnt].bUse == true)
@@ -188,8 +189,8 @@ void UpdateGimmick(void)
 			//プレイヤーが範囲に入ったら
 			if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
 			{
-				//ビルボードを表示する
-				isBill = true;
+						//ビルボードを表示する
+						isBill = true;
 
 				if (KeybordTrigger(DIK_F) == true)
 				{

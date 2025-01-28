@@ -9,6 +9,7 @@
 #include "player.h"
 #include "item.h"
 #include "input.h"
+#include "gimmick.h"
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 // グローバル変数宣言
@@ -16,7 +17,7 @@
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffBillboard = NULL;				//頂点バッファへのポインタ
 LPDIRECT3DTEXTURE9 g_pTextureBillboard[BILLBOARDTYPE_MAX] = {};		//テクスチャへのポインタ
 Billboard g_Billboard[MAX_BILLBOARD];
-
+bool bExchange;
 //====================================================
 //アイテムの初期化処理
 //====================================================
@@ -50,8 +51,10 @@ void InitBillboard()
 	{
 		g_Billboard[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_Billboard[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_Billboard[nCnt].bTest = false;
+		g_Billboard[nCnt].bDisplay = false;
 		g_Billboard[nCnt].bUse = false;
-
+		bExchange = false;
 		//頂点情報の設定
 		pVtx[0].pos = D3DXVECTOR3(-15.0f, 35.0f, 0.0f);
 		pVtx[1].pos = D3DXVECTOR3(15.0f, 35.0f, 0.0f);
@@ -111,7 +114,7 @@ void UninitBillboard()
 void UpdateBillboard()
 {
 	ITEM* pItem = Getitem();
-
+	bool isbill = IsBill();
 	for (int count = 0; count < MAX_ITEM; count++, pItem++)
 	{
 		if (pItem->bUse == true)
@@ -162,6 +165,26 @@ void UpdateBillboard()
 			}
 		}
 	}
+	for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
+	{
+		if (g_Billboard[nCnt].bUse == true)
+		{
+
+			if (isbill == true)
+			{
+				if (pItem->bKey_Top == true && pItem->bKey_bottom == true)
+				{
+					bExchange = true;
+				}
+
+				else if (g_Billboard[nCnt].bTest == false)
+				{
+					bExchange = false;
+				}
+			}
+		}
+	}
+
 }
 
 //====================================================
@@ -209,9 +232,22 @@ void DrawBillboard()
 			//頂点バッファをデバイスのデータストリームに設定
 			pDevice->SetStreamSource(0, g_pVtxBuffBillboard, 0, sizeof(VERTEX_3D));
 
-			//テクスチャの設定
-			pDevice->SetTexture(0, g_pTextureBillboard[g_Billboard[nCnt].nType]);
 
+			if(bExchange == false)
+			{ 
+				//テクスチャの設定
+				pDevice->SetTexture(0, g_pTextureBillboard[2]);
+			}
+			else if (bExchange == true)
+			{
+				//テクスチャの設定
+				pDevice->SetTexture(0, g_pTextureBillboard[3]);
+			}
+			else
+			{
+				//テクスチャの設定
+				pDevice->SetTexture(0, g_pTextureBillboard[g_Billboard[nCnt].nType]);
+			}
 			//頂点フォーマット
 			pDevice->SetFVF(FVF_VERTEX_3D);
 
