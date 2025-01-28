@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "block.h"
 #include "meshwall.h"
+#include "gimmick.h"
 
 //ƒOƒ[ƒoƒ‹•Ï”éŒ¾
 Player g_player;
@@ -304,6 +305,7 @@ void UpdatePlayer(void)
 
 	g_player.rot.y += (g_player.rotDest.y - g_player.rot.y) * 0.2f;
 	CollisionBlock(&g_player.pos, &g_player.posOld);
+	CollisionGimmick(&g_player.pos, &g_player.posOld);
 	//CollisionWall(&g_player.pos, &g_player.posOld);
 	//CollisionCyrynder();
 	//SetPositionShadow(g_nIdxShadow, D3DXVECTOR3(g_player.pos.x, 1.0f, g_player.pos.z), g_player.pos.y);

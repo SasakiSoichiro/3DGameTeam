@@ -18,6 +18,8 @@ Camera g_camera[MAX_CAMERA] = {};	//カメラ情報
 //====================
 void InitCamera(void)
 {
+	MODE mode = GetMode();
+
 	//	視点・注視点・上方向を設定する
 	for (int count = 0; count < MAX_CAMERA; count++)
 	{
@@ -33,7 +35,15 @@ void InitCamera(void)
 			* (g_camera[count].posV.z - g_camera[count].posR.z));
 		g_camera[count].deltaX = 0.0f;
 		g_camera[count].deltaY = 0.0f;
+
+		if (mode == MODE_TITLE)
+		{
+			g_camera[count].posV = D3DXVECTOR3(-100.0f, 80.0f, -200.0f);
+			g_camera[count].posR = D3DXVECTOR3(-100.0f, 70.0f, 0.0f);
+			g_camera[count].rot = D3DXVECTOR3(0.0f, 90.0f, 0.0f);
+		}
 	}
+
 
 	//	ビューポート構成の保存	左
 	g_camera[0].viewport.X = 0.0f;
@@ -72,8 +82,6 @@ void UpdateCamera(void)
 	MODE mode = GetMode();
 	XINPUT_STATE* pStick;
 	pStick = GetJoyStickAngle();
-	D3DXVECTOR2 a = GetMouseVelocity();
-	D3DXVECTOR2 b = GetMouseVelocityOld();
 
 	for (int nCnt = 0; nCnt < MAX_CAMERA; nCnt++)
 	{
@@ -178,15 +186,6 @@ void UpdateCamera(void)
 			{
 				g_camera[nCnt].rot.y += -D3DX_PI * 2.0f;
 			}
-
-			//if (g_camera[nCnt].rot.x <= -D3DX_PI)
-			//{
-			//	g_camera[nCnt].rot.x += D3DX_PI * 2.0f;
-			//}
-			//else if (g_camera[nCnt].rot.x >= D3DX_PI)
-			//{
-			//	g_camera[nCnt].rot.x += -D3DX_PI * 2.0f;
-			//}
 
 			//角度制限
 			if (g_camera[nCnt].rot.x > 1.57f)
