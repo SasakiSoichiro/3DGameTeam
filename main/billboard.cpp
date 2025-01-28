@@ -172,7 +172,7 @@ void UpdateBillboard()
 
 			if (isbill == true)
 			{
-				if (pItem->bKey_Top == true && pItem->bKey_bottom == true)
+				if (pItem->bKey_Top == true)
 				{
 					bExchange = true;
 				}

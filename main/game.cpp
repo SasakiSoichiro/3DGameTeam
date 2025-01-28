@@ -62,8 +62,8 @@ void InitGame(void)
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0,D3DXVECTOR3(15.0f,35.0f,0.0f));
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
-	SetBillboard(D3DXVECTOR3(-1800.0f, 50.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_2, D3DXVECTOR3(4.0f, 4.0f, 0.0f));
-	SetBillboard(D3DXVECTOR3(-1800.0f, 50.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_3, D3DXVECTOR3(4.0f, 4.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-1800.0f, 50.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_2, D3DXVECTOR3(15.0f, 15.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-1800.0f, 50.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_3, D3DXVECTOR3(15.0f, 15.0f, 0.0f));
 
 	//SetEnemy(D3DXVECTOR3(20.0f, 0.0f, 0.0f),0);
 
@@ -165,7 +165,7 @@ void UpdateGame(void)
 	}
 	if (isGoal == true)
 	{
-		g_gameState = GAMESTATE_RESULT;
+		g_gameState = GAMESTATE_CLEAR;
 	}
 
 	switch (g_gameState)
@@ -176,6 +176,17 @@ void UpdateGame(void)
 		{
 			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
 			SetResult(RESULT_GAMEOVER);
+			SetFade(MODE_RESULT);
+			g_nCounterGameState = 0;
+		}
+		break;
+
+	case GAMESTATE_CLEAR:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 60)
+		{
+			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
+			SetResult(RESULT_CLEAR);
 			SetFade(MODE_RESULT);
 			g_nCounterGameState = 0;
 		}
