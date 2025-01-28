@@ -242,6 +242,7 @@ void ToggleFullscreen(HWND hWnd)
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	const RECT rect = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };	//	ウィンドウの領域
+	bool bEdit=GetEditState();
 
 	switch (uMsg)
 	{
@@ -262,8 +263,11 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_MOUSEWHEEL:
-		int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
-		MouseWheel(zDelta);
+		if (bEdit == true)
+		{
+			int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+			MouseWheel(zDelta);
+		}
 		break;
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);

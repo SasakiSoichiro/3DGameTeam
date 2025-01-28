@@ -1,7 +1,7 @@
 //======================================================
 //
-//				ライト	light.cpp
-//					ryuusei hirata
+//		ライト  light.cpp
+//		ryuusei hirata
 //
 //======================================================
 #include "light.h"
@@ -26,19 +26,19 @@ void InitLighr(void)
 
 	for (int nCntLight = 0; nCntLight < MAX_LIGHT; nCntLight++)
 	{
-		g_light[nCntLight].Type = D3DLIGHT_DIRECTIONAL;  // スポットライト
+		g_light[nCntLight].Type = D3DLIGHT_SPOT;  // スポットライト
 		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);		// 白色の拡散光
 		g_light[nCntLight].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	// 白色の鏡面反射光
 		g_light[nCntLight].Ambient = D3DXCOLOR(0.5f, 0.2f, 0.2f, 1.0f);		// 暗めの周囲光
-		g_light[nCntLight].Position = D3DXVECTOR3(0.0f, 10.0f, 0.0f);		// ライトの位置
+		g_light[nCntLight].Position = D3DXVECTOR3(pPlayer->pos.x, pPlayer->pos.y+10.0f, pPlayer->pos.z);		// ライトの位置
 		g_light[nCntLight].Direction = D3DXVECTOR3(0.0f, -1.0f, 0.0f);		// ライトの向き（下向き）
-		g_light[nCntLight].Range = 1000.0f;  // ライトの範囲
-		g_light[nCntLight].Falloff = 0.0f;  // 減衰
-		g_light[nCntLight].Attenuation0 = 1.0f;  // 減衰定数
+		g_light[nCntLight].Range = 10.0f;									// ライトの範囲
+		g_light[nCntLight].Falloff = 1.0f;									// 減衰
+		g_light[nCntLight].Attenuation0 = 1.0f;								// 減衰定数
 		g_light[nCntLight].Attenuation1 = 0.0f;
 		g_light[nCntLight].Attenuation2 = 0.0f;
-		g_light[nCntLight].Theta = D3DXToRadian(30.0f);  // コーン角度
-		g_light[nCntLight].Phi = D3DXToRadian(60.0f);   // 広がり角度
+		g_light[nCntLight].Theta = D3DXToRadian(30.0f);						// コーン角度
+		g_light[nCntLight].Phi = D3DXToRadian(60.0f);						// 広がり角度
 
 		//	ライトの方向
 		//vecDir[0] = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
@@ -65,4 +65,24 @@ void UninitLight(void)
 void UpdateLight(void)
 {
 
+	//プレイヤー情報の取得
+	Player* pPlayer = GetPlayer();
+
+	for (int nCntLight = 0; nCntLight < MAX_LIGHT; nCntLight++)
+	{
+		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);		// 白色の拡散光
+		g_light[nCntLight].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	// 白色の鏡面反射光
+		g_light[nCntLight].Ambient = D3DXCOLOR(0.5f, 0.2f, 0.2f, 1.0f);		// 暗めの周囲光
+		g_light[nCntLight].Position = D3DXVECTOR3(pPlayer->pos.x, pPlayer->pos.y + 50.0f, pPlayer->pos.z);		// ライトの位置
+		g_light[nCntLight].Direction = D3DXVECTOR3(0.0f, -1.0f, 0.0f);		// ライトの向き（下向き）
+		g_light[nCntLight].Range = 10.0f;									// ライトの範囲
+		g_light[nCntLight].Falloff = 1.0f;									// 減衰
+		g_light[nCntLight].Attenuation0 = 1.0f;								// 減衰定数
+		g_light[nCntLight].Attenuation1 = 0.0f;
+		g_light[nCntLight].Attenuation2 = 0.0f;
+		g_light[nCntLight].Theta = D3DXToRadian(30.0f);						// コーン角度
+		g_light[nCntLight].Phi = D3DXToRadian(60.0f);						// 広がり角度
+
+	}
+	
 }

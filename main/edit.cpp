@@ -19,7 +19,7 @@ void InitEdit(void)
 		//各種変数の初期化
 		g_Edit[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_Edit[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		g_Edit[nCnt].nType = BLOCK_HOUSE00;
+		g_Edit[nCnt].nType = BLOCK_HOUSE00_L;
 		g_Edit[nCnt].bUse = false;
 	}
 
@@ -40,7 +40,6 @@ void InitEdit(void)
 	//マテリアルの取得
 	for (int nCnt = 0; nCnt < BLOCK_MAX; nCnt++)
 	{
-
 			D3DXMATERIAL* pMat;//マテリアルへのポインタ
 
 			//マテリアルデータへのポインタを取得

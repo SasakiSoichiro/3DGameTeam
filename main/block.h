@@ -14,28 +14,20 @@
 typedef enum
 {
 	//家1
-	BLOCK_HOUSE00 = 0,		//普通のブロック
-	BLOCK_HOUSE00_L,
+	BLOCK_HOUSE00_L = 0,		//普通のブロック
 	BLOCK_HOUSE00_R,
-	BLOCK_HOUSE00_B,
 
 	////家2
-	BLOCK_HOUSE01,
 	BLOCK_HOUSE01_L,
-	BLOCK_HOUSE01_R,
-	BLOCK_HOUSE01_B,
+	BLOCK_HOUSE01_r,
 
 	////家3
-	BLOCK_HOUSE02,
 	BLOCK_HOUSE02_L,
 	BLOCK_HOUSE02_R,
-	BLOCK_HOUSE02_B,
 
 	////家4
-	BLOCK_HOUSE03,
 	BLOCK_HOUSE03_L,
 	BLOCK_HOUSE03_R,
-	BLOCK_HOUSE03_B,
 
 	////慰霊碑
 	BLOCK_IREIHI,
@@ -102,28 +94,20 @@ typedef struct
 static const char* X_BLOCK[BLOCK_MAX] =
 {
 	//家1個目
-	"data\\model\\house.x",
 	"data\\model\\house_L.x",
 	"data\\model\\house_R.x",
-	"data\\model\\house_B.x",
 
 	//家2個目
-	"data\\model\\house000.x",
 	"data\\model\\house000_L.x",
 	"data\\model\\house000_r.x",
-	"data\\model\\house000_b.x",
 
 	////家3個目
-	"data\\model\\house01.x",
 	"data\\model\\house01_L.x",
 	"data\\model\\house01_R.x",
-	"data\\model\\house01_B.x",
 
 	////家4個目
-	"data\\model\\house04.x",
 	"data\\model\\house04_L.x",
 	"data\\model\\house04_R.x",
-	"data\\model\\house04_B.x",
 
 	////慰霊碑
 	"data\\model\\ireihi.x",
