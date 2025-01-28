@@ -22,6 +22,7 @@
 #include "enemy.h"
 #include "edit.h"
 #include "sound.h"
+#include "gimmick.h"
 
 // ÉQÅ[ÉÄÇÃèÛë‘
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -49,9 +50,13 @@ void InitGame(void)
 	Inititem();
 	InitTime();
 	InitEnemy();
+	InitBlock();
 	InitEdit();
 	LoadEdit();
-	InitBlock();
+	InitGimmick();
+
+	SetGimmick(D3DXVECTOR3(200.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
 	Setitem(D3DXVECTOR3(50.0f, 1.0f, 0.0f), ITEMTYPE_ONE);
 	Setitem(D3DXVECTOR3(200.0f, 0.0f, 0.0f), ITEMTYPE_FOUR);
 
@@ -87,7 +92,7 @@ void UinitGame(void)
 	UninitEdit();
 	UninitBillboard();
 	UninitPause();
-
+	UninitGimmick();
 }
 
 //---------------
@@ -131,7 +136,7 @@ void UpdateGame(void)
 			UpdateBillboard();
 			Updateitem();
 			UpdateTime();
-
+			UpdateGimmick();
 
 			if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
 			{
@@ -207,7 +212,7 @@ void DrawGame(void)
 	DrawTime();
 
 	DrawBillboard();
-
+	DrawGimmick();
 
 	if (g_bPause == true)
 	{

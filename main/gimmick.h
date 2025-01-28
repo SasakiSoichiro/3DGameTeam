@@ -6,7 +6,7 @@
 #include "main.h"
 #include "player.h"
 
-#define MAX_DOOR (1)	//ドアの最大数
+#define MAX_DOOR (2)	//ドアの最大数
 
 //ブロックの構造体
 typedef struct
