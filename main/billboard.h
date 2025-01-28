@@ -44,6 +44,7 @@ typedef struct
 	D3DXVECTOR3 VtxMinBillboard;
 	D3DXMATRIX mtxWorld;	//ワールドマトリックス
 	TYPE nType;
+	bool bDisplay;
 	bool bUse;				//使用しているかどうか
 }Billboard;
 

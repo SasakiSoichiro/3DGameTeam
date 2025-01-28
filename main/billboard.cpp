@@ -144,6 +144,7 @@ void UpdateBillboard()
 					if (g_Billboard[nCnt].nType == BILLBOARDTYPE_1)
 					{
 						g_Billboard[nCnt].bUse = true;
+						g_Billboard[nCnt].bDisplay = true;
 						g_Billboard[nCnt].pos.x = pItem->pos.x;
 						g_Billboard[nCnt].pos.y = pItem->pos.y + 10.0f;
 						g_Billboard[nCnt].pos.z = pItem->pos.z;
@@ -153,6 +154,10 @@ void UpdateBillboard()
 							g_Billboard[nCnt].bUse = false;
 						}
 					}
+				}
+				else if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) > (fRadX * fRadX))
+				{
+					g_Billboard[nCnt].bDisplay = false;
 				}
 			}
 		}
@@ -175,7 +180,7 @@ void DrawBillboard()
 
 	for (int nCnt = 0; nCnt < MAX_BILLBOARD; nCnt++)
 	{
-		if (g_Billboard[nCnt].bUse == true)
+		if (g_Billboard[nCnt].bUse == true&& g_Billboard[nCnt].bDisplay==true)
 		{
 			//ワールドマトリックスの初期化
 			D3DXMatrixIdentity(&g_Billboard[nCnt].mtxWorld);
@@ -238,14 +243,14 @@ void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 dir, TYPE nType, D3DXVECTOR3 size
 		{
 			g_Billboard[nCnt].pos = pos;			//	位置
 			g_Billboard[nCnt].nType = nType;		//	種類
-			if (nType == BILLBOARDTYPE_1)
-			{
-				g_Billboard[nCnt].bUse = false;			//	使用しているとき
-			}
-			else
-			{
+			//if (nType == BILLBOARDTYPE_1)
+			//{
+			//	g_Billboard[nCnt].bUse = false;			//	使用しているとき
+			//}
+			//else
+			//{
 				g_Billboard[nCnt].bUse = true;			//	使用しているとき
-			}
+			//}
 
 			//	頂点情報の設定
 			pVtx[0].pos = D3DXVECTOR3(-size.x, size.y, size.z);
