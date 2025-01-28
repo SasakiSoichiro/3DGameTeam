@@ -168,7 +168,7 @@ void UpdateGame(void)
 	}
 	if (isGoal == true)
 	{
-		g_gameState = GAMESTATE_RESULT;
+		g_gameState = GAMESTATE_CLEAR;
 	}
 
 	switch (g_gameState)
@@ -179,6 +179,17 @@ void UpdateGame(void)
 		{
 			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
 			SetResult(RESULT_GAMEOVER);
+			SetFade(MODE_RESULT);
+			g_nCounterGameState = 0;
+		}
+		break;
+
+	case GAMESTATE_CLEAR:
+		g_nCounterGameState++;
+		if (g_nCounterGameState >= 60)
+		{
+			g_gameState = GAMESTATE_NONE;	// ‰½‚à‚µ‚Ä‚¢‚È‚¢
+			SetResult(RESULT_CLEAR);
 			SetFade(MODE_RESULT);
 			g_nCounterGameState = 0;
 		}
