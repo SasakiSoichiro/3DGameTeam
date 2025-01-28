@@ -3100,7 +3100,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "data\\TEXTURE\\MYTEXTURE\\kikaimura.png";
+    "data\\TEXTURE\\MYTEXTURE\\kikaimura.jpg";
    }
   }
   Material {
