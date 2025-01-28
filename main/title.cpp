@@ -143,6 +143,9 @@ void UninitTitle(void)
 //---------------
 void UpdateTitle(void)
 {
+	XINPUT_STATE* pStick;
+	pStick = GetJoyStickAngle();
+
 	UpdateCamera();
 
 	//スティック状態の取得
@@ -164,11 +167,11 @@ void UpdateTitle(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffTitle->Unlock();
 
-	if (KeybordTrigger(DIK_W) == true || OnMouseDown(MOUSE_L) == true)//W
+	if (KeybordTrigger(DIK_W) == true || OnMouseDown(MOUSE_L) == true || JoyPadTrigger(JOYKEY_UP) == true)//W
 	{//Wキーが押された
 		nSelect2--;
 	}
-	else if (KeybordTrigger(DIK_S) == true || OnMouseDown(MOUSE_R) == true)//S
+	else if (KeybordTrigger(DIK_S) == true || OnMouseDown(MOUSE_R) == true || JoyPadTrigger(JOYKEY_DOWN) == true)//S
 	{//Sキーが押された
 		nSelect2++;
 	}
@@ -198,7 +201,7 @@ void UpdateTitle(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffTitle->Unlock();
 
-	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true || OnMouseDown(MOUSE_H) == true)
+	if (KeybordTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true || OnMouseDown(MOUSE_H) == true || JoyPadTrigger(JOYKEY_START) == true)
 	{//決定キーが押された
 
 		// 音楽を鳴らす
