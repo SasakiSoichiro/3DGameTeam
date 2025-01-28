@@ -10,6 +10,7 @@
 #include "item.h"
 #include "player.h"
 #include "input.h"
+#include "sound.h"
 
 ITEM g_item[MAX_ITEM] = {};
 LPD3DXMESH g_pMeshItem[MAX_ITEM] = { NULL };				//	頂点情報のポインター
@@ -115,6 +116,8 @@ void Inititem(void)
 //=================
 void Uinititem(void)
 {
+	StopSound();
+
 	for (int count = 0; count < MAX_ITEM; count++)
 	{
 		for (int nCntMat = 0; nCntMat < (int)g_dwNuMatItem[count]; nCntMat++)
@@ -182,7 +185,7 @@ void Updateitem(void)
 			{
 				if (KeybordTrigger(DIK_F) == true)
 				{//Fを押されたとき
-
+					PlaySound(SOUND_LABEL_SHOT02);
 					//アイテムを拾う
 					g_item[nCnt].bHave = true;
 					g_item[nCnt].bUse = false;
