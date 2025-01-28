@@ -169,19 +169,14 @@ void UpdateBillboard()
 	{
 		if (g_Billboard[nCnt].bUse == true)
 		{
-
-			if (isbill == true)
+			for (int nCut = 0; nCut < MAX_ITEM; nCut++, pItem++)
 			{
-				if (pItem->bKey_Top == true)
+				if (pItem->bKey_Top == true && isbill == true)
 				{
 					bExchange = true;
 				}
-
-				else if (g_Billboard[nCnt].bTest == false)
-				{
-					bExchange = false;
-				}
 			}
+			
 		}
 	}
 
@@ -233,12 +228,7 @@ void DrawBillboard()
 			pDevice->SetStreamSource(0, g_pVtxBuffBillboard, 0, sizeof(VERTEX_3D));
 
 
-			if(bExchange == false)
-			{ 
-				//テクスチャの設定
-				pDevice->SetTexture(0, g_pTextureBillboard[2]);
-			}
-			else if (bExchange == true)
+			if (bExchange == true)
 			{
 				//テクスチャの設定
 				pDevice->SetTexture(0, g_pTextureBillboard[3]);

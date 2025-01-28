@@ -58,6 +58,8 @@ void InitGame(void)
 	Setitem(D3DXVECTOR3(50.0f, 1.0f, 0.0f), ITEMTYPE_ONE);
 	Setitem(D3DXVECTOR3(200.0f, 0.0f, 0.0f), ITEMTYPE_FOUR);
 
+	SetGimmick(D3DXVECTOR3(-1835.0f, 0.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
 	InitBillboard();
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0,D3DXVECTOR3(15.0f,35.0f,0.0f));
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
@@ -67,7 +69,7 @@ void InitGame(void)
 
 	//SetEnemy(D3DXVECTOR3(20.0f, 0.0f, 0.0f),0);
 
-	SetGimmick(D3DXVECTOR3(-1835.0f, 0.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	
 
 
 	InitPause();
@@ -137,10 +139,11 @@ void UpdateGame(void)
 			UpdateBlock();
 			UpdatePlayer();
 			UpdateEnemy();
+			UpdateGimmick();
 			UpdateBillboard();
 			Updateitem();
 			UpdateTime();
-			UpdateGimmick();
+			
 
 #ifdef _DEBUG
 			if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
