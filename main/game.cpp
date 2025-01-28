@@ -62,8 +62,10 @@ void InitGame(void)
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_0,D3DXVECTOR3(15.0f,35.0f,0.0f));
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
 	SetBillboard(D3DXVECTOR3(-100.0f, 50.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_1, D3DXVECTOR3(2.0f, 2.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-1800.0f, 50.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_2, D3DXVECTOR3(4.0f, 4.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-1800.0f, 50.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARDTYPE_3, D3DXVECTOR3(4.0f, 4.0f, 0.0f));
 
-	SetEnemy(D3DXVECTOR3(20.0f, 0.0f, 0.0f),0);
+	//SetEnemy(D3DXVECTOR3(20.0f, 0.0f, 0.0f),0);
 
 	SetGimmick(D3DXVECTOR3(-1835.0f, 0.0f, -300.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
@@ -140,6 +142,7 @@ void UpdateGame(void)
 			UpdateTime();
 			UpdateGimmick();
 
+#ifdef _DEBUG
 			if (KeybordTrigger(DIK_O) == true || JoyPadTrigger(JOYKEY_A) == true)
 			{
 				SetResult(RESULT_CLEAR);
@@ -151,7 +154,7 @@ void UpdateGame(void)
 				SetResult(RESULT_GAMEOVER);
 				SetFade(MODE_RESULT);
 			}
-
+#endif
 		}
 		else if (g_bEdit == true)
 		{
