@@ -97,8 +97,8 @@ typedef struct
 static const char* X_EDIT[EDIT_MAX] =
 {
 	//‰Æ1ŒÂ–Ú
-	"data\\model\\house_L.x",
-	"data\\model\\house_R.x",
+	"data\\model\\house000_L.x",
+	"data\\model\\house000_L.x",
 
 	//‰Æ2ŒÂ–Ú
 	"data\\model\\house000_L.x",
