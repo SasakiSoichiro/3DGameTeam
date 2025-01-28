@@ -101,23 +101,71 @@ void UpdateCamera(void)
 			{
 				if (pStick->Gamepad.sThumbRX > 10922)
 				{
+					if (pStick->Gamepad.sThumbRY > 10922)
+					{
+						//ã
+						g_camera[nCnt].rot.x -= 0.03f;
+					}
+					else if (pStick->Gamepad.sThumbRY < -10922)
+					{
+						//‰º
+						g_camera[nCnt].rot.x += 0.03f;
+					}
+
 					//‰E‰ñ‚è
 					g_camera[nCnt].rot.y += 0.03f;
+
 				}
 				else if (pStick->Gamepad.sThumbRX < -10922)
 				{
+					if (pStick->Gamepad.sThumbRY > 10922)
+					{
+						//ã
+						g_camera[nCnt].rot.x -= 0.03f;
+					}
+					else if (pStick->Gamepad.sThumbRY < -10922)
+					{
+						//‰º
+						g_camera[nCnt].rot.x += 0.03f;
+					}
+
 					//¶‰ñ‚è
 					g_camera[nCnt].rot.y -= 0.03f;
+
 				}
 				else if (pStick->Gamepad.sThumbRY > 10922)
 				{
+					if (pStick->Gamepad.sThumbRX > 10922)
+					{
+						//‰E‰ñ‚è
+						g_camera[nCnt].rot.y += 0.03f;
+					}
+					else if (pStick->Gamepad.sThumbRX < -10922)
+					{
+						//¶‰ñ‚è
+						g_camera[nCnt].rot.y -= 0.03f;
+					}
+
 					//ã
 					g_camera[nCnt].rot.x -= 0.03f;
+
 				}
 				else if (pStick->Gamepad.sThumbRY < -10922)
 				{
+					if (pStick->Gamepad.sThumbRX > 10922)
+					{
+						//‰E‰ñ‚è
+						g_camera[nCnt].rot.y += 0.03f;
+					}
+					else if (pStick->Gamepad.sThumbRX < -10922)
+					{
+						//¶‰ñ‚è
+						g_camera[nCnt].rot.y -= 0.03f;
+					}
+
 					//‰º
 					g_camera[nCnt].rot.x += 0.03f;
+
 				}
 			}
 
