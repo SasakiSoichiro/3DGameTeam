@@ -31,7 +31,7 @@ void InitGimmick(void);
 void UninitGimmick(void);
 void UpdateGimmick(void);
 void DrawGimmick(void);
-bool CollisionGimmick(D3DXVECTOR3* pPos,D3DXVECTOR3* pPosOld);
+void CollisionGimmick(D3DXVECTOR3* pPos,D3DXVECTOR3* pPosOld);
 void SetGimmick(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 GIMMICK* GetGimmick(void);
 bool IsGoal();

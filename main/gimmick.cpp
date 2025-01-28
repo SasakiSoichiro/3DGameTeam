@@ -285,14 +285,11 @@ void SetGimmick(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 //================================================
 //ブロック当たり判定
 //================================================
-bool CollisionGimmick(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld)
+void CollisionGimmick(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld)
 {
 	Player* pPlayer = GetPlayer();
 	D3DXVECTOR3* posOld = pPosOld;		//前フレームのプレイヤーの位置
 	D3DXVECTOR3* pos = pPos;			//現フレームのプレイヤーの位置
-
-
-
 
 	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
 	{
@@ -355,6 +352,7 @@ bool CollisionGimmick(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld)
 
 	}
 }
+
 GIMMICK* GetGimmick(void)
 {
 	return &g_Door[0];
