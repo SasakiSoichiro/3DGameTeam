@@ -21,6 +21,7 @@
 #include "pause.h"
 #include "enemy.h"
 #include "edit.h"
+#include "sound.h"
 
 // ƒQ[ƒ€‚Ìó‘Ô
 GAMESTATE g_gameState = GAMESTATE_NONE;
@@ -38,6 +39,9 @@ bool g_bEdit = false;
 //---------------
 void InitGame(void)
 {
+	//BGM‚ğ–Â‚ç‚·
+	PlaySound(SOUND_LABEL_BGM2);
+
 	InitLighr();
 	InitCamera();
 	InitMeshfield();
@@ -66,6 +70,9 @@ void InitGame(void)
 //---------------
 void UinitGame(void)
 {
+	//‰¹Šy‚ğ~‚ß‚é
+	StopSound();
+
 	UninitLight();
 	UninitMeshfield();
 	UninitCamera();

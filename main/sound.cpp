@@ -34,8 +34,8 @@ DWORD g_aSizeAudio[SOUND_LABEL_MAX] = {};					// オーディオデータサイズ
 SOUNDINFO g_aSoundInfo[SOUND_LABEL_MAX] =
 {
 	{"data/BGM/Silent.wav", -1},		// BGM1
-	{"data/BGM/Darkdrama.wav", -1},		// BGM2
-	{"data/SE/bummer.wav", 0},			// SE1
+	{"data/BGM/Darkdrama2.wav", -1},		// BGM2
+	{"data/SE/depressed.wav", 0},			// SE1
 
 };
 
