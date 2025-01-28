@@ -26,7 +26,7 @@ void InitLighr(void)
 
 	for (int nCntLight = 0; nCntLight < MAX_LIGHT; nCntLight++)
 	{
-		g_light[nCntLight].Type = D3DLIGHT_SPOT;  // スポットライト
+		g_light[nCntLight].Type = D3DLIGHT_DIRECTIONAL;  // スポットライト
 		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);		// 白色の拡散光
 		g_light[nCntLight].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	// 白色の鏡面反射光
 		g_light[nCntLight].Ambient = D3DXCOLOR(0.5f, 0.2f, 0.2f, 1.0f);		// 暗めの周囲光
