@@ -181,6 +181,7 @@ void UpdateEdit(void)
 
 			g_Edit[g_EditCnt + 1].bUse = true;
 
+			g_Edit[g_EditCnt + 1].nType = g_Edit[g_EditCnt].nType;
 			g_Edit[g_EditCnt + 1].tex[g_Edit[g_EditCnt + 1].nType] =g_EditTex[g_Edit[g_EditCnt].nType];
 
 			g_EditCnt++;
