@@ -12,14 +12,14 @@
 
 //グローバル変数宣言
 LPDIRECT3DTEXTURE9 g_apTextureDoor[MAX_DOOR] = {};//テクスチャへのポインタ
-BLOCK g_Door[MAX_DOOR];
+GIMMICK g_Door[MAX_DOOR];
 bool isGoal;
 bool isBill;
-//bool isMove;
+
 //================================
 //初期化処理
 //================================
-void InitBlock(void)
+void InitGimmick(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
@@ -35,8 +35,8 @@ void InitBlock(void)
 		g_Door[nCnt].vtxMin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_Door[nCnt].dwNumMat = 0;
 		g_Door[nCnt].bUse = false;
-		//g_Block[nCnt1][nCnt].bGoal = false;
-		//g_Block[nCnt1][nCnt].bMove = false;
+		//g_Door[nCnt1][nCnt].bGoal = false;
+		//g_Door[nCnt1][nCnt].bMove = false;
 
 		// モデル読み込み
 		//Xファイルの読み込み
@@ -129,7 +129,7 @@ void InitBlock(void)
 //================================
 //終了処理
 //================================
-void UninitBlock(void)
+void UninitGimmick(void)
 {
 
 	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
@@ -158,106 +158,60 @@ void UninitBlock(void)
 //================================
 //更新処理
 //================================
-void UpdateBlock(void)
+void UpdateGimmick(void)
 {
 	Player* pPlayer = GetPlayer();
 	Enemy* pEnemy = GetEnemy();
 
-	for (int n = 0; n < BLOCKTYPE_MAX; n++)
+	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
 	{
-		for (int nCnt = 0; nCnt < MAX_BLOCK; nCnt++)
+		if (g_Door[nCnt].bUse == true)
 		{
-			if (g_Block[n][nCnt].bUse == true)
+			//半径の算出変数
+			float PRadiusPos = 50.0f;
+			float BRadiusPos = 50.0f;
+
+			//プレイヤーの位置の取得
+			D3DXVECTOR3 PlayerPos = GetPlayer()->pos;
+
+			//敵とプレイヤーの距離の差
+			D3DXVECTOR3 diff = PlayerPos - g_Door[nCnt].pos;
+
+			//範囲計算
+			float fDisX = PlayerPos.x - g_Door[nCnt].pos.x;
+			float fDisY = PlayerPos.y - g_Door[nCnt].pos.y;
+			float fDisZ = PlayerPos.z - g_Door[nCnt].pos.z;
+
+			//二つの半径を求める
+			float fRadX = PRadiusPos + BRadiusPos;
+
+			//プレイヤーが範囲に入ったら
+			if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
 			{
-				//半径の算出変数
-				float PRadiusPos = 50.0f;
-				float BRadiusPos = 50.0f;
+				//ビルボードを表示する
+				isBill = true;
 
-				//プレイヤーの位置の取得
-				D3DXVECTOR3 PlayerPos = GetPlayer()->pos;
-
-				//敵とプレイヤーの距離の差
-				D3DXVECTOR3 diff = PlayerPos - g_Block[4][nCnt].pos;
-
-				//範囲計算
-				float fDisX = PlayerPos.x - g_Block[4][nCnt].pos.x;
-				float fDisY = PlayerPos.y - g_Block[4][nCnt].pos.y;
-				float fDisZ = PlayerPos.z - g_Block[4][nCnt].pos.z;
-
-				//二つの半径を求める
-				float fRadX = PRadiusPos + BRadiusPos;
-
-				if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX * fRadX))
+				if (KeybordTrigger(DIK_F) == true)
 				{
-					isBill = true;
-					if (g_Block[n][nCnt].nType == BLOCKTYPE_KEYHOLE)
-					{
-						if (KeyboardTrigger(DIK_F) == true)
-						{
-							isGoal = true;
-						}
-					}
+					//Fキーを押したらゴールにする
+					isGoal = true;
 				}
-				else if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) >= (fRadX * fRadX))
-				{
-					isBill = false;
-				}
-
-				if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-				{
-					if (g_Block[n][nCnt].move.y == 0.0f && g_Block[n][nCnt].move.y <= 10.0f)
-					{
-						g_Block[n][nCnt].move.y += 1.0f;
-					}
-					else if (g_Block[n][nCnt].move.y >= 10.0f)
-					{
-						g_Block[n][nCnt].move.y -= 1.0f;
-					}
-
-					g_Block[n][nCnt].rot.y += 0.15f;
-					if (g_Block[n][nCnt].rot.y >= 12.5f)
-					{
-						g_Block[n][nCnt].rot.y = 0.0f;
-					}
-					/*if (g_Block[n][nCnt].rot.y <= 15.0f)
-					{
-						g_Block[n][nCnt].rot.y = 0.0f;
-					}*/
-				}
-				if (g_Block[n][nCnt].nType == BLOCKTYPE_TUTORIAL)
-				{
-
-					if (pEnemy->nCounterEnemy >= 1)
-					{
-						g_Block[n][nCnt].bUse = false;
-					}
-				}
-
-				/*if (g_Block[n][nCnt].nType == BLOCKTYPE_TUTORIAL1)
-				{
-
-					if (pEnemy->nCounterEnemy >= 2)
-					{
-						g_Block[n][nCnt].bUse = false;
-					}
-				}*/
-				/*if (g_Block[n][nCnt].nType == BLOCKTYPE_1)
-				{
-					g_Block[n][nCnt].rot.y += 0.0314f;
-
-					if (g_Block[n][nCnt].rot.y >= 3.14f)
-					{
-						g_Block[n][nCnt].rot.y = 0.0f;
-					}
-				}*/
+				
+			}
+			//プレイヤーが範囲の外に出たら
+			else if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) >= (fRadX * fRadX))
+			{
+				//ビルボードを非表示にする
+				isBill = false;
 			}
 		}
 	}
+	
 }
 //================================
 //描画処理
 //================================
-void DrawBlock(void)
+void DrawGimmick(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
@@ -265,68 +219,64 @@ void DrawBlock(void)
 	D3DMATERIAL9 matDef; //現在のマテリアル保存用
 	D3DXMATERIAL* pMat;	//マテリアルデータへのポインタ
 
-	for (int nCnt1 = 0; nCnt1 < BLOCKTYPE_MAX; nCnt1++)
+	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
 	{
-		for (int nCnt = 0; nCnt < MAX_BLOCK; nCnt++)
-		{
-			if (g_Block[nCnt1][nCnt].bUse == true)
-			{// 未使用だったら下の処理を通さない
-							//ワールドマトリックスの初期化
-				D3DXMatrixIdentity(&g_Block[nCnt1][nCnt].mtxWorld);
+		if (g_Door[nCnt].bUse == true)
+		{// 未使用だったら下の処理を通さない
+						//ワールドマトリックスの初期化
+			D3DXMatrixIdentity(&g_Door[nCnt].mtxWorld);
 
-				//向きを反映
-				D3DXMatrixRotationYawPitchRoll(&mtxRot, g_Block[nCnt1][nCnt].rot.y, g_Block[nCnt1][nCnt].rot.x, g_Block[nCnt1][nCnt].rot.z);
-				D3DXMatrixMultiply(&g_Block[nCnt1][nCnt].mtxWorld, &g_Block[nCnt1][nCnt].mtxWorld, &mtxRot);
+			//向きを反映
+			D3DXMatrixRotationYawPitchRoll(&mtxRot, g_Door[nCnt].rot.y, g_Door[nCnt].rot.x, g_Door[nCnt].rot.z);
+			D3DXMatrixMultiply(&g_Door[nCnt].mtxWorld, &g_Door[nCnt].mtxWorld, &mtxRot);
 
-				//位置を反映
-				D3DXMatrixTranslation(&mtxTrans, g_Block[nCnt1][nCnt].pos.x, g_Block[nCnt1][nCnt].pos.y, g_Block[nCnt1][nCnt].pos.z);
-				D3DXMatrixMultiply(&g_Block[nCnt1][nCnt].mtxWorld, &g_Block[nCnt1][nCnt].mtxWorld, &mtxTrans);
+			//位置を反映
+			D3DXMatrixTranslation(&mtxTrans, g_Door[nCnt].pos.x, g_Door[nCnt].pos.y, g_Door[nCnt].pos.z);
+			D3DXMatrixMultiply(&g_Door[nCnt].mtxWorld, &g_Door[nCnt].mtxWorld, &mtxTrans);
 
-				//ワールドマトリックスの設定
-				pDevice->SetTransform(D3DTS_WORLD, &g_Block[nCnt1][nCnt].mtxWorld);
+			//ワールドマトリックスの設定
+			pDevice->SetTransform(D3DTS_WORLD, &g_Door[nCnt].mtxWorld);
 
-				//現在のマテリアルを取得
-				pDevice->GetMaterial(&matDef);
+			//現在のマテリアルを取得
+			pDevice->GetMaterial(&matDef);
 
-				//マテリアルデータへのポインタを取得
-				pMat = (D3DXMATERIAL*)g_Block[nCnt1][nCnt].pBuffMat->GetBufferPointer();
+			//マテリアルデータへのポインタを取得
+			pMat = (D3DXMATERIAL*)g_Door[nCnt].pBuffMat->GetBufferPointer();
 
-				for (int nCntMat = 0; nCntMat < (int)g_Block[nCnt1][nCnt].dwNumMat; nCntMat++)
-				{
-					//マテリアルの設定
-					pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
-
-					//テクスチャの設定
-					pDevice->SetTexture(0, g_apTextureBlock[nCntMat]);
-
-					//モデル(パーツ)の描画
-					g_Block[nCnt1][nCnt].pMesh->DrawSubset(nCntMat);
-				}
-				//保存していたマテリアルを隠す
-				//pDevice->SetMaterial(NULL);
-				pDevice->SetMaterial(&matDef);
+			for (int nCntMat = 0; nCntMat < (int)g_Door[nCnt].dwNumMat; nCntMat++)
+			{
+				//マテリアルの設定
+				pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
 				//テクスチャの設定
-				pDevice->SetTexture(0, NULL);
-			}
+				pDevice->SetTexture(0, g_apTextureDoor[nCntMat]);
 
+				//モデル(パーツ)の描画
+				g_Door[nCnt].pMesh->DrawSubset(nCntMat);
+			}
+			//保存していたマテリアルを隠す
+			//pDevice->SetMaterial(NULL);
+			pDevice->SetMaterial(&matDef);
+
+			//テクスチャの設定
+			pDevice->SetTexture(0, NULL);
 		}
+
 	}
 }
 //================================================
 //ブロックの設定処理
 //================================================
-void SetBlock(D3DXVECTOR3 pos, D3DXVECTOR3 rot, BLOCKTYPE Type)
+void SetGimmick(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 {
-	for (int nCnt = 0; nCnt < MAX_BLOCK; nCnt++)
+	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
 	{
-		if (g_Block[Type][nCnt].bUse == false)
+		if (g_Door[nCnt].bUse == false)
 		{//壁が使用されていない
 			//頂点座標の設定
-			g_Block[Type][nCnt].pos = pos;
-			g_Block[Type][nCnt].rot = rot;
-			g_Block[Type][nCnt].nType = Type;
-			g_Block[Type][nCnt].bUse = true;
+			g_Door[nCnt].pos = pos;
+			g_Door[nCnt].rot = rot;
+			g_Door[nCnt].bUse = true;
 			break;
 		}
 
@@ -335,259 +285,79 @@ void SetBlock(D3DXVECTOR3 pos, D3DXVECTOR3 rot, BLOCKTYPE Type)
 //================================================
 //ブロック当たり判定
 //================================================
-bool CollisionBlock(void)
+bool CollisionGimmick(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld)
 {
-	bool bLanding = false;	//着地しているかどうか
-
-	// プレイヤーの取得
 	Player* pPlayer = GetPlayer();
-	Enemy* pEnemy = GetEnemy();
+	D3DXVECTOR3* posOld = pPosOld;		//前フレームのプレイヤーの位置
+	D3DXVECTOR3* pos = pPos;			//現フレームのプレイヤーの位置
 
-	for (int n = 0; n < BLOCKTYPE_MAX; n++)
+
+
+
+	for (int nCnt = 0; nCnt < MAX_DOOR; nCnt++)
 	{
-		for (int nCnt = 0; nCnt < MAX_BLOCK; nCnt++)
+		if (g_Door[nCnt].bUse == true)
 		{
-			if (g_Block[n][nCnt].bUse == true)
+			//左右手前奥のめり込み判定
+			if (pos->y< g_Door[nCnt].pos.y + g_Door[nCnt].vtxMax.y && pos->y + (OBJ_P * 2.0f) > g_Door[nCnt].pos.y + g_Door[nCnt].vtxMin.y)
 			{
-				//================================
-				//プレイヤーの当たり判定
-				//================================
-				if (pPlayer->posOld.y < (g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f)
-					&& (pPlayer->posOld.y + pPlayer->size.y * 2.0f) >= (g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f))
+				//左右のめり込み判定
+				if (pos->z - OBJ_P< g_Door[nCnt].pos.z + g_Door[nCnt].vtxMax.z && pos->z + OBJ_P > g_Door[nCnt].pos.z + g_Door[nCnt].vtxMin.z)//プレイヤーのｚの範囲がブロックに重なっている
 				{
-					//前後
-					if ((pPlayer->pos.x - pPlayer->size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-						&& (pPlayer->pos.x + pPlayer->size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f))
+
+					if (posOld->x + OBJ_P< g_Door[nCnt].pos.x + g_Door[nCnt].vtxMin.x && pos->x + OBJ_P > g_Door[nCnt].pos.x + g_Door[nCnt].vtxMin.x)//Ｘが左から右にめり込んだ
 					{
-						//奥から
-						if ((pPlayer->posOld.z + pPlayer->size.z * 0.5f) <= (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f)
-							&& (pPlayer->pos.z + pPlayer->size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-						{
-							//使用しているブロックすべてをチェックする
-							//bLanding = true;
-							if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-							{
-								isGoal = true;
-							}
+						//pPlayer->posをモデルの左側にくっつける
+						pos->x = g_Door[nCnt].pos.x + g_Door[nCnt].vtxMin.x - OBJ_P - 0.1f;
 
-							else
-							{
-								pPlayer->pos.z = -g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f - pPlayer->size.z * 0.5f - 0.5f;
-
-							}
-
-						}
-						//手前から
-						else if ((pPlayer->posOld.z - pPlayer->size.z * 0.5f) > (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-							&& (pPlayer->pos.z - pPlayer->size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f))
-						{
-							//使用しているブロックすべてをチェックする
-							//bLanding = true;
-							if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-							{
-
-								isGoal = true;
-							}
-
-							else
-							{
-								pPlayer->pos.z = g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f + pPlayer->size.z * 0.5f + 0.5f;
-
-							}
-
-
-						}
-						//左右
-						if ((pPlayer->pos.z - pPlayer->size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-							&& (pPlayer->pos.z + pPlayer->size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-						{
-							//右
-							if ((pPlayer->posOld.x - pPlayer->size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-								&& (pPlayer->pos.x + pPlayer->size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f))
-							{
-								//使用しているブロックすべてをチェックする
-								//bLanding = true;
-								if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-								{
-
-									isGoal = true;
-								}
-
-								else
-								{
-									pPlayer->pos.x = g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f - pPlayer->size.x * 0.5f + 0.5f;
-
-								}
-							}
-							//左
-							else if ((pPlayer->posOld.x + pPlayer->size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f)
-								&& (pPlayer->pos.x - pPlayer->size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f))
-							{
-								//使用しているブロックすべてをチェックする
-								//bLanding = true;
-								if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-								{
-
-									isGoal = true;
-								}
-
-								else
-								{
-									pPlayer->pos.x = g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f + pPlayer->size.x * 0.5f + 0.5f;
-
-								}
-
-							}
-
-						}
-
+					}
+					if (posOld->x - OBJ_P > g_Door[nCnt].pos.x + g_Door[nCnt].vtxMax.x && pos->x - OBJ_P < g_Door[nCnt].pos.x + g_Door[nCnt].vtxMax.x)//Ｘが左から右にめり込んだ
+					{
+						//pPlayer->posをモデルの右側にくっつける
+						pos->x = g_Door[nCnt].pos.x + g_Door[nCnt].vtxMax.x + OBJ_P + 0.1f;
 					}
 				}
-				//上から
-				if ((pPlayer->pos.x - pPlayer->size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-					&& (pPlayer->pos.x + pPlayer->size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f)
-					&& (pPlayer->pos.z - pPlayer->size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-					&& (pPlayer->pos.z + pPlayer->size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
+
+				//手前奥のめり込み判定
+				if (pos->x - OBJ_P< g_Door[nCnt].pos.x + g_Door[nCnt].vtxMax.x && pos->x + OBJ_P > g_Door[nCnt].pos.x + g_Door[nCnt].vtxMin.x)//プレイヤーxの範囲がブロックに重なっている
 				{
-					if ((pPlayer->posOld.y > g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f)
-						&& (pPlayer->pos.y < g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f))
+
+					if (posOld->z + OBJ_P< g_Door[nCnt].pos.z + g_Door[nCnt].vtxMin.z && pos->z + OBJ_P > g_Door[nCnt].pos.z + g_Door[nCnt].vtxMin.z)//Zが下から上にめり込んだ
 					{
-
-
-						if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-						{
-
-							isGoal = true;
-						}
-
-						else
-						{
-							bLanding = true;
-							pPlayer->pos.y = pPlayer->posOld.y;
-
-						}
-
-
+						//pPlayer->posをモデルの手前側にくっつける
+						pos->z = g_Door[nCnt].pos.z + g_Door[nCnt].vtxMin.z - OBJ_P - 0.1f;
+					}
+					if (posOld->z - OBJ_P > g_Door[nCnt].pos.z + g_Door[nCnt].vtxMax.z && pos->z - OBJ_P < g_Door[nCnt].pos.z + g_Door[nCnt].vtxMax.z)//Zが上から下にめり込んだ
+					{
+						//pPlayer->posをモデルの奥側にくっつける
+						pos->z = g_Door[nCnt].pos.z + g_Door[nCnt].vtxMax.z + OBJ_P + 0.1f;
 					}
 				}
-				//下から
-				if ((pPlayer->pos.x - pPlayer->size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-					&& (pPlayer->pos.x + pPlayer->size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f)
-					&& (pPlayer->pos.z - pPlayer->size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-					&& (pPlayer->pos.z + pPlayer->size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-				{
-					if ((pPlayer->posOld.y * 5.0f < g_Block[n][nCnt].pos.y - g_Block[n][nCnt].size.y)
-						&& (pPlayer->pos.y * 5.0f > g_Block[n][nCnt].pos.y - g_Block[n][nCnt].size.y))
-					{
-						if (g_Block[n][nCnt].nType == BLOCKTYPE_GOAL)
-						{
 
-							isGoal = true;
-						}
-
-						else
-						{
-							pPlayer->pos.y = pPlayer->posOld.y;
-
-						}
-					}
-				}
-				//================================
-				//敵の当たり判定
-				//================================
-				for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
-				{
-					if (pEnemy[nCntEnemy].posOld.y < (g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f)
-						&& (pEnemy[nCntEnemy].posOld.y + pEnemy->size.y * 0.5f) >= (g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f))
-					{
-						//前後
-						if ((pEnemy[nCntEnemy].pos.x - pEnemy[nCntEnemy].size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-							&& (pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f))
-						{
-							//奥から
-							if ((pEnemy[nCntEnemy].posOld.z + pEnemy[nCntEnemy].size.z * 0.5f) <= (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f)
-								&& (pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-							{
-								//使用しているブロックすべてをチェックする
-								//bLanding = true;
-								pEnemy[nCntEnemy].pos.z = -g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f - pEnemy->size.z * 0.5f - 0.5f;
-								//pPlayer->move.z = 0.0f;
-
-							}
-							//手前から
-							else if ((pEnemy[nCntEnemy].posOld.z - pEnemy[nCntEnemy].size.z * 0.5f) > (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-								&& (pEnemy[nCntEnemy].pos.z - pEnemy[nCntEnemy].size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f))
-							{
-								//使用しているブロックすべてをチェックする
-								//bLanding = true;
-								pEnemy[nCntEnemy].pos.z = g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f + pEnemy->size.z * 0.5f + 0.5f;
-								//pPlayer->move.z = 0.0f;
-
-							}
-							//左右
-							if ((pEnemy[nCntEnemy].pos.z - pEnemy[nCntEnemy].size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-								&& (pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-							{
-								//右
-								if ((pEnemy[nCntEnemy].posOld.x - pEnemy[nCntEnemy].size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-									&& (pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f))
-								{
-									//使用しているブロックすべてをチェックする
-									//bLanding = true;
-									pEnemy[nCntEnemy].pos.x = g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f - pEnemy->size.x * 0.5f + 0.5f;
-									//pPlayer->move.x = 0.0f;
-								}
-								//左
-								else if ((pEnemy[nCntEnemy].posOld.x + pEnemy[nCntEnemy].size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f)
-									&& (pEnemy[nCntEnemy].pos.x - pEnemy[nCntEnemy].size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f))
-								{
-									//使用しているブロックすべてをチェックする
-									//bLanding = true;
-									pEnemy[nCntEnemy].pos.x = g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f + pEnemy->size.x * 0.5f + 0.5f; /*g_Block.pos.x -g_Block.vtxMax.x * 1.0f - pPlayer->vtxMax.x * 1.0f;*/
-
-
-								}
-
-							}
-
-						}
-					}
-					//上から
-					if ((pEnemy[nCntEnemy].pos.x - pEnemy[nCntEnemy].size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-						&& (pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f)
-						&& (pEnemy[nCntEnemy].pos.z - pEnemy[nCntEnemy].size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-						&& (pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-					{
-						if ((pEnemy[nCntEnemy].posOld.y > g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f)
-							&& (pEnemy[nCntEnemy].pos.y < g_Block[n][nCnt].pos.y + g_Block[n][nCnt].size.y * 0.5f))
-						{
-							bLanding = true;
-							pEnemy[nCntEnemy].pos.y = pEnemy[nCntEnemy].posOld.y;
-
-
-						}
-					}
-					//下から
-					if ((pEnemy[nCntEnemy].pos.x - pEnemy[nCntEnemy].size.x * 0.5f) < (g_Block[n][nCnt].pos.x + g_Block[n][nCnt].size.x * 0.5f)
-						&& (pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * 0.5f) > (g_Block[n][nCnt].pos.x - g_Block[n][nCnt].size.x * 0.5f)
-						&& (pEnemy[nCntEnemy].pos.z - pEnemy[nCntEnemy].size.z * 0.5f) < (g_Block[n][nCnt].pos.z + g_Block[n][nCnt].size.z * 0.5f)
-						&& (pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * 0.5f) > (g_Block[n][nCnt].pos.z - g_Block[n][nCnt].size.z * 0.5f))
-					{
-						if ((pEnemy[nCntEnemy].posOld.y < g_Block[n][nCnt].pos.y - g_Block[n][nCnt].size.y)
-							&& (pEnemy[nCntEnemy].pos.y > g_Block[n][nCnt].pos.y - g_Block[n][nCnt].size.y))
-						{
-							pEnemy[nCntEnemy].pos.y = pEnemy[nCntEnemy].posOld.y;
-						}
-					}
-				}
 			}
+			if (pos->z - OBJ_P< g_Door[nCnt].pos.z + g_Door[nCnt].vtxMax.z && pos->z + OBJ_P > g_Door[nCnt].pos.z + g_Door[nCnt].vtxMin.z
+				&& pos->x - OBJ_P< g_Door[nCnt].pos.x + g_Door[nCnt].vtxMax.x && pos->x + OBJ_P > g_Door[nCnt].pos.x + g_Door[nCnt].vtxMin.x)
+			{
+				if (posOld->y + (OBJ_P * 2.0f) < g_Door[nCnt].pos.y + g_Door[nCnt].vtxMin.y && pos->y + (OBJ_P * 2.0f) > g_Door[nCnt].pos.y + g_Door[nCnt].vtxMin.y)//Ｘが左から右にめり込んだ
+				{
+					//pPlayer->posをモデルの下側にくっつける
+					pos->y = g_Door[nCnt].pos.y + g_Door[nCnt].vtxMin.y - (OBJ_P * 2.0f) - 0.1f;
+				}
+				if (posOld->y > g_Door[nCnt].pos.y + g_Door[nCnt].vtxMax.y && pos->y < g_Door[nCnt].pos.y + g_Door[nCnt].vtxMax.y)//Ｘが左から右にめり込んだ
+				{
+					//pPlayer->posをモデルの上側にくっつける
+					pos->y = g_Door[nCnt].pos.y + g_Door[nCnt].vtxMax.y + 0.1f;
+				}
+
+			}
+
 		}
+
 	}
-	return bLanding;
 }
-BLOCK* GetBlock(void)
+GIMMICK* GetGimmick(void)
 {
-	return &g_Block[0][0];
+	return &g_Door[0];
 }
 
 bool IsGoal()

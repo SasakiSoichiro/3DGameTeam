@@ -28,6 +28,7 @@
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="slow.cpp" />
     <ClCompile Include="edit.cpp" />
+    <ClCompile Include="gimmick.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h" />
@@ -57,5 +58,6 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="slow.h" />
     <ClInclude Include="edit.h" />
+    <ClInclude Include="gimmick.h" />
   </ItemGroup>
 </Project>

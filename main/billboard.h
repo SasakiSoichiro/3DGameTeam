@@ -20,6 +20,8 @@ typedef enum
 {
 	BILLBOARDTYPE_0,
 	BILLBOARDTYPE_1,
+	BILLBOARDTYPE_2,
+	BILLBOARDTYPE_3,
 	BILLBOARDTYPE_MAX
 }TYPE;
 
@@ -27,6 +29,8 @@ static const char* ITEM_TEXTURE[BILLBOARDTYPE_MAX] =
 {
 	"data\\texture\\Wood.png",
 	"data\\texture\\itembilbord.jpg",
+	"data\\texture\\batu.png",
+	"data\\texture\\maru.png",
 
 };
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
