@@ -36,5 +36,4 @@ void SetGimmick(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 GIMMICK* GetGimmick(void);
 bool IsGoal();
 bool IsBill();
-
 #endif

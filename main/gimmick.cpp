@@ -16,7 +16,7 @@ LPDIRECT3DTEXTURE9 g_apTextureDoor[MAX_DOOR] = {};//テクスチャへのポインタ
 GIMMICK g_Door[MAX_DOOR];
 bool isGoal;
 bool isBill;
-
+bool bExchange;
 //================================
 //初期化処理
 //================================
@@ -38,7 +38,7 @@ void InitGimmick(void)
 		g_Door[nCnt].bUse = false;
 		//g_Door[nCnt1][nCnt].bGoal = false;
 		//g_Door[nCnt1][nCnt].bMove = false;
-
+		bExchange = false;
 		// モデル読み込み
 		//Xファイルの読み込み
 		D3DXLoadMeshFromX("data\\MODEL\\door.x",
@@ -191,12 +191,14 @@ void UpdateGimmick(void)
 			{
 						//ビルボードを表示する
 						isBill = true;
-
-				if (KeybordTrigger(DIK_F) == true)
-				{
-					//Fキーを押したらゴールにする
-					isGoal = true;
-				}
+						if (pItem->bKey_Top == true)
+						{
+							if (KeybordTrigger(DIK_F) == true)
+							{
+								//Fキーを押したらゴールにする
+								isGoal = true;
+							}
+						}
 				
 			}
 			//プレイヤーが範囲の外に出たら
