@@ -8,7 +8,9 @@
 #define _BLOCK_H_//2銃インクルード防止のマクロ定義
 #include "main.h"
 #include "player.h"
-#define NUM_BLOCK (16)
+#define BLOCK_TEXTURE (128) //ブロックのテクスチャの最大数
+#define NUM_BLOCK (100)		//ブロックの最大数
+
 typedef enum
 {
 	//家1
@@ -17,47 +19,47 @@ typedef enum
 	BLOCK_HOUSE00_R,
 	BLOCK_HOUSE00_B,
 
-	//家2
+	////家2
 	BLOCK_HOUSE01,
 	BLOCK_HOUSE01_L,
 	BLOCK_HOUSE01_R,
 	BLOCK_HOUSE01_B,
 
-	//家3
+	////家3
 	BLOCK_HOUSE02,
 	BLOCK_HOUSE02_L,
 	BLOCK_HOUSE02_R,
 	BLOCK_HOUSE02_B,
 
-	//家3
+	////家4
 	BLOCK_HOUSE03,
 	BLOCK_HOUSE03_L,
 	BLOCK_HOUSE03_R,
 	BLOCK_HOUSE03_B,
 
-	//慰霊碑
+	////慰霊碑
 	BLOCK_IREIHI,
 
-	//看板
+	////看板
 	BLOCK_KANBAN,
 
-	//蔵
+	////蔵
 	BLOCK_KURA,
 
-	//クモとクモの巣
+	////クモとクモの巣
 	BLOCK_KUMO,
 	BLOCK_KUMONOSU,
 
-	//鳥小屋
+	////鳥小屋
 	BLOCK_TORIGOYA,
 
-	//井戸
+	////井戸
 	BLOCK_WELL,
 
-	//電柱(木製)
+	////電柱(木製)
 	BLOCK_WTPOLE,
 
-	//枯れてる木
+	////枯れてる木
 	BLOCK_DEADTREE,
 
 	//スピーカー
@@ -75,16 +77,23 @@ typedef enum
 
 }BLOCKTYPE;
 
+
 typedef struct
 {
-	LPD3DXMESH pMesh;					//メッシュ（頂点情報)へのポインタ
-	LPDIRECT3DTEXTURE9 apTexture[128];	//テクスチャへのポインタ
-	LPD3DXBUFFER pBuffMat;				//マテリアルへのポインタ
-	DWORD dwNumMat;						//マテリアルの数
+	LPD3DXMESH pMesh;								//メッシュ（頂点情報)へのポインタ
+	LPDIRECT3DTEXTURE9 apTexture[BLOCK_TEXTURE];	//テクスチャへのポインタ
+	LPD3DXBUFFER pBuffMat;							//マテリアルへのポインタ
+	DWORD dwNumMat;									//マテリアルの数
+	D3DXVECTOR3 vtxMin, vtxMax;						//モデルの最小値,最大値
+}BLOCKTEX;
+
+
+typedef struct
+{
+	BLOCKTEX tex;						//テクスチャ情報
 	D3DXVECTOR3 pos;					//位置
 	D3DXVECTOR3 rot;					//向き
 	D3DXMATRIX mtxWorld;				//ワールドマトリックス
-	D3DXVECTOR3 vtxMin, vtxMax;			//モデルの最小値,最大値
 	int nType;
 	bool bUse;
 
@@ -92,8 +101,65 @@ typedef struct
 
 static const char* X_BLOCK[BLOCK_MAX] =
 {
+	//家1個目
+	"data\\model\\house.x",
+	"data\\model\\house_L.x",
+	"data\\model\\house_R.x",
+	"data\\model\\house_B.x",
+
+	//家2個目
 	"data\\model\\house000.x",
+	"data\\model\\house000_L.x",
+	"data\\model\\house000_r.x",
+	"data\\model\\house000_b.x",
+
+	////家3個目
 	"data\\model\\house01.x",
+	"data\\model\\house01_L.x",
+	"data\\model\\house01_R.x",
+	"data\\model\\house01_B.x",
+
+	////家4個目
+	"data\\model\\house04.x",
+	"data\\model\\house04_L.x",
+	"data\\model\\house04_R.x",
+	"data\\model\\house04_B.x",
+
+	////慰霊碑
+	"data\\model\\ireihi.x",
+
+	////看板
+	"data\\model\\kanban.x",
+
+	////蔵
+	"data\\model\\kura.x",
+
+	////クモ、クモの巣
+	"data\\model\\kumo.x",
+	"data\\model\\kumonosu.x",
+
+	////鳥小屋
+	"data\\model\\torigoya.x",
+
+
+	////井戸
+	"data\\model\\Well.x",
+
+	//電柱(木製)
+	"data\\model\\WoodenTelephonePole.x",
+
+	////枯れてる木
+	"data\\model\\deadtree000.x",
+
+	//スピーカー
+	"data\\model\\speacar.x",
+
+	//鍵
+	"data\\model\\key.x",
+	"data\\model\\key_bottom.x",
+	"data\\model\\key_top.x",
+
+	//壁
 	"data\\model\\wallmaria.x",
 	"data\\model\\wallmaria2.x",
 };

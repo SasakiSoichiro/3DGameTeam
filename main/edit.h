@@ -152,7 +152,7 @@ static const char* X_EDIT[EDIT_MAX] =
 	"data\\model\\WoodenTelephonePole.x",
 
 	//枯れてる木
-	"data\\model\\deadtree.x",
+	"data\\model\\deadtree000.x",
 
 	//スピーカー
 	"data\\model\\speacar.x",

@@ -41,13 +41,13 @@ void InitGame(void)
 	InitLighr();
 	InitCamera();
 	InitMeshfield();
-	InitBlock();
 	InitPlayer();
 	Inititem();
 	InitTime();
 	InitEnemy();
 	InitEdit();
 	LoadEdit();
+	InitBlock();
 	Setitem(D3DXVECTOR3(50.0f, 40.0f, 0.0f), ITEMTYPE_ONE);
 
 	InitBillboard();
