@@ -123,7 +123,6 @@ void SetResult(RESULT type)
 {
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = GetDevice();
-
 	g_ResultType = type;
 
 	switch (type)
@@ -139,7 +138,7 @@ void SetResult(RESULT type)
 	case RESULT_GAMEOVER:
 		//	テクスチャ読み込み
 		D3DXCreateTextureFromFile(pDevice,
-			"data\\texture\\result1.png",
+			"data\\texture\\GameOver1.png",
 			&g_apTextureResult);
 
 		break;
