@@ -55,7 +55,7 @@ void InitGame(void)
 	LoadEdit();
 	InitGimmick();
 
-	SetGimmick(D3DXVECTOR3(200.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetGimmick(D3DXVECTOR3(-1500.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	Setitem(D3DXVECTOR3(50.0f, 1.0f, 0.0f), ITEMTYPE_ONE);
 	Setitem(D3DXVECTOR3(200.0f, 0.0f, 0.0f), ITEMTYPE_FOUR);
