@@ -26,14 +26,14 @@ void InitLighr(void)
 
 	for (int nCntLight = 0; nCntLight < MAX_LIGHT; nCntLight++)
 	{
-		g_light[nCntLight].Type = D3DLIGHT_SPOT;  // スポットライト
+		g_light[nCntLight].Type = D3DLIGHT_DIRECTIONAL;  // スポットライト
 		g_light[nCntLight].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);		// 白色の拡散光
 		g_light[nCntLight].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	// 白色の鏡面反射光
 		g_light[nCntLight].Ambient = D3DXCOLOR(0.5f, 0.2f, 0.2f, 1.0f);		// 暗めの周囲光
 		g_light[nCntLight].Position = D3DXVECTOR3(0.0f, 10.0f, 0.0f);		// ライトの位置
 		g_light[nCntLight].Direction = D3DXVECTOR3(0.0f, -1.0f, 0.0f);		// ライトの向き（下向き）
-		g_light[nCntLight].Range = 100.0f;  // ライトの範囲
-		g_light[nCntLight].Falloff = 0.1f;  // 減衰
+		g_light[nCntLight].Range = 1000.0f;  // ライトの範囲
+		g_light[nCntLight].Falloff = 0.0f;  // 減衰
 		g_light[nCntLight].Attenuation0 = 1.0f;  // 減衰定数
 		g_light[nCntLight].Attenuation1 = 0.0f;
 		g_light[nCntLight].Attenuation2 = 0.0f;
