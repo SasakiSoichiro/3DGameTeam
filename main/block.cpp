@@ -14,7 +14,7 @@ void InitBlock(void)
 		//Šeí•Ï”‚Ì‰Šú‰»
 		g_Block[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_Block[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		g_Block[nCnt].nType = BLOCK_HOUSE00;
+		g_Block[nCnt].nType = BLOCK_HOUSE00_L;
 		g_Block[nCnt].bUse = false;
 	}
 

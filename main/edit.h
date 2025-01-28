@@ -19,20 +19,20 @@
 typedef enum
 {
 	//家1
-	EDIT_HOUSE00 = 0,		//普通のブロック
-	EDIT_HOUSE00_B,
+	EDIT_HOUSE00_L = 0,		//普通のブロック
+	EDIT_HOUSE00_R,
 
 	//家2
-	EDIT_HOUSE01,
-	EDIT_HOUSE01_B,
+	EDIT_HOUSE01_L,
+	EDIT_HOUSE01_r,
 
 	//家3
-	EDIT_HOUSE02,
-	EDIT_HOUSE02_B,
+	EDIT_HOUSE02_L,
+	EDIT_HOUSE02_R,
 
 	//家3
-	EDIT_HOUSE03,
-	EDIT_HOUSE03_B,
+	EDIT_HOUSE03_L,
+	EDIT_HOUSE03_R,
 
 	//慰霊碑
 	EDIT_IREIHI,
@@ -97,20 +97,23 @@ typedef struct
 static const char* X_EDIT[EDIT_MAX] =
 {
 	//家1個目
-	"data\\model\\house.x",
-	"data\\model\\house_B.x",
+	"data\\model\\house_L.x",
+	"data\\model\\house_R.x",
 
 	//家2個目
-	"data\\model\\house000.x",
-	"data\\model\\house000_b.x",
+	"data\\model\\house000_L.x",
+	"data\\model\\house000_r.x",
+
 
 	//家3個目
-	"data\\model\\house01.x",
-	"data\\model\\house01_B.x",
+	"data\\model\\house01_L.x",
+	"data\\model\\house01_R.x",
+
 
 	//家4個目
-	"data\\model\\house04.x",
-	"data\\model\\house04_B.x",
+	"data\\model\\house04_L.x",
+	"data\\model\\house04_R.x",
+
 
 	//慰霊碑
 	"data\\model\\ireihi.x",
